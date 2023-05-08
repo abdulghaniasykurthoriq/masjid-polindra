@@ -1,0 +1,460 @@
+mysql -u root
+mysql -u root
+mysql -u root
+git --version
+git clone https://github.com/kumpul4semut/snakegame-python.git
+cd snakegame-python\
+code .
+cd ..
+mysql -u root
+mysql -u root
+mysql -u root
+git clone https://github.com/rifai716/oop-pygame-simplegame.git
+mysql -u root
+mysql -u root
+code .
+mysql -u root
+pinstaller --add-data resources/img/*; resources/img --add-data resources/audio/*; resources/audio --noconsole snake.py
+pyinstaller --add-data resources/img/*; resources/img --add-data resources/audio/*; resources/audio --noconsole snake.py
+pyinstaller --add-data resources/img/*; resources/img --add-data resources/audio/*; resources/audio --noconsole main.py
+pyinstaller --add-data resources/img/*.png; resources/img --add-data resources/audio/*; resources/audio --noconsole main.py
+pyinstaller --add-data "resources/img/*.png; resources/img" --add-data resources/audio/*; resources/audio --noconsole main.py
+pyinstaller --add-data "resources/img/*.png; resources/img" --add-data "resources/audio/*; resources/audio" --noconsole main.py
+pyinstaller --add-data "resources/img/*;resources/img" --add-data "resources/audio/*;resources/audio" --noconsole main.py
+shutdown
+cd shamo-backend-video\
+ls
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+npm install && npm run dev
+php artisan migrate
+php artisan vendor:publish --tag=jetstream-views
+code ,
+node --version
+npm init -y
+npm i express nodemon
+code .
+npx create-react-app seputarkoding
+cd seputarkoding\
+npm --version
+code 
+npm --version
+code 
+git clone https://github.com/elfinsanjaya12/be-trello.git
+cd be-trello\
+code .
+git clone https://github.com/elfinsanjaya12/fe-trello.git
+cd fe-trello\
+npm i
+npm start
+cd ..
+mkdir client
+cd client\
+npx create react app .
+npx create-react-app .
+code .
+composer --version
+npx create-react-app .
+composer --version
+composer create-project --prefer-dist laravel/laravel:^9.1 laravel-mail
+cd laravel-mail
+code .
+php artisan make:mail SendEmail
+php artisan serve
+composer create-project --prefer-dist laravel/laravel:^9.1 laravel-mas
+flutter create kasir_app
+cd kasir_app\
+code .
+git clone https://github.com/nurulaulia19/Proyek2-sadari.git
+cd Proyek2-sadari\
+code .
+php artisan make:mail SendEmail
+composer create-project --prefer-dist laravel/laravel:^9.1 laravel-mas
+flutter create kasir_app
+cd kasir_app\
+code .
+git clone https://github.com/nurulaulia19/Proyek2-sadari.git
+cd Proyek2-sadari\
+code .
+composer install
+ php artisan config:cache
+php --version
+ php artisan config:cache
+php artisan key:generate
+composer update
+php artisan serve
+npx create-react-app gudang_sepatu
+cd gudang_sepatu\
+npm i react-router-dom
+code .
+npm init -y
+code .
+npm init -y
+flutter create gudangSepatu
+flutter create gudang_sepatu_app
+cd gudang_sepatu
+cd ..
+cd gudang_sepatu_app\
+code .
+get -v
+flutter create mahasiswa
+cd ..
+mysql -u root
+flutter create mahasiswa
+flutter create mahasiswa_with_api
+flutter create mahasiswa_app
+code .
+mysql -u root
+mysql -u root
+flutter create mahasiswa
+flutter create mahasiswa_with_api
+flutter create mahasiswa_app
+code .
+mysql -u root
+cd Proyek2-sadari\
+composer require tymon/jwt-auth
+composer require tymon/jwt-auth --ignore-platform-reqs
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+php artisan serve
+php artisan migrate
+php artisan migrate:fresh
+composer require tymon/jwt-auth --ignore-platform-reqs
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+php artisan serve
+php artisan migrate
+php artisan migrate:fresh
+cd Proyek2-sadari\
+code .
+cd ..
+cd spatierole\
+php artisan migrate:refresh --seed
+composer require tymon/jwt-auth --ignore-platform-reqs
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+php artisan serve
+php artisan migrate
+php artisan migrate:fresh
+cd ..
+cd spatierole\
+php artisan make:controller Admin/DashboardController --resource
+php artisan make:controller Admin/NewsController --resource
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm config set registry http://registry.npmjs.org/
+npm cache clean –force
+npm cache clean -–force
+npm cache clean
+npm config set registry https://registry.npmjs.org/
+npm cache verify
+npm install
+npm run dev
+npm install && npm run dev
+flutter create mahasiswa_app
+code .
+mysql -u root
+mysql -u root
+flutter create mahasiswa
+flutter create mahasiswa_with_api
+flutter create mahasiswa_app
+code .
+cd Proyek2-sadari\
+composer require tymon/jwt-auth
+composer require tymon/jwt-auth --ignore-platform-reqs
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+php artisan migrate:fresh
+composer require spatie/laravel-permission
+php artisan vendor:publish --tag=laravel-assets --ansi --force
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag"migrations"
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+cd ..
+mysql -u root
+cd spatierole\
+php artisan migrate
+php artisan make:migration add_menu_name_to_
+php artisan make:migration add_menu_name_to_permissions_table
+php artisan migrate:refresh
+php artisan make:seeder PermissionSeeder
+php artisan make:seeder RoleSeeder
+php artisan make:seeder UserSeeder
+php artisan make:controller Admin/DashboardController
+php artisan make:controller Admin/NewsController
+php artisan migrate:refresh --seed
+php artisan serve
+code .
+mysql -u root
+mysql -u root
+flutter create mahasiswa
+flutter create mahasiswa_with_api
+flutter create mahasiswa_app
+composer require tymon/jwt-auth
+composer require tymon/jwt-auth --ignore-platform-reqs
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+php artisan make:controller AuthController
+php artisan vendor:publish --tag=laravel-assets --ansi --force
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag"migrations"
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+mysql -u root
+cd spatierole\
+php artisan make:migration add_menu_name_to_
+php artisan make:migration add_menu_name_to_permissions_table
+php artisan migrate:refresh
+php artisan make:seeder PermissionSeeder
+php artisan make:controller Admin/DashboardController
+php artisan make:controller Admin/NewsController
+php artisan migrate:refresh --seed
+cd crudMahasiswa\
+php artisan make:mode -m
+php artisan make:model Mahasiswa -m
+php artisan make:controller MahasiswaController -r
+php artisan route:list
+composer update
+php artisan make::seeder RoleSeeder
+php artisan db:Seed
+php artisan ui --auth bootstrap
+npm install && npm run dev
+cd Proyek2-sadari\
+ composer require spatie/laravel-permission
+ composer require spatie/laravel-permission
+ composer require spatie/laravel-permission
+ composer require spatie/laravel-permission
+ composer require spatie/laravel-permission --ignore-platform-reqs
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan make:seeder RoleSeeder
+CODE .
+php artisan make:seeder UserSeeder
+php artisan optimize:clear
+php artisan config:clear
+php artisan migrate
+Use php artisan permission:cache-reset
+php artisan permission:cache-reset
+php artisan cache:clea
+php artisan cache:clear
+php artisan migrate:fresh
+php artisan db:seed
+composer require laravel/ui
+cd ..
+git clone https://github.com/nurulaulia19/Proyek2-sadari.git sadari
+cd sadari\
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan migrate --seed
+git checkout kerinci2023
+code .
+php artisan serve
+cd ..
+cd sadari\
+php artisan migrate --seed
+php artisan db:seed
+php artisan migrate fresh
+php artisan migrate:fresh
+php artisan migrate:fresh --seed
+code .
+cd ..
+ cd sadari\
+php artisan serve
+cd ..
+git clone https://github.com/nurulaulia19/Proyek2-sadari.git sadari
+cd sadari\
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan migrate --seed
+git checkout kerinci2023
+code .
+php artisan serve
+cd ..
+cd sadari\
+php artisan migrate --seed
+php artisan migrate fresh
+php artisan migrate:fresh --seed
+code .
+cd ..
+ cd sadari\
+php artisan migrate:fresh
+php artisan db:seed
+php artisan serve
+php artisan make:migration create_puskesmas_table -m
+php artisan make:migration create_puskesmas_table --m
+php artisan make:migration create_puskesmas_table
+php artisan make model Puskesmas
+php artisan make:model Puskesmas --migration
+npm run dev
+php artisan serve
+php artisan make:controller AdminController -r
+php artisan make:controller AdminController -r
+npm run dev
+cd ..
+php artisan migrate --seed
+php artisan migrate fresh
+code .
+ cd sadari\
+php artisan migrate:fresh
+php artisan db:seed
+php artisan serve
+php artisan make:migration create_puskesmas_table -m
+php artisan make:migration create_puskesmas_table --m
+php artisan make:migration create_puskesmas_table
+php artisan make model Puskesmas
+php artisan make:model Puskesmas --migration
+npm run dev
+php artisan make:controller AdminController -r
+cd proyek-2\
+cd ..
+cd sadari\
+php artisan serve
+php artisan migrate:fresh --seed
+git add .
+git commit -m "permission admin"
+git push -u origin kerinci2023
+git push -u origin kerinci2023
+composer install
+code .
+php artisan key:generate
+php artisan migrate:fresh
+php artisan migrate:fresh
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+cd ..
+cd sadaruluyeah\
+git checkout kerinci2023
+composer install
+code .
+php artisan key:generate
+npm i
+php artisan migrate:fresh --seed
+npm run dev
+npx create-react-app seputarkoding
+cd seputarkoding\
+code .
+php artisan migrate:fresh --seed
+npm run dev
+npx create-react-app seputarkoding
+cd seputarkoding\
+code .
+cd ..
+cd proyek-2-nurulaulia
+php artisan serve
+npx create-react-app seputarkoding
+cd seputarkoding\
+cd ..
+cd proyek-3-nurulaulia
+cd proyek-2-nurulaulia
+code .
+php artisan key:generate
+php artisan migrate:fresh
+php artisan db:seed
+php artisan serve
+npm run dev
+flutter create diaryqu
+cd diaryqu\
+code .
+php --version
+cd ..
+cd formadiksi\
+php artisan serve
+restart
+php artisan serve
+restart
+cd .
+cd ..
+composer create-project laravel/laravel:^9.0 proyek-formadiksi
+cd proyek-formadiksi\
+composer require laravel/breeze --dev
+php artisan breeze:install react --ssr
+scomposer require inertiajs/inertia-laravel
+composer require inertiajs/inertia-laravel
+touch resources/js/ssr.js
+code .
+npm install
+npm run build
+npm run dev
+npm install
+cd ..
+composer create-project laravel/laravel:^9.19 proyek-formadiksi
+php --version
+composer create-project laravel/laravel:^9 proyek-formadiksi
+cd proyek-formadiksi\
+composer require laravel/breeze --dev
+php artisan breeze:install
+npm run build
+code .
+npm run dev
+composer create-project laravel/laravel inertia-react
+composer -v
+composer -version
+composer --version
+composer create-project laravel/laravel:^9.0 formadiksi-proyek
+cd formadiksi-proyek\
+composer require laravel/breeze --dev
+php artisan breeze:install
+code .
+npm install && npm run build
+laravel --version
+cd ..
+cd ..
+composer create-project laravel/laravel lara10
+composer -v
+composer --version
+flutter create latihanslicing
+cd latihanslicing\
+code .
+cd latihanslicing\
+npx-create-react-app client-masjid-polindra
+npx create-react-app client-masjid-polindra
+cd client-masjid-polindra\
+code .
+npm install -D tailwindcss
+npx tailwindcss init
+npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+code .
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/abdulghaniasykurthoriq/masjid-polindra.git
+git push -u origin main
+git push -u origin main
+flutter create instagramUi
+flutter create instagramui
+cd instagramui\
+code .
+php artisan serve
+php artisan serve
+php artisan serve
+code .
+php artisan serve
+cd shamo-backend-main\
+php --version
+composer install
+code .
+php artisan key:generate
+php artisan migrate:fresh
+php artisan serve
+php artisan serve --host=0.0.0.0
+php --version
+php artisan serve
+flutter create blog-app
+flutter create blog_app
+cd blog_app\
+code .
+ipconfig
+ipconfig
+php artisan serv --host 192.168.43.121:8000
+flutter create live_tracking
+cd live_tracking\
+code .
+npx create-react-app ui-masjid-admin
+cd ui-masjid-admin\
+code .
+php artisan serv --host 192.168.43.109 --port 8000
+php artisan serv --host 192.168.43.121 --port 8000

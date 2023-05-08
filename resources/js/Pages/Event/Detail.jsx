@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 export default function DetailEvent(props) {
+    
     return (
         <AuthenticatedLayout
             auth={props.auth}
