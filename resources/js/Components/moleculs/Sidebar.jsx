@@ -12,23 +12,27 @@ import {
   FaArrowDown,
   FaDeezer,
 } from "react-icons/fa";
+// import { Link } from '@inertiajs/inertia-react';
 import { Link } from '@inertiajs/react'
-import { usePage } from '@inertiajs/inertia-react';
 
 export default function Sidebar(){
   const [isShow, setIsShow] = useState(false)
-  const [isKeuangan, setIsKeuangan] = useState(true)
+  const [isKeuangan, setIsKeuangan] = useState(false)
   let angka = 29;
   const handleShow = () => {
 
   }
 
   const showKeuangan = () => {
-
+    setIsKeuangan(!isKeuangan)
   }
   const currentPage = window.location.pathname
   useEffect(() => {
+    if(currentPage == '/laporan-kas' || currentPage == '/laporan-kas/pemasukan' || currentPage == '/laporan-kas/pengeluaran'){
+      setIsKeuangan(true)
+    }
     console.log('angka',currentPage)
+    // setIsKeuangan(false)
   })
   return (
     <>
@@ -58,13 +62,14 @@ export default function Sidebar(){
                       BAITUL<br /> MUTTAQIN
                     </p>
                   </div>
+                  
                   <div className="w-full ">
                     <div className="pt-8">
                     <p className="pl-10 ">Administrator</p>
                     <ul className="text-lg font-semibold">
-                      <Link to="/">
+                      <Link href={route('login')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }}
+                          style={currentPage === "/dashboard" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2  w-full"
                         >
                           {" "}
@@ -84,10 +89,9 @@ export default function Sidebar(){
                       </li>
 
                       <div className={`${isKeuangan ? "" : "hidden"}`} >
-                        <Link to="/laporan-kas">
+                        <Link  href={route('postingan.index')}>
                           <li
-                            style={{ backgroundColor: "#d9ddfc" }
-                            }
+                            style={currentPage === "/laporan-kas" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"
                           >
                             {" "}
@@ -98,8 +102,7 @@ export default function Sidebar(){
                         </Link>
                         <Link to="/pemasukan">
                           <li
-                            style={{ backgroundColor: "#d9ddfc" }
-                            }
+                            style={currentPage === "/laporan-kas/pemasukan" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"
                           >
                             {" "}
@@ -108,8 +111,7 @@ export default function Sidebar(){
                         </Link>
                         <Link to="/pengeluaran">
                           <li
-                            style={{ backgroundColor: "#d9ddfc" }
-                            }
+                            style={currentPage === "/laporan-kas/pengeluaran" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"
                           >
                             {" "}
@@ -121,10 +123,9 @@ export default function Sidebar(){
 
                       {/* END LAPORAN KAS */}
 
-                      <Link to="/kegiatan">
+                      <Link href={route('event.index')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }
-                          }
+                          style={currentPage === "/event" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2 "
                         >
                           {" "}
@@ -132,20 +133,18 @@ export default function Sidebar(){
                         </li>
                       </Link>
 
-                      <Link to="/short-post">
+                      <Link href={route('postingan.index')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }
-                          }
+                          style={currentPage === "/postingan" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2"
                         >
                           {" "}
                           <MdSpaceDashboard /> <p className="pl-4">Postingan</p>
                         </li>
                       </Link>
-                      <Link to="/kehadiran-jamaah">
+                      <Link href={route('kehadiran-jamaah.index')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }
-                          }
+                          style={currentPage === "/kehadiran-jamaah" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2"
                         >
                           {" "}
@@ -153,32 +152,30 @@ export default function Sidebar(){
                           <p className="pl-4">Kehadiran Jamaah </p>
                         </li>
                       </Link>
-                      <Link to="/kotak-saran">
+                      <Link href={route('kotak-saran.index')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }
-                          }
+                          style={currentPage === "/kotak-saran" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2"
                         >
                           {" "}
                           <MdMessage /> <p className="pl-4">Kotak Saran </p>
                         </li>
                       </Link>
-                      <Link to="/event">
+                      {/* <Link to="/event">
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }
-                          }
+                          style={currentPage === "/event" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center py-2"
                         >
                           {" "}
                           <MdMessage /> <p className="pl-4">Event </p>
                         </li>
-                      </Link>
+                      </Link> */}
                     </ul>
                     <p className="pl-10 pt-4">Administrator</p>
                     <ul>
-                      <Link to="/akun">
+                      <Link href={route('akun.index')}>
                         <li
-                          style={{ backgroundColor: "#d9ddfc" }}
+                          style={currentPage === "/akun" ? { backgroundColor: "#d9ddfc" } : {}}
                           className="pl-10 flex items-center font-semibold py-2"
                         >
                           {" "}
