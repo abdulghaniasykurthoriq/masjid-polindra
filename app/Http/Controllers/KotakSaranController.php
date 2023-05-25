@@ -15,6 +15,11 @@ class KotakSaranController extends Controller
         return Inertia::render('KotakSaran/index');
     }
 
+    public function kotakSaranMasuk()
+    {
+        return Inertia::render('KotakSaran/KotakSaranMasuk');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

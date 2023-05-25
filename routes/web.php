@@ -47,19 +47,30 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/laporan-kas', [LaporanKasController::class, 'index'])->name('kas.index');
     Route::get('/laporan-kas/pemasukan', [LaporanKasController::class, 'createPemasukan'])->name('kas.createPemasukan');
-    Route::get('/laporan-kas/pengeluaran', [LaporanKasController::class, 'createPemasukan'])->name('kas.createPengeluaran');
+    Route::get('/laporan-kas/pengeluaran', [LaporanKasController::class, 'createPengeluaran'])->name('kas.createPengeluaran');
+    Route::get('/laporan-kas/detail', [LaporanKasController::class, 'detail'])->name('kas.detail');
 
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
+    Route::get('/event/detail', [EventController::class, 'detail'])->name('event.detail');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
     // Route::patch('/event', [EventController::class, 'update'])->name('event.update');
     // Route::delete('/event', [EventController::class, 'destroy'])->name('event.destroy');
     Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index');
+    Route::get('/postingan/create', [PostinganController::class, 'create'])->name('postingan.create');
+    Route::get('/postingan/update', [PostinganController::class, 'update'])->name('postingan.update');
+
+
     Route::get('/kehadiran-jamaah', [KehadiranJamaahController::class, 'index'])->name('kehadiran-jamaah.index');
+
     Route::get('/kotak-saran', [KotakSaranController::class, 'index'])->name('kotak-saran.index');
+    Route::get('/kotak-saran/masuk', [KotakSaranController::class, 'kotakSaranMasuk'])->name('kotak-saran.masuk');
 
     Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
 
     Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index');
+    Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create');
+    Route::post('/akuncreate', [ManagementAkunController::class, 'store']);
+    Route::get('/akun/update', [ManagementAkunController::class, 'update'])->name('akun.update');
 });
 
 

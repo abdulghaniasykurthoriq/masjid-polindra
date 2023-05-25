@@ -22,6 +22,8 @@
         "@inertiajs/inertia-react": "^0.8.1",
         "daisyui": "^2.51.6",
         "react-icons": "^4.8.0",
-        "react-router-dom": "^6.11.0"
+        "react-router-dom": "^6.11.0",
+        "react-scroll": "^1.8.9",
+        "sweetalert2": "^11.7.5"
     }
 }

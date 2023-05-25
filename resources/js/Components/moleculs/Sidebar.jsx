@@ -14,13 +14,18 @@ import {
 } from "react-icons/fa";
 // import { Link } from '@inertiajs/inertia-react';
 import { Link } from '@inertiajs/react'
+import useMediaQuery from '../../../../resources/helpers/useMediaQuery';
+// import useMediaQuery from 'resources/helpers/mediaQuery';
 
 export default function Sidebar(){
   const [isShow, setIsShow] = useState(false)
   const [isKeuangan, setIsKeuangan] = useState(false)
+  const isDesktop = useMediaQuery("(min-width:1024px)");
+  const isMobile = useMediaQuery("(min-width:200px)");
+  
   let angka = 29;
   const handleShow = () => {
-
+    setIsShow(!isShow);
   }
 
   const showKeuangan = () => {
@@ -31,19 +36,26 @@ export default function Sidebar(){
     if(currentPage == '/laporan-kas' || currentPage == '/laporan-kas/pemasukan' || currentPage == '/laporan-kas/pengeluaran'){
       setIsKeuangan(true)
     }
+    if (isMobile) {
+      setIsShow(true);
+    }
+    if (isDesktop) {
+      setIsShow(false);
+    }
     console.log('angka',currentPage)
     // setIsKeuangan(false)
-  })
+  },[isMobile,isDesktop])
   return (
     <>
-      <div className="lg:min-w-[320px] overflow-auto scroll-smooth  min-h-screen">
+      <div className="lg:min-w-[320px] overflow-auto scroll-smooth  min-h-screen z-50">
+      <div
+            onClick={handleShow}
+            className="bg-red-200 z-50 w-14 h-14 rounded-full absolute  left-3 top-3"
+          ></div>
         <div className="fixed z-10 overflow-auto ">
         {/* //TODO:THIS START CIRCLE */}
         
-        <div
-            onClick={handleShow}
-            className="bg-red-200 z-20 w-14 h-14 rounded-full absolute  left-3 top-3"
-          ></div>
+        
         {/* //TODO: END BTN CIRCLE */}
         <div
           style={{ backgroundColor: "#f6f7ff" }}
@@ -89,7 +101,8 @@ export default function Sidebar(){
                       </li>
 
                       <div className={`${isKeuangan ? "" : "hidden"}`} >
-                        <Link  href={route('postingan.index')}>
+             
+                        <Link  href={route('kas.index')}>
                           <li
                             style={currentPage === "/laporan-kas" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"
@@ -100,7 +113,7 @@ export default function Sidebar(){
                             </p>{" "}
                           </li>
                         </Link>
-                        <Link to="/pemasukan">
+                        <Link href={route('kas.createPemasukan')}>
                           <li
                             style={currentPage === "/laporan-kas/pemasukan" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"
@@ -109,7 +122,7 @@ export default function Sidebar(){
                             <FaDeezer /> <p className="pl-4">Pemasukan</p>{" "}
                           </li>
                         </Link>
-                        <Link to="/pengeluaran">
+                        <Link href={route('kas.createPengeluaran')}>
                           <li
                             style={currentPage === "/laporan-kas/pengeluaran" ? { backgroundColor: "#d9ddfc" } : {}}
                             className="ease-in-out duration-300 pl-14 flex items-center py-2"

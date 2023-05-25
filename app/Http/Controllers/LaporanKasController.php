@@ -33,6 +33,11 @@ class LaporanKasController extends Controller
         return Inertia::render('LaporanKas/Pengeluaran');
     }
 
+    public function detail()
+    {
+        return Inertia::render('LaporanKas/Detail');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

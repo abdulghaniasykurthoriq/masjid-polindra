@@ -1,11 +1,11 @@
-
+import InputMateri from '@/Components/atoms/InputMateri';
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 import { FaArrowLeft, FaPlus } from 'react-icons/fa';
 
-export default function CreateEvent(props) {
+export default function Update(props) {
 
     const [totalMateri, setTotalMateri] = useState(1);
     const handleTotalMateri = () => {
@@ -45,7 +45,7 @@ export default function CreateEvent(props) {
             <div className='bg-blue-50 w-full'>
                 {/* Header section */}
                 <div className='flex justify-between p-8'>
-                    <p className='text-3xl font-bold'>MANAGEMENT EVENT</p>
+                    <p className='text-3xl font-bold'> FORM UPDATE ACCOUNT</p>
                     <p>logout</p>
                 </div>
 
@@ -56,7 +56,7 @@ export default function CreateEvent(props) {
                                 <FaArrowLeft className='mr-2'/>
                                 <p>Back</p> 
                             </div>
-                            <p className='px-6 text-2xl font-bold'>Bikin Event</p>
+                            <p className='px-6 text-2xl font-bold'>Update Akun</p>
                         </div>
                     </div>
                     <form className=''>
@@ -144,7 +144,7 @@ export default function CreateEvent(props) {
                         {listMateri}
 
                         <div className='flex justify-center py-8 full'>
-                        <button className='btn btn-primary'>
+                        <button className='bg-blue-600 px-6 py-2 w-max flex items-center text-white rounded-lg'>
                                 Simpan
                             </button>
                         </div>

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PostinganController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Postingan/index');
+        //
     }
 
     /**
@@ -20,7 +21,7 @@ class PostinganController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Postingan/Create');
+        //
     }
 
     /**
@@ -28,7 +29,21 @@ class PostinganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'username' => 'required',
+            'name' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+            'status' => 'required'
+        ]);
+        $data = new User();
+        $data->name = $validateData['name'];
+        $data->username = $validateData['username'];
+        $data->password = $validateData['password'];
+        $data->level = $validateData['level'];
+        $data->status = $validateData['status'];
+        $data->save();
+        Inertia::render('Event/Event');
     }
 
     /**
@@ -50,13 +65,9 @@ class PostinganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(Request $request, string $id)
-    // {
-    //     return Inertia::render('Postingan/Update');
-    // }
-    public function update()
+    public function update(Request $request, string $id)
     {
-        return Inertia::render('Postingan/Update');
+        //
     }
 
     /**

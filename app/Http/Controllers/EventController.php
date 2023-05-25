@@ -22,6 +22,11 @@ class EventController extends Controller
     {
         return Inertia::render('Event/Create');
     }
+    public function detail()
+    {
+        return Inertia::render('Event/Detail');
+    }
+
 
     /**
      * Store a newly created resource in storage.

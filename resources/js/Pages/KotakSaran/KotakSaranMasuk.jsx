@@ -1,17 +1,16 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
-import { FaFilter, FaPencilAlt, FaRegSadTear, FaTrashAlt, FaUser } from 'react-icons/fa';
-import Logo from '../../../assets/logo.png'
+import { FaFilter} from 'react-icons/fa';
 import HeaderPage from '@/Components/moleculs/headerPage';
 
-export default function KehadiranJamaah(props) {
+export default function KotakSaranMasuk(props) {
     return (
         <div className='flex'>
-            <Head title="Management Kehadiran Jamaah Masjid" />
+            <Head title="Kotak Saran Masuk Masjid" />
             <Sidebar/>
             <div className='bg-blue-50 w-full'>
-                <HeaderPage title={"Kehadiran Jamaah"}/>
+                <HeaderPage title={"Kotak Saran Masuk"}/>
                 {/* Menu section */}
                 <div className='flex justify-between px-8 pt-8'>
                     <div className='flex items-center  w-full max-w-[600px] '>   
@@ -29,7 +28,7 @@ export default function KehadiranJamaah(props) {
                     <div className='flex'>
 
                     <Link href={route('postingan.create')}>
-                        <button className='bg-blue-400 px-4 rounded-lg text-white' type="btn">+ New Post</button>
+                        <button className='bg-blue-400 px-4 rounded-lg text-white' type="btn">+10 New Saran</button>
                     </Link>
                     </div>
                 </div>
@@ -44,20 +43,23 @@ export default function KehadiranJamaah(props) {
     <thead>
       <tr>
         <th></th>
-        <th>Nama</th>
-        <th>Jurusan</th>
-        <th>No Handphone</th>
-        <th>Tanggal</th>
+        <th>Username</th>
+        <th>Kritik dan Saran</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       {/* row 1 */}
       <tr>
         <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-        <td>kamis 29 juli 2023</td>
+        <td>Bambang Purmadi</td>
+        <td>saya suka kesal ketika saya mau piipis wc pintu masjidny
+selalu tidak rapat ditutup</td>
+        <td>
+        <button className="btn btn-primary">setujui</button>
+        <button className="btn btn-error">tolak</button>
+        </td>
+        
       </tr>
     </tbody>
   </table>
