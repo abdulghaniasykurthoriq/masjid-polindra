@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KehadiranJamaah;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,10 @@ class KehadiranJamaahController extends Controller
      */
     public function index()
     {
-        return Inertia::render('KehadiranJamaah/index');
+        $kehadiranJamaah = KehadiranJamaah::all();
+        return Inertia::render('KehadiranJamaah/index', [
+            'kehadiran' => $kehadiranJamaah
+        ]);
     }
 
     /**

@@ -57,20 +57,29 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/event', [EventController::class, 'destroy'])->name('event.destroy');
     Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index');
     Route::get('/postingan/create', [PostinganController::class, 'create'])->name('postingan.create');
-    Route::get('/postingan/update', [PostinganController::class, 'update'])->name('postingan.update');
-
+    Route::post('/postingan/create', [PostinganController::class, 'store'])->name('postingan.store');
+    Route::get('/postingan/{id}/edit', [PostinganController::class, 'edit'])->name('postingan.edit');
+    Route::put('/postingan/{id}/update', [PostinganController::class, 'update'])->name('postingan.update');
+    Route::delete('/postingan/{id}/delete', [PostinganController::class, 'destroy'])->name('postingan.delete');
 
     Route::get('/kehadiran-jamaah', [KehadiranJamaahController::class, 'index'])->name('kehadiran-jamaah.index');
 
     Route::get('/kotak-saran', [KotakSaranController::class, 'index'])->name('kotak-saran.index');
     Route::get('/kotak-saran/masuk', [KotakSaranController::class, 'kotakSaranMasuk'])->name('kotak-saran.masuk');
+    Route::post('/kotak-saran/{id}/setujui', [KotakSaranController::class, 'setujuiSaran'])->name('kotak-saran.setujui');
+    Route::delete('/kotak-saran/{id}/hapus', [KotakSaranController::class, 'hapusSaran'])->name('kotak-saran.hapus');
+
+
 
     Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
 
     Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index');
     Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create');
     Route::post('/akuncreate', [ManagementAkunController::class, 'store']);
-    Route::get('/akun/update', [ManagementAkunController::class, 'update'])->name('akun.update');
+    Route::get('/akun/update/{id}', [ManagementAkunController::class, 'update'])->name('akun.update');
+    Route::post('/akun/update/{id}', [ManagementAkunController::class, 'updateStore'])->name('akun.updateStore');
+    Route::put('/akun/{id}/resetpassword', [ManagementAkunController::class, 'resetPassword'])->name('akun.resetPassword');
+    Route::delete('/akun/{id}/delete', [ManagementAkunController::class, 'destroy'])->name('akun.destroy');
 });
 
 

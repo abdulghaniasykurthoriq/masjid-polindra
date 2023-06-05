@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KotakSaran;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,13 +13,49 @@ class KotakSaranController extends Controller
      */
     public function index()
     {
-        return Inertia::render('KotakSaran/index');
+
+        $kotakSaranApproved = KotakSaran::query()
+            ->when('status_approval', function ($query) {
+                return $query->where('status_approval', true);
+            })
+            ->get();
+        // $kotakSaranApproved->where('status_approval', 1);
+        return Inertia::render(
+            'KotakSaran/index',
+            [
+                'kotak_saran' => $kotakSaranApproved
+            ]
+        );
     }
 
     public function kotakSaranMasuk()
     {
-        return Inertia::render('KotakSaran/KotakSaranMasuk');
+        $kotakSaranMasuk = KotakSaran::query()
+            ->when('status_approval', function ($query) {
+                return $query->where('status_approval', false);
+            })
+            ->get();
+        return Inertia::render('KotakSaran/KotakSaranMasuk', [
+            'kotak_saran_masuk' => $kotakSaranMasuk
+        ]);
     }
+    public function setujuiSaran(string $id)
+    {
+        $kotakSaranMasuk = KotakSaran::find($id);
+        $kotakSaranMasuk->status_approval = true;
+        $kotakSaranMasuk->save();
+        return redirect()->route('kotak-saran.index')->with('success', 'Saran Berhasil disetujui!');
+    }
+
+    public function hapusSaran(string $id)
+    {
+        $kotakSaranMasuk = KotakSaran::find($id);
+        $kotakSaranMasuk->status_approval = true;
+        $kotakSaranMasuk->delete();
+        return redirect()->route('kotak-saran.index')->with('success', 'Saran Berhasil disetujui!');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

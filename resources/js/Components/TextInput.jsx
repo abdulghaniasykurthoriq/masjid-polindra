@@ -1,6 +1,9 @@
 import { forwardRef, useEffect, useRef } from 'react';
 
-export default forwardRef(function TextInput({ type = 'text', className = '', isFocused = false, ...props }, ref) {
+export default forwardRef(function TextInput(
+    { type = 'text', className = '', isFocused = false, ...props },
+    ref
+) {
     const input = ref ? ref : useRef();
 
     useEffect(() => {
@@ -11,7 +14,6 @@ export default forwardRef(function TextInput({ type = 'text', className = '', is
 
     return (
         <div className="flex flex-col items-start w-full">
-            
             <input
                 {...props}
                 type={type}
