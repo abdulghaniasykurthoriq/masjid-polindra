@@ -5,18 +5,16 @@ import { FaFilter } from 'react-icons/fa';
 import HeaderPage from '@/Components/moleculs/headerPage';
 import { Inertia } from '@inertiajs/inertia';
 
-
 export default function KotakSaranMasuk(props) {
-
     const onSetujui = (id) => {
         const url = route('kotak-saran.setujui', { id });
         Inertia.post(url);
-    }
+    };
     const onTolak = (id) => {
         // alert('wpo')
         const url = route('kotak-saran.hapus', { id });
         Inertia.delete(url);
-    }
+    };
     return (
         <div className="flex">
             <Head title="Kotak Saran Masuk Masjid" />
@@ -70,14 +68,20 @@ export default function KotakSaranMasuk(props) {
                                                 <td>{item.username}</td>
                                                 <td>{item.text_saran}</td>
                                                 <td>
-                                                    <button 
-                                                        onClick={() =>onSetujui(item.id)}
-                                                    className="btn mx-1 btn-primary">
+                                                    <button
+                                                        onClick={() =>
+                                                            onSetujui(item.id)
+                                                        }
+                                                        className="btn mx-1 btn-primary"
+                                                    >
                                                         setujui
                                                     </button>
-                                                    <button 
-                                                    onClick={() =>onTolak(item.id)}
-                                                    className="btn mx-1 btn-error">
+                                                    <button
+                                                        onClick={() =>
+                                                            onTolak(item.id)
+                                                        }
+                                                        className="btn mx-1 btn-error"
+                                                    >
                                                         tolak
                                                     </button>
                                                 </td>

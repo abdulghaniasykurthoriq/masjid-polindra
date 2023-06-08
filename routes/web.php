@@ -24,6 +24,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    // return 'hello world';
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -51,8 +52,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan-kas/detail', [LaporanKasController::class, 'detail'])->name('kas.detail');
 
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
-    Route::get('/event/detail', [EventController::class, 'detail'])->name('event.detail');
+    Route::post('/event', [EventController::class, 'store'])->name('event.store');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
+    Route::get('/event/{id}', [EventController::class, 'detail'])->name('eventdetail');
+
     // Route::patch('/event', [EventController::class, 'update'])->name('event.update');
     // Route::delete('/event', [EventController::class, 'destroy'])->name('event.destroy');
     Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index');

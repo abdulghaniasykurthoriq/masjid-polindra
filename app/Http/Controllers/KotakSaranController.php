@@ -13,7 +13,7 @@ class KotakSaranController extends Controller
      */
     public function index()
     {
-
+        
         $kotakSaranApproved = KotakSaran::query()
             ->when('status_approval', function ($query) {
                 return $query->where('status_approval', true);

@@ -1,16 +1,18 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
-import {
-    FaFilter,
-} from 'react-icons/fa';
+import { FaFilter } from 'react-icons/fa';
 import HeaderPage from '@/Components/moleculs/headerPage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function KehadiranJamaah(props) {
+    const [filter, setFilter] = useState('');
+    const searchFilter = () => {
+        console.log('filter', filter);
+    };
     useEffect(() => {
-        console.log('props', props)
-    })
+        console.log('props', props);
+    });
     return (
         <div className="flex">
             <Head title="Management Kehadiran Jamaah Masjid" />
@@ -21,9 +23,16 @@ export default function KehadiranJamaah(props) {
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">
                         <div className="w-full">
-                            <TextInput placeholder="search" />
+                            <TextInput
+                                placeholder="search"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                            />
                         </div>
-                        <div className="flex items-center ml-4 text-2xl w-full">
+                        <div
+                            onClick={searchFilter}
+                            className="flex items-center ml-4 text-2xl w-full"
+                        >
                             <FaFilter />
                         </div>
                     </div>
@@ -58,19 +67,17 @@ export default function KehadiranJamaah(props) {
                                 </thead>
                                 <tbody>
                                     {/* row 1 */}
-                                    {
-                                        props.kehadiran.map((kehadiran,i) => {
-                                            return(
-                                                <tr>
-                                        <th>1</th>
-                                        <td>{kehadiran.nama}</td>
-                                        <td>{kehadiran.jurusan}</td>
-                                        <td>{kehadiran.no_hp}</td>
-                                        <td>{kehadiran.created_at}</td>
-                                    </tr>
-                                            )
-                                        } )
-                                    }
+                                    {props.kehadiran.map((kehadiran, i) => {
+                                        return (
+                                            <tr>
+                                                <th>1</th>
+                                                <td>{kehadiran.nama}</td>
+                                                <td>{kehadiran.jurusan}</td>
+                                                <td>{kehadiran.no_hp}</td>
+                                                <td>{kehadiran.created_at}</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>

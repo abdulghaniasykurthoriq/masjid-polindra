@@ -1,22 +1,18 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
-import {
-    FaFilter,
-} from 'react-icons/fa';
+import { FaFilter } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import HeaderPage from '@/Components/moleculs/headerPage';
-import { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
 export default function Postingan(props) {
-
+    console.log('props', props);
     const onUpdate = (id) => {
-        const url = route('postingan.edit',{id})
-        Inertia.get(url)
-        
-    }
-    
+        const url = route('postingan.edit', { id });
+        Inertia.get(url);
+    };
+
     const onDeleted = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -28,8 +24,8 @@ export default function Postingan(props) {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = route('postingan.delete',{id})
-                Inertia.delete(url)
+                const url = route('postingan.delete', { id });
+                Inertia.delete(url);
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             }
         });
@@ -81,34 +77,37 @@ export default function Postingan(props) {
                                 </thead>
                                 <tbody>
                                     {/* row 1 */}
-                                    {
-                                        props.postingan.map((item,i) => {
-                                            return(
-                                                <tr key={i}>
-                                        <th>1</th>
-                                        <td>{item.id}</td>
-                                        <td>{item.text}</td>
-                                        <td>{item.user_id}</td>
-                                        <td>
-                                                <button 
-                                                onClick={() => onUpdate(item.id)}
-                                                className="btn btn-primary mx-1">
-                                                    Update
-                                                </button>
-                                            <button className="btn btn-success mx-1">
-                                                Show detail
-                                            </button>
-                                            <button
-                                                onClick={() => onDeleted(item.id)}
-                                                className="btn btn-error mx-1"
-                                            >
-                                                hapus
-                                            </button>
-                                        </td>
-                                    </tr>
-                                            )
-                                        })
-                                    }
+                                    {props.postingan.map((item, i) => {
+                                        return (
+                                            <tr key={i}>
+                                                <th>1</th>
+                                                <td>{item.id}</td>
+                                                <td>{item.text}</td>
+                                                <td>{item.user_id}</td>
+                                                <td>
+                                                    <button
+                                                        onClick={() =>
+                                                            onUpdate(item.id)
+                                                        }
+                                                        className="btn btn-primary mx-1"
+                                                    >
+                                                        Update
+                                                    </button>
+                                                    <button className="btn btn-success mx-1">
+                                                        Show detail
+                                                    </button>
+                                                    <button
+                                                        onClick={() =>
+                                                            onDeleted(item.id)
+                                                        }
+                                                        className="btn btn-error mx-1"
+                                                    >
+                                                        hapus
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>

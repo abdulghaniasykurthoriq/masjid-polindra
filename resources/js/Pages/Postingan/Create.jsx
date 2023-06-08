@@ -1,18 +1,31 @@
-
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 export default function Detail(props) {
-
-    const [text, setText] = useState("")
+    const [text, setText] = useState('');
+    const [warna, setWarna] = useState('');
+    useEffect(() => {}, [warna]);
     const onSubmit = (e) => {
-        e.preventDefault()
-        const url = route('postingan.create',{text})
-        Inertia.post(url)
-        console.log('text', text)
-    }
+        e.preventDefault();
+        console.log('warna', warna);
+        console.log('text', text);
+        const data = { text, warna };
+        // alert('kocak gaming')
+        const url = route('postingan.create', { data });
+        Inertia.post(url);
+        // console.log('text', text)
+    };
+    const onRed = () => {
+        setWarna('red');
+        console.log('warna', warna);
+    };
+    const onGreen = () => {
+        setWarna('green');
+        console.log('warna', warna);
+    };
+
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
@@ -32,13 +45,29 @@ export default function Detail(props) {
                             </p>
                         </div>
                     </div>
-                    <form onSubmit={onSubmit} className="pl-8">
+                    <form onSubmit={(e) => onSubmit(e)} className="pl-8">
                         <div className="  flex w-full  px-6 p-2 items-center">
                             <label className="max-w-[200px] w-full">
-                                Expired
+                                Warna
                             </label>
-                            <div className="max-w-xl w-full">
-                                <TextInput className="" />
+                            <div className="max-w-xl flex w-full">
+                                <div
+                                    onClick={() => setWarna('red')}
+                                    className={`${
+                                        warna === 'red'
+                                            ? 'border-4 border-black'
+                                            : ''
+                                    } bg-red-200 w-10 h-10 rounded-full`}
+                                ></div>
+                                <div
+                                    onClick={() => setWarna('green')}
+                                    className={`${
+                                        warna === 'green'
+                                            ? 'border-4 border-black'
+                                            : ''
+                                    } bg-green-200 w-10 h-10 rounded-full`}
+                                ></div>
+                                {/* <TextInput className="" /> */}
                             </div>
                         </div>
                         <div className="  flex w-full  px-6 p-2 items-center">

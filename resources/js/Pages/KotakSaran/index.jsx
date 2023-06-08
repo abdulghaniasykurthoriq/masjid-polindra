@@ -3,17 +3,23 @@ import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
 import { FaFilter } from 'react-icons/fa';
 import HeaderPage from '@/Components/moleculs/headerPage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Inertia } from '@inertiajs/inertia';
 
 export default function KotakSaran(props) {
+    const [filter, setFilter] = useState('');
+
+    const searchFilter = () => {
+        console.log('filter', filter);
+
+        Inertia.get('/akun', { name: filter }, { preserveState: true });
+    };
     useEffect(() => {
         console.log('props', props);
     }, []);
 
     const onDelete = (id) => {
-        
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -29,7 +35,7 @@ export default function KotakSaran(props) {
                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             }
         });
-    }
+    };
 
     return (
         <div className="flex">
@@ -41,10 +47,14 @@ export default function KotakSaran(props) {
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">
                         <div className="w-full">
-                            <TextInput placeholder="search" />
+                            <TextInput
+                                placeholder="search"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                            />
                         </div>
                         <div className="flex items-center ml-4 text-2xl w-full">
-                            <FaFilter />
+                            <FaFilter onClick={searchFilter} />
                         </div>
                     </div>
 
@@ -85,9 +95,12 @@ export default function KotakSaran(props) {
                                                 <td>{item.username}</td>
                                                 <td>{item.text_saran}</td>
                                                 <td>
-                                                    <button 
-                                                        onClick={() => onDelete(item.id)}
-                                                    className="btn btn-error">
+                                                    <button
+                                                        onClick={() =>
+                                                            onDelete(item.id)
+                                                        }
+                                                        className="btn btn-error"
+                                                    >
                                                         hapus
                                                     </button>
                                                 </td>

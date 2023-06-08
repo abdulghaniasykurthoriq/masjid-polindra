@@ -16,17 +16,24 @@ export default function Akun(props) {
     useEffect(() => {
         console.log('woi ini property lahh', props);
     }, []);
+    console.log('isDosen', isDosen);
     const handleDosenFilter = () => {
         setIsDosen(!isDosen);
-        if (isDosen === true && isMahasiswa === true) {
-            setIsLevel('');
-        }
+        console.log('isDosen', isDosen);
         if (isDosen === true) {
             setIsLevel('dosen');
-        } else if (isMahasiswa === true) {
-            setIsLevel('mahasiswa');
         }
-        console.log('isLevel', isLevel);
+        // console.log('isDosen', isDosen)
+        // if (isDosen === true && isMahasiswa === true) {
+        //     setIsLevel('');
+        // }
+        // if (isDosen === true) {
+        //     setIsLevel('dosen');
+        // }
+        // if (isMahasiswa === true) {
+        //     setIsLevel('mahasiswa');
+        // }
+        console.log('isDosen', isDosen);
     };
     const handleMahasiswaFilter = () => {
         setIsMahasiswa(!isMahasiswa);
@@ -37,6 +44,13 @@ export default function Akun(props) {
 
     const onFilterLevel = () => {};
     const onFilter = () => {
+        if (isDosen === true && isMahasiswa === true) {
+            setIsLevel('');
+        } else if (isDosen === true) {
+            setIsLevel('dosen');
+        } else if (isMahasiswa === true) {
+            setIsLevel('mahasiswa');
+        }
         Inertia.get(
             '/akun',
             { name: filter, level: isLevel },

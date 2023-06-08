@@ -4,17 +4,17 @@ import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 export default function Detail(props) {
-    const [text, setText] = useState("")
+    const [text, setText] = useState('');
     useEffect(() => {
-        console.log('props', props)
-        setText(props.post.text)
-    },[])
+        console.log('props', props);
+        setText(props.post.text);
+    }, []);
 
     const onSubmit = (e) => {
-        e.preventDefault()
-        const url = route('postingan.update',{id : props.post.id ,text})
-        Inertia.put(url)
-    }
+        e.preventDefault();
+        const url = route('postingan.update', { id: props.post.id, text });
+        Inertia.put(url);
+    };
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
@@ -34,9 +34,7 @@ export default function Detail(props) {
                             </p>
                         </div>
                     </div>
-                    <form 
-                        onSubmit={ (e) => onSubmit(e)}
-                    className="pl-8">
+                    <form onSubmit={(e) => onSubmit(e)} className="pl-8">
                         <div className="  flex w-full  px-6 p-2 items-center">
                             <label className="max-w-[200px] w-full">
                                 Expired
@@ -51,8 +49,8 @@ export default function Detail(props) {
                             </label>
                             <div className="max-w-xl w-full ">
                                 <textarea
-                                value={text}
-                                onChange={(e) =>setText(e.target.value)}
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
                                     className="textarea textarea-bordered w-full"
                                     placeholder="Post"
                                 ></textarea>

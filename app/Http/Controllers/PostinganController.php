@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Postingan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,10 +14,12 @@ class PostinganController extends Controller
      */
     public function index()
     {
+        $event = Event::with(['materi']);
         $postingan = Postingan::all();
 
         return Inertia::render('Postingan/index', [
-            'postingan' => $postingan
+            'postingan' => $postingan,
+            'event' => $event
         ]);
     }
 
@@ -38,6 +41,7 @@ class PostinganController extends Controller
         ]);
         $postingan = new Postingan();
         $postingan->text = $validateData['text'];
+        // $postingan->warna = $request->warna;
         $postingan->user_id = 1;
         $postingan->save();
         return redirect()->route('postingan.index')->with('success', 'Data Berhasil Dibuat!');
