@@ -17,7 +17,7 @@ export default function CreateEvent(props) {
                 <label>Thumbnail</label>
                 <div className="max-w-4xl float-start max-w-md w-full flex">
                     <input
-                        onChange={(e) =>setFile(e.target.files[0])}
+                        onChange={(e) => setFile(e.target.files[0])}
                         class=" max-w-sm file:bg-blue-500 file:text-white file:absolute file:-right-3 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 leading-[2.15] font-normal text-neutral-700  transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
                         id="formFileLg"
                         type="file"
@@ -53,7 +53,7 @@ export default function CreateEvent(props) {
     const [kategori, setKategori] = useState('');
     const [image, setImage] = useState(null);
     // const [materi, setMateri] = useState(null);
-    let materi = []
+    let materi = [];
     const [error, setError] = useState(null);
 
     const handleFileChange = (event) => {
@@ -70,16 +70,14 @@ export default function CreateEvent(props) {
         var arrayOfObjects = [
             ['John', 25],
             ['Jane', 30],
-            ['Bob', 35 ]
-          ];
+            ['Bob', 35],
+        ];
         //   formData.append('items', arrayOfObjects);
-          
-          // Iterasi melalui array dan tambahkan setiap objek ke FormData
-          for (var i = 0; i < arrayOfObjects.length; i++) {
-            formData.append('items[' + i +'].', arrayOfObjects[i]);
 
-          }
-    
+        // Iterasi melalui array dan tambahkan setiap objek ke FormData
+        for (var i = 0; i < arrayOfObjects.length; i++) {
+            formData.append('items[' + i + '].', arrayOfObjects[i]);
+        }
 
         Inertia.post('/event', formData, {
             onError: (errors) => {
@@ -91,7 +89,6 @@ export default function CreateEvent(props) {
             },
         });
     };
-
 
     return (
         <div className="flex">

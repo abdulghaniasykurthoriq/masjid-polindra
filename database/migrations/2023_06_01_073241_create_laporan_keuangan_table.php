@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_laporan');
-            $table->integer('user_id');
+            $table->string('kode_laporan')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('status');
             // $table->integer('user_id');
             $table->integer('total');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -5,21 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Postingan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Symfony\Component\Console\Input\Input;
 
 class PostinganController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $event = Event::with(['materi']);
-        $postingan = Postingan::all();
 
+        // $event = Event::with(['materi']);
+        // $kode = $request->input('kode');
+
+        // $postingan = Postingan::with('users')->where('id', $id)->first();
+        // if ($kode) {
+        //     $postingan = Postingan::query();
+        // } else {
+        //     $postingan = Postingan::all();
+        //     $postingan->load('user');
+        // }
+
+        $postingan = Postingan::all();
+        $postingan->load('user');
         return Inertia::render('Postingan/index', [
             'postingan' => $postingan,
-            'event' => $event
+            // 'event' => $event
         ]);
     }
 
@@ -37,12 +50,14 @@ class PostinganController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'text' => 'required'
+            'text' => 'required',
+            'warna' => 'required'
         ]);
         $postingan = new Postingan();
         $postingan->text = $validateData['text'];
+        $postingan->warna = $validateData['warna'];
         // $postingan->warna = $request->warna;
-        $postingan->user_id = 1;
+        $postingan->user_id = Auth::user()->id;
         $postingan->save();
         return redirect()->route('postingan.index')->with('success', 'Data Berhasil Dibuat!');
     }

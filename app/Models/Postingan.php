@@ -14,4 +14,8 @@ class Postingan extends Model
         'user_id',
         'warna'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

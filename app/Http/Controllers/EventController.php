@@ -60,7 +60,7 @@ class EventController extends Controller
         //     $event->save();
         //     return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
         // }
-        dd($request);
+        // dd($request);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

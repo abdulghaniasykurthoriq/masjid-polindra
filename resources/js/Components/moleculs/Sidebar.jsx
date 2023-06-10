@@ -111,18 +111,27 @@ export default function Sidebar() {
                                         </Link>
 
                                         {/* START LAPORAN KAS */}
-                                        <li
-                                            onClick={showKeuangan}
-                                            className="cursor-pointer pl-10 flex items-center py-2"
-                                        >
-                                            {' '}
-                                            <FaWallet />{' '}
-                                            <p className="pl-4">
-                                                Laporan Kas
-                                            </p>{' '}
-                                        </li>
-
-                                        <div
+                                        <Link href={route('kas.index')}>
+                                            <li
+                                                style={
+                                                    currentPage ===
+                                                    '/laporan-kas'
+                                                        ? {
+                                                              backgroundColor:
+                                                                  '#d9ddfc',
+                                                          }
+                                                        : {}
+                                                }
+                                                className="cursor-pointer pl-10 flex items-center py-2"
+                                            >
+                                                {' '}
+                                                <FaWallet />{' '}
+                                                <p className="pl-4">
+                                                    Laporan Kas
+                                                </p>{' '}
+                                            </li>
+                                        </Link>
+                                        {/* <div
                                             className={`${
                                                 isKeuangan ? '' : 'hidden'
                                             }`}
@@ -195,7 +204,7 @@ export default function Sidebar() {
                                                     </p>{' '}
                                                 </li>
                                             </Link>
-                                        </div>
+                                        </div> */}
 
                                         {/* END LAPORAN KAS */}
 

@@ -1,32 +1,33 @@
 import { FaSearch } from 'react-icons/fa';
-import { BiLogOutCircle } from 'react-icons/bi';
+import { Inertia } from '@inertiajs/inertia';
 import Content from '@/Components/moleculs/content';
-import React from 'react';
-function LaporanKas() {
+import React, { useState } from 'react';
+import HeaderPage from '@/Components/moleculs/headerPage';
+// import useFormatDate from '../../helpers/useFormatDate';
+import useFormatDate from '../../../helpers/useFormatDate';
+import useFormatRupiah from '../../../helpers/useFormatRupiah';
+function LaporanKas(props) {
+    console.log('props', props);
+    
+
+
     return (
         <Content>
             <div className=" min-h-screen ">
+                <HeaderPage title={'LAPORAN KEUANGAN'} />
+
                 <Header />
                 <div className="relative">
-                    <ListCard />
-                    <div
-                        className="
-          h-[50px] 
-          sm:h-[70px] 
-          md:h-[100px] 
-          lg:h-[70px] 
-          xl:h-[130px] 
-          border-b-2 mx-6 "
-                    >
-                        {/* //TODO: This is line */}{' '}
-                    </div>
-                    <div className="flex mx-16 my-4">
+                    {/* <ListCard /> */}
+
+                    <div className="flex mx-16 mb-4 ">
                         {/* start table  */}
-                        <div className="overflow-x-auto w-full ">
-                            <table className="table w-full">
+                        <div className="overflow-x-auto w-full">
+                            <table className="table w-full ">
                                 {/* head */}
                                 <thead>
                                     <tr>
+                                    <th>kode laporan</th>
                                         <th>Kategori</th>
                                         <th>Nominal</th>
                                         <th>Tanggal</th>
@@ -35,78 +36,26 @@ function LaporanKas() {
                                 </thead>
                                 <tbody>
                                     {/* row 1 */}
-                                    <tr>
-                                        <td>pemasukan </td>
-                                        <td>Rp. 1.900.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {/* row 2 */}
-                                    <tr className="hover">
-                                        <td>pemasukan</td>
-                                        <td>Rp. 1.000.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {/* row 3 */}
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    {props.laporan_keuangan.length > 0 && props.laporan_keuangan.map(
+                                        (pemasukan, index) => {
+                                            return (
+                                                <tr
+                                                    className="hover"
+                                                    key={index}
+                                                >
+                                                    <td>{pemasukan.kode_laporan} </td>
+                                                    <td>{pemasukan.status} </td>
+                                                    <td>{useFormatRupiah(pemasukan.total)}</td>
+                                                    <td>{useFormatDate(pemasukan.created_at)}</td>
+                                                    <td>
+                                                        <button className="btn btn-accent">
+                                                            Show detail
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        }
+                                    )}
                                 </tbody>
                             </table>
                         </div>
@@ -125,9 +74,29 @@ function LaporanKas() {
 }
 
 const Header = () => {
+    const [kode, setKode] = useState("")
+    const goToCreatePemasukan = () => {
+        const url = route('kas.createPemasukan');
+        Inertia.get(url);
+    };
+    const goToCreatePengeluaran = () => {
+        const url = route('kas.createPengeluaran');
+        Inertia.get(url);
+    };
+    const submitFilter = (e) => {
+        e.preventDefault()
+        alert('wpi')
+        Inertia.get(
+            '/laporan-kas',
+            { kode},
+            { preserveState: true }
+        );
+    }
     return (
-        <div className="w-full flex justify-between px-12 bg-blue-50 pt-12 pb-32 h-10 lg:h-56">
+        <div className="w-full flex justify-between px-12 pt-12 pb-6 ">
             {/* //todo: input search */}
+            <form onSubmit={submitFilter}>
+                
             <div className="form-control">
                 <label className="input-group">
                     <span className="bg-white text-gray-300">
@@ -135,16 +104,31 @@ const Header = () => {
                     </span>
                     <input
                         type="text"
+                        value={kode}
+                        onChange={(e) => setKode(e.target.value)}
                         placeholder="Search . . ."
                         className="input"
                     />
                 </label>
             </div>
+            </form>
 
             {/* //todo: logout  */}
-            <div className="hidden sm:flex items-center text-lg font-medium">
-                <p className="px-2">Logout</p>
-                <BiLogOutCircle />
+            <div>
+                <button
+                    onClick={() => goToCreatePemasukan()}
+                    className="btn btn-primary mx-2"
+                >
+                    + Pemasukan
+                </button>
+                <button
+                    onClick={goToCreatePengeluaran}
+                    className="btn btn-secondary mx-2"
+                >
+                    + Pengeluaran
+                </button>
+                {/* <p className="px-2">Logout</p>
+                <BiLogOutCircle /> */}
             </div>
         </div>
     );

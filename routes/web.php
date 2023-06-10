@@ -6,6 +6,7 @@ use App\Http\Controllers\KehadiranJamaahController;
 use App\Http\Controllers\KotakSaranController;
 use App\Http\Controllers\LaporanKasController;
 use App\Http\Controllers\ManagementAkunController;
+use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -37,6 +38,8 @@ Route::get('/', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/monitor', [MonitorController::class, 'index'])->name('monitor.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,7 +51,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/laporan-kas', [LaporanKasController::class, 'index'])->name('kas.index');
     Route::get('/laporan-kas/pemasukan', [LaporanKasController::class, 'createPemasukan'])->name('kas.createPemasukan');
+    Route::post('/laporan-kas/pemasukan', [LaporanKasController::class, 'storePemasukan'])->name('kas.storePemasukan');
+
     Route::get('/laporan-kas/pengeluaran', [LaporanKasController::class, 'createPengeluaran'])->name('kas.createPengeluaran');
+    Route::post('/laporan-kas/pengeluaran', [LaporanKasController::class, 'storePengeluaran'])->name('kas.storePengeluaran');
     Route::get('/laporan-kas/detail', [LaporanKasController::class, 'detail'])->name('kas.detail');
 
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
@@ -74,7 +80,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
+    // Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
 
     Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index');
     Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create');

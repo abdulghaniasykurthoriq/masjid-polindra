@@ -5,13 +5,24 @@ import { FaFilter } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import HeaderPage from '@/Components/moleculs/headerPage';
 import { Inertia } from '@inertiajs/inertia';
+import { useState } from 'react';
 
 export default function Postingan(props) {
+    const [kode, setKode] = useState("")
     console.log('props', props);
     const onUpdate = (id) => {
         const url = route('postingan.edit', { id });
         Inertia.get(url);
     };
+
+    const submitFilter = () => {
+        alert('wpi')
+        // Inertia.get(
+        //     '/laporan-kas',
+        //     { kode},
+        //     { preserveState: true }
+        // );
+    }
 
     const onDeleted = (id) => {
         Swal.fire({
@@ -38,14 +49,17 @@ export default function Postingan(props) {
                 <HeaderPage title={'FORM POSTINGAN'} />
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
-                    <div className="flex items-center  w-full max-w-[600px] ">
+                    
+                        <form onSubmit={submitFilter} className='flex items-center  w-full max-w-[600px] '>
                         <div className="w-full">
-                            <TextInput placeholder="search" />
+                            <TextInput placeholder="search" value={kode} onChange={(e) =>setKode(e.target.value)} />
                         </div>
                         <div className="flex items-center ml-4 text-2xl w-full">
                             <FaFilter />
                         </div>
-                    </div>
+                        </form>
+                        
+                  
 
                     <div className="flex">
                         <Link href={route('postingan.create')}>
@@ -69,7 +83,7 @@ export default function Postingan(props) {
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>id post</th>
+                                        <th>warna</th>
                                         <th>Text</th>
                                         <th>Dibuat oleh</th>
                                         <th></th>
@@ -81,9 +95,13 @@ export default function Postingan(props) {
                                         return (
                                             <tr key={i}>
                                                 <th>1</th>
-                                                <td>{item.id}</td>
+                                                <td>
+                                                    <div style={{backgroundColor:item.warna}} className='flex items-center justify-center w-20 h-10'>
+                                                    {item.warna}
+                                                    </div>
+                                                    </td>
                                                 <td>{item.text}</td>
-                                                <td>{item.user_id}</td>
+                                                <td>{item.user.username}</td>
                                                 <td>
                                                     <button
                                                         onClick={() =>
