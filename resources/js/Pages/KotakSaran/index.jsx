@@ -42,7 +42,7 @@ export default function KotakSaran(props) {
             <Head title="Kotak Saran Jamaah Masjid" />
             <Sidebar />
             <div className="bg-blue-50 w-full">
-                <HeaderPage title={'Kehadiran Jamaah'} />
+                <HeaderPage title={'Kotak Saran'} />
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">

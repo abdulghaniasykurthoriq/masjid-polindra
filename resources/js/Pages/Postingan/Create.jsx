@@ -13,7 +13,7 @@ export default function Detail(props) {
         console.log('text', text);
         const data = { text, warna };
         // alert('kocak gaming')
-        const url = route('postingan.create', { data });
+        const url = route('postingan.create', { text });
         Inertia.post(url);
         // console.log('text', text)
     };

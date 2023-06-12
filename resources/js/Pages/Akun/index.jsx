@@ -199,16 +199,21 @@ export default function Akun(props) {
                                                         {/* <Link href={route('akun.update')}>
             <button className="btn btn-info mx-1">Update</button>
           </Link> */}
-                                                        <button
-                                                            onClick={(e) =>
-                                                                onUpdate(
-                                                                    data.id
-                                                                )
-                                                            }
-                                                            className="btn btn-info mx-1"
+                                                        <a
+                                                            href={`akun/update/${data.id}`}
                                                         >
-                                                            Update
-                                                        </button>
+                                                            <button
+                                                                // onClick={(e) =>
+                                                                //     onUpdate(
+                                                                //         data.id
+                                                                //     )
+                                                                // }
+                                                                className="btn btn-info mx-1"
+                                                            >
+                                                                Update
+                                                            </button>
+                                                        </a>
+
                                                         <button
                                                             onClick={(e) =>
                                                                 onReset(data.id)

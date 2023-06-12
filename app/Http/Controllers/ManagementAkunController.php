@@ -69,7 +69,8 @@ class ManagementAkunController extends Controller
         $data->save();
         // return redirect()->back()->with('message', 'berita berhasil dibuat');
         // return Inertia::render('Akun/index');
-        return redirect()->route('akun.index')->with('success', 'Data Berhasil Dibuat!');
+        // return redirect()->route('akun.index')->with('success', 'Data Berhasil Dibuat!');
+        return Inertia::location(route('akun.index'));
     }
 
     /**
