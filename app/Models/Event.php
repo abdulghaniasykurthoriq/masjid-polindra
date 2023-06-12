@@ -11,18 +11,18 @@ class Event extends Model
     use HasFactory;
     protected $table = 'event';
     protected $fillable = [
-        'nama_event',
-        'kategori_event',
+        'nama',
+        'image',
         'user_id',
-        'kategori_event'
+        'kategori'
     ];
-    protected function name(): Attribute
-    {
+    // protected function name(): Attribute
+    // {
 
-        return Attribute::make(
-            get: fn ($value) => url('uploads/' . $value),
-        );
-    }
+    //     return Attribute::make(
+    //         get: fn ($value) => url('uploads/' . $value),
+    //     );
+    // }
     public function materi()
     {
         return $this->hasMany(Materi::class);

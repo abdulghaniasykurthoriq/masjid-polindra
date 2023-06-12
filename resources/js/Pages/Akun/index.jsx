@@ -23,16 +23,7 @@ export default function Akun(props) {
         if (isDosen === true) {
             setIsLevel('dosen');
         }
-        // console.log('isDosen', isDosen)
-        // if (isDosen === true && isMahasiswa === true) {
-        //     setIsLevel('');
-        // }
-        // if (isDosen === true) {
-        //     setIsLevel('dosen');
-        // }
-        // if (isMahasiswa === true) {
-        //     setIsLevel('mahasiswa');
-        // }
+
         console.log('isDosen', isDosen);
     };
     const handleMahasiswaFilter = () => {

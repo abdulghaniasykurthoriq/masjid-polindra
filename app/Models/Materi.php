@@ -13,7 +13,8 @@ class Materi extends Model
     protected $table = 'materi';
     protected $fillable = [
         'file_materi',
-        'name'
+        'name',
+        'event_id'
     ];
 
 
@@ -21,5 +22,4 @@ class Materi extends Model
     {
         return $this->belongsTo(Event::class);
     }
-    
 }

@@ -52,10 +52,10 @@ export default function Sidebar() {
     return (
         <>
             <div className="lg:min-w-[320px] overflow-auto scroll-smooth  min-h-screen z-50">
-                <div
+                {/* <div
                     onClick={handleShow}
                     className="bg-red-200 z-50 w-14 h-14 rounded-full absolute  left-3 top-3"
-                ></div>
+                ></div> */}
                 <div className="fixed z-10 overflow-auto ">
                     {/* //TODO:THIS START CIRCLE */}
 

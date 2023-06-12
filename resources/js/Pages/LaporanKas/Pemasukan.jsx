@@ -165,17 +165,7 @@ const FormPemasukan = (props) => {
                                         className="textarea textarea-bordered"
                                         placeholder="Bio"
                                     ></textarea>
-                                    {/* <select
-                                        defaultValue={1}
-                                        className="select w-full max-w-xs mr-2 border-2 border-gray-200"
-                                    >
-                                        <option value={1} disabled selected>
-                                            infaq jumat
-                                        </option>
-                                        <option value={1}>01</option>
-                                        <option value={1}>02</option>
-                                        <option value={1}>03</option>
-                                    </select> */}
+                                
                                 </div>
                             </div>
 
@@ -197,27 +187,9 @@ const FormPemasukan = (props) => {
                                 </button>
                             )}
                         </div>
-                        // <div key={input.id}>
-                        //     <input
-                        //         type="text"
-                        //         value={input.value}
-                        //         onChange={(event) =>
-                        //             handleInputChange(index, event.target.value)
-                        //         }
-                        //     />
-                        //     {index > 0 && (
-                        //         <button
-                        //             type="button"
-                        //             onClick={() => handleRemoveInput(index)}
-                        //         >
-                        //             Hapus
-                        //         </button>
-                        //     )}
-                        // </div>
+
                     ))}
-                    {/* <button type="button" onClick={handleAddInput}>
-                        Tambah Input
-                    </button> */}
+
                     <div className={`max-w-[200px] py-10`}>
                         <button className="btn btn-primary w-full">
                             Simpan

@@ -1,18 +1,37 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
 import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
-import { FaPencilAlt, FaRegSadTear, FaTrashAlt, FaUser } from 'react-icons/fa';
+import { FaPencilAlt, FaRegSadTear, FaSearch, FaTrashAlt, FaUser } from 'react-icons/fa';
 import Logo from '../../../assets/logo.png';
-import HeaderContent from '@/Components/moleculs/headerContent';
 import HeaderPage from '@/Components/moleculs/headerPage';
-import { useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import Swal from 'sweetalert2';
 
 export default function Event(props) {
     const goDetail = (id) => {
         console.log('id', id);
         const url = route('eventdetail', { id });
         Inertia.get(url);
+    };
+
+    
+    const onDeleted = (id) => {
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const url = route('event.destroy', { id });
+                Inertia.delete(url);
+                Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            }
+        });
     };
     console.log('props', props);
     return (
@@ -30,26 +49,40 @@ export default function Event(props) {
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">
-                        <div className="w-full">
-                            <TextInput placeholder="search" />
-                        </div>
-                        <div className="flex items-center ml-4 max-w-2xl w-full">
+                    <form >
+                <div className="form-control">
+                    <label className="input-group">
+                        <span className="bg-white text-gray-300">
+                            <FaSearch />
+                            
+                        </span>
+                        <input
+                            type="text"
+                            // value={kode}
+                            // onChange={(e) => setKode(e.target.value)}
+                            placeholder="Search . . ."
+                            className="input"
+                        />
+                    </label>
+                </div>
+            </form>
+                        {/* <div className="flex items-center ml-4 max-w-2xl w-full">
                             <span>Kategory : </span>
                             <div className="px-4 mx-2 bg-gray-200 py-2 rounded-lg ">
                                 <p> Mater/ judul / Tanggal</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="flex">
-                        <Link href={route('eventdetail', { id: 1 })}>
+                        {/* <Link href={route('eventdetail', { id: 1 })}>
                             <button
                                 className="bg-gray-400 px-4  rounded-lg text-white"
                                 type="btn"
                             >
                                 Most Recent
                             </button>
-                        </Link>
+                        </Link> */}
                         <Link href={route('event.create')}>
                             <button
                                 className="bg-blue-400 px-4 rounded-lg text-white"
@@ -95,7 +128,7 @@ export default function Event(props) {
                                                                 event.image ==
                                                                 null
                                                                     ? Logo
-                                                                    : '../images/1686139359.png'
+                                                                    : `../images/${event.image}`
                                                             }
                                                             alt="image"
                                                         />
@@ -132,18 +165,23 @@ export default function Event(props) {
                                                         <p className="px-4 bg-blue-500 mx-4 self-center">
                                                             Pengajian Umum
                                                         </p>
+                                                        <a href={`/event/${event.id}`}>
                                                         <button
                                                             className="mx-2 bg-green-700 p-2 rounded-lg"
                                                             type="btn"
-                                                            onClick={() =>
-                                                                goDetail(
-                                                                    event.id
-                                                                )
-                                                            }
+                                                            // onClick={() =>
+                                                            //     goDetail(
+                                                            //         event.id
+                                                            //     )
+                                                            // }
                                                         >
                                                             {' '}
                                                             <FaRegSadTear />{' '}
                                                         </button>
+
+                                                        </a>
+                                                        <a href={`event/${event.id}`}>
+
                                                         <button
                                                             className="mx-2 bg-blue-400 p-2 rounded-lg"
                                                             type="btn"
@@ -151,7 +189,10 @@ export default function Event(props) {
                                                             {' '}
                                                             <FaPencilAlt />{' '}
                                                         </button>
+                                                        </a>
+
                                                         <button
+                                                        onClick={() => onDeleted(event.id)}
                                                             className="mx-2 bg-red-400 p-2 rounded-lg"
                                                             type="btn"
                                                         >

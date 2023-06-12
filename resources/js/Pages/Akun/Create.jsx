@@ -94,7 +94,7 @@ export default function CreateAccount(props) {
                             <label>Password</label>
                             <div className="max-w-4xl w-full">
                                 <TextInput
-                                    className=""
+                                    type="password"
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -123,7 +123,7 @@ export default function CreateAccount(props) {
                                 Status
                             </label>
                             <select
-                                value={level}
+                                value={status}
                                 onChange={(e) => setStatus(e.target.value)}
                                 className="select w-full max-w-xs mr-2 border-2 border-gray-200"
                             >

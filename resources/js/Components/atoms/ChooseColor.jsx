@@ -1,8 +1,7 @@
-const ChooseColor = ({warna, color, onClick}) => {
-
+const ChooseColor = ({ warna, color, onClick }) => {
     return (
         <div
-            style={{backgroundColor:color}}
+            style={{ backgroundColor: color }}
             // onClick={() => setWarna('red')}
             onClick={onClick}
             className={`${

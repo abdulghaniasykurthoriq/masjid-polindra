@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 
-class DashboardController extends Controller
+class MateriController extends Controller
 {
+    public function downloadPDF(String $name)
+    {
+        // // $file = public_path('materi/' . $name);
+        $file = public_path('materi/' . $name);
+        return response()->download($file, 'fileName.pdf');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Dashboard');
+        //
     }
 
     /**
@@ -60,6 +69,15 @@ class DashboardController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $materi = Materi::find($id);
+
+
+        //delete post
+        $materi->delete();
+
+        //redirect
+
+        return Inertia::location(route('event.index'));
+        //  return redirect()->route('akun.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }

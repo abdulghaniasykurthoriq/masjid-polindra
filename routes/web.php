@@ -6,6 +6,7 @@ use App\Http\Controllers\KehadiranJamaahController;
 use App\Http\Controllers\KotakSaranController;
 use App\Http\Controllers\LaporanKasController;
 use App\Http\Controllers\ManagementAkunController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\ProfileController;
@@ -61,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/event', [EventController::class, 'store'])->name('event.store');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
     Route::get('/event/{id}', [EventController::class, 'detail'])->name('eventdetail');
+    Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 
     // Route::patch('/event', [EventController::class, 'update'])->name('event.update');
     // Route::delete('/event', [EventController::class, 'destroy'])->name('event.destroy');
@@ -70,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/postingan/{id}/edit', [PostinganController::class, 'edit'])->name('postingan.edit');
     Route::put('/postingan/{id}/update', [PostinganController::class, 'update'])->name('postingan.update');
     Route::delete('/postingan/{id}/delete', [PostinganController::class, 'destroy'])->name('postingan.delete');
+    Route::get('/materi{name}', [MateriController::class, 'downloadPDF'])->name('materi.downloadPDF');
+    Route::delete('/materi{id}', [MateriController::class, 'destroy'])->name('materi.destroy');
+
 
     Route::get('/kehadiran-jamaah', [KehadiranJamaahController::class, 'index'])->name('kehadiran-jamaah.index');
 

@@ -37,7 +37,7 @@ export default function KehadiranJamaah(props) {
                         </div>
                     </div>
 
-                    <div className="flex">
+                    {/* <div className="flex">
                         <Link href={route('postingan.create')}>
                             <button
                                 className="bg-blue-400 px-4 rounded-lg text-white"
@@ -46,7 +46,7 @@ export default function KehadiranJamaah(props) {
                                 + New Post
                             </button>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Content section */}

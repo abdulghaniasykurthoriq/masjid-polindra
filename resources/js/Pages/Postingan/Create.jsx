@@ -57,18 +57,23 @@ export default function Detail(props) {
                             <div className="max-w-xl flex w-full">
                                 <ChooseColor
                                     warna={warna}
-                                    color={'red'}
-                                    onClick={() => setWarna('red')}
+                                    color={'#6e56ce'}
+                                    onClick={() => setWarna('#6e56ce')}
                                 />
                                 <ChooseColor
                                     warna={warna}
-                                    color={'green'}
-                                    onClick={() => setWarna('green')}
+                                    color={'#ab99ea'}
+                                    onClick={() => setWarna('#ab99ea')}
                                 />
                                 <ChooseColor
                                     warna={warna}
-                                    color={'blue'}
-                                    onClick={() => setWarna('blue')}
+                                    color={'#ab49ba'}
+                                    onClick={() => setWarna('#ab49ba')}
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'#eb9091'}
+                                    onClick={() => setWarna('#eb9091')}
                                 />
                             </div>
                         </div>

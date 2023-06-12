@@ -64,7 +64,7 @@ export default function KotakSaran(props) {
                                 className="bg-blue-400 px-4 rounded-lg text-white"
                                 type="btn"
                             >
-                                +10 New Saran
+                                + New Saran
                             </button>
                         </Link>
                     </div>

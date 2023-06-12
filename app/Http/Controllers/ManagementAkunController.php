@@ -53,6 +53,7 @@ class ManagementAkunController extends Controller
      */
     public function store(Request $request)
     {
+
         $validateData = $request->validate([
             'username' => 'required',
             'name' => 'required',
@@ -121,8 +122,12 @@ class ManagementAkunController extends Controller
         $user->username = $requestValidate['username'];
         $user->level = $requestValidate['level'];
         $user->status = $requestValidate['status'];
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
-        return redirect()->route('akun.index')->with('success', 'Data Berhasil Dibuat!');
+        return Inertia::location(route('akun.index'));
+        //return redirect()->route('akun.index')->with('success', 'Data Berhasil Dibuat!');
     }
 
     public function resetPassword(string $id)
@@ -134,7 +139,8 @@ class ManagementAkunController extends Controller
         $user->save();
 
         //redirect
-        return redirect()->route('akun.index')->with('success', 'Password Berhasil Direset!');
+        return Inertia::location(route('akun.index'));
+        //return redirect()->route('akun.index')->with('success', 'Password Berhasil Direset!');
     }
 
 
@@ -150,6 +156,7 @@ class ManagementAkunController extends Controller
         $user->delete();
 
         //redirect
-        return redirect()->route('akun.index')->with('success', 'Data Berhasil Dihapus!');
+        return Inertia::location(route('akun.index'));
+        //return redirect()->route('akun.index')->with('success', 'Data Berhasil Dihapus!');
     }
 }

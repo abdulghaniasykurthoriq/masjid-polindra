@@ -47,10 +47,27 @@ export default function Detail(props) {
                                 Warna
                             </label>
                             <div className="max-w-xl w-full flex">
-                            <ChooseColor warna={warna} color={'red'} onClick={() => setWarna('red')}/>
-                            <ChooseColor warna={warna} color={'green'} onClick={() => setWarna('green')}/>
-                            <ChooseColor warna={warna} color={'blue'} onClick={() => setWarna('blue')}/>
-                                
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'#6e56ce'}
+                                    onClick={() => setWarna('#6e56ce')}
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'#ab99ea'}
+                                    onClick={() => setWarna('#ab99ea')}
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'#ab49ba'}
+                                    onClick={() => setWarna('#ab49ba')}
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'#eb9091'}
+                                    onClick={() => setWarna('#eb9091')}
+                                />
+
                                 {/* <TextInput
                                     className=""
                                     value={warna}

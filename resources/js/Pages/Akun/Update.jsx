@@ -10,21 +10,21 @@ export default function Update(props) {
     const [id, setId] = useState('');
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
-    const [level, setLevel] = useState('dosen');
-    const [status, setStatus] = useState('active');
-    const [password, setPassword] = useState('**********');
+    const [level, setLevel] = useState('');
+    const [status, setStatus] = useState('');
+    const [password, setPassword] = useState('');
     useEffect(() => {
         setId(props.user.id);
         setUsername(props.user.username);
         setName(props.user.name);
         setLevel(props.user.level);
         setStatus(props.user.status);
-        // setPassword(props.user.password)
+        // setPassword(props.user.password);
         console.log('woi ini property lahh', props);
     }, []);
     const sendUpdate = (e) => {
         e.preventDefault();
-        const data = { id, name, username, level, status };
+        const data = { id, name, username, level, status, password };
         console.log('data', data);
         Inertia.post(`/akun/update/{$id}`, data);
     };
@@ -76,12 +76,13 @@ export default function Update(props) {
                             <label>Password</label>
                             <div className="max-w-4xl w-full">
                                 <TextInput
-                                    readOnly
                                     className=""
+                                    type="password"
                                     value={password}
-                                    // onChange={(e) =>
-                                    //     setPassword(e.target.value)
-                                    // }
+                                    placeholder={'********'}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                 />
                             </div>
                         </div>
@@ -106,7 +107,7 @@ export default function Update(props) {
                                 Status
                             </label>
                             <select
-                                value={level}
+                                value={status}
                                 onChange={(e) => setStatus(e.target.value)}
                                 className="select w-full max-w-xs mr-2 border-2 border-gray-200"
                             >

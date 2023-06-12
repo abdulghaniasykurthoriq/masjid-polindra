@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Materi;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Termwind\Components\Dd;
 
 class EventController extends Controller
 {
@@ -46,22 +49,20 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'nama' => 'required|string',
             // 'materi' => 'required|array',
             'kategori' => 'required|string'
         ]);
-        // if ($request->files == null) {
-        //     // dd($request);
-        //     $event = new Event();
-        //     $event->nama = $request->nama;
-        //     $event->kategori = $request->kategori;
-        //     $event->user_id = 1;
-        //     $event->save();
-        //     return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
-        // }
+
 
         if ($request->hasFile('image')) {
+            // $path = $request->file('image')->store('gambar');
+
+            // return response()->json([
+            //     'path' => $path,
+            // ]);
             $image = $request->file('image');
             $imageName = time() . '.' . $image->extension();
             $image->move(public_path('images'), $imageName);
@@ -72,15 +73,59 @@ class EventController extends Controller
             $event->image = $imageName;
             $event->user_id = 1;
             $event->save();
-            return response()->json(['success' => 'Image uploaded successfully.']);
+            if ($request->has('items')) {
+                $counter = 0;
+                foreach ($request->items as $item) {
+
+                    if (isset($item['materi']) && is_a($item['materi'], 'Illuminate\Http\UploadedFile')) {
+                        $counter++;
+                        $materi = $item['materi'];
+                        $materiName = time() . '.' . $materi->getClientOriginalExtension();
+
+                        $materi->move(public_path('materi'), $materiName);
+                        Materi::create([
+                            'name' => 'Materi ' . $counter,
+                            'event_id' => $event->id,
+                            'file_materi' => $materiName
+                        ]);
+                    } else {
+                        // Tindakan jika item tidak memiliki file
+                    }
+                }
+            }
+            return response()->json(['berhasil' => 'berhasil menambah event dengan image']);
+            // return response()->json(['success' => 'Image uploaded successfully.']);
+        } else {
+            $event = new Event();
+            $event->nama = $request->nama;
+            $event->kategori = $request->kategori;
+            $event->user_id = Auth::user()->id;
+            $event->save();
+            if ($request->has('items')) {
+                $counter = 0;
+                foreach ($request->items as $item) {
+
+                    if (isset($item['materi']) && is_a($item['materi'], 'Illuminate\Http\UploadedFile')) {
+                        $counter++;
+                        $materi = $item['materi'];
+                        $materiName = time() . '.' . $materi->getClientOriginalExtension();
+
+                        $materi->move(public_path('materi'), $materiName);
+                        Materi::create([
+                            'name' => 'Materi ' . $counter,
+                            'event_id' => $event->id,
+                            'file_materi' => $materiName
+                        ]);
+                    } else {
+                        // Tindakan jika item tidak memiliki file
+                    }
+                }
+            }
+            return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
         }
-        // dd($request->files);
-        $event = new Event();
-        $event->nama = $request->nama;
-        $event->kategori = $request->kategori;
-        $event->user_id = 1;
-        $event->save();
-        return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
+
+
+        return response()->json(['gagal' => 'something went wrong']);
         // return response()->json(['error' => 'Error upload event.']);
     }
 
@@ -116,6 +161,11 @@ class EventController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $event = Event::findOrFail($id);
+
+        $event->materi()->delete();
+
+        $event->delete();
+        return Inertia::location(route('event.index'));
     }
 }

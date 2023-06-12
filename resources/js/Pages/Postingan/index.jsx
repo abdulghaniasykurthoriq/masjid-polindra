@@ -8,7 +8,7 @@ import { Inertia } from '@inertiajs/inertia';
 import { useState } from 'react';
 
 export default function Postingan(props) {
-    const [kode, setKode] = useState("")
+    const [kode, setKode] = useState('');
     console.log('props', props);
     const onUpdate = (id) => {
         const url = route('postingan.edit', { id });
@@ -16,13 +16,13 @@ export default function Postingan(props) {
     };
 
     const submitFilter = () => {
-        alert('wpi')
+        alert('wpi');
         // Inertia.get(
         //     '/laporan-kas',
         //     { kode},
         //     { preserveState: true }
         // );
-    }
+    };
 
     const onDeleted = (id) => {
         Swal.fire({
@@ -49,17 +49,21 @@ export default function Postingan(props) {
                 <HeaderPage title={'FORM POSTINGAN'} />
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
-                    
-                        <form onSubmit={submitFilter} className='flex items-center  w-full max-w-[600px] '>
+                    <form
+                        onSubmit={submitFilter}
+                        className="flex items-center  w-full max-w-[600px] "
+                    >
                         <div className="w-full">
-                            <TextInput placeholder="search" value={kode} onChange={(e) =>setKode(e.target.value)} />
+                            <TextInput
+                                placeholder="search"
+                                value={kode}
+                                onChange={(e) => setKode(e.target.value)}
+                            />
                         </div>
                         <div className="flex items-center ml-4 text-2xl w-full">
                             <FaFilter />
                         </div>
-                        </form>
-                        
-                  
+                    </form>
 
                     <div className="flex">
                         <Link href={route('postingan.create')}>
@@ -94,23 +98,34 @@ export default function Postingan(props) {
                                     {props.postingan.map((item, i) => {
                                         return (
                                             <tr key={i}>
-                                                <th>1</th>
+                                                <th>{i+1}</th>
                                                 <td>
-                                                    <div style={{backgroundColor:item.warna}} className='flex items-center justify-center w-20 h-10'>
-                                                    {item.warna}
+                                                    <div
+                                                        style={{
+                                                            backgroundColor:
+                                                                item.warna,
+                                                        }}
+                                                        className="flex items-center justify-center w-20 h-10"
+                                                    >
+                                                        {item.warna}
                                                     </div>
-                                                    </td>
+                                                </td>
                                                 <td>{item.text}</td>
                                                 <td>{item.user.username}</td>
                                                 <td>
-                                                    <button
-                                                        onClick={() =>
-                                                            onUpdate(item.id)
-                                                        }
-                                                        className="btn btn-primary mx-1"
+                                                    <a
+                                                        href={`postingan/${item.id}/edit`}
                                                     >
-                                                        Update
-                                                    </button>
+                                                        <button
+                                                            // onClick={() =>
+                                                            //     onUpdate(item.id)
+                                                            // }
+                                                            className="btn btn-primary mx-1"
+                                                        >
+                                                            Update
+                                                        </button>
+                                                    </a>
+                                                    
                                                     <button className="btn btn-success mx-1">
                                                         Show detail
                                                     </button>
