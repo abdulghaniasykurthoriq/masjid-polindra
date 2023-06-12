@@ -1,246 +1,231 @@
 import Content from '@/Components/moleculs/content';
 import HeaderPage from '@/Components/moleculs/headerPage';
-// import React from 'react'
 import React, { useEffect, useState } from 'react';
-// import Content from "../../components/moleculs/content";
-// import HeaderPage from "../../components/moleculs/headerPage";
 import { animateScroll as scroll } from 'react-scroll';
+import { Inertia } from '@inertiajs/inertia';
 
-function Pengeluaran() {
+function Pengeluaran(props) {
+    // console.log('props', props)
     return (
         <Content>
             <div className="flex flex-col  min-h-screen bg-blue-50">
                 <HeaderPage title="Form Pengeluaran" />
 
-                <FormPengeluaran />
+                <FormPengeluaran props={props} />
             </div>
         </Content>
     );
 }
-
 export default Pengeluaran;
 
-const FormPengeluaran = () => {
-    const [items, setItems] = useState([]);
+const FormPengeluaran = (props) => {
+    console.log('props', props);
+    // useEffect(() => {
 
-    let angka = 0;
+    // },[])
+    const [kodeLaporan, setKodeLaporan] = useState(props.props.kode_laporan);
+    const [inputs, setInputs] = useState([
+        { id: 1, jumlah_pengeluaran: 0, kategory: 'infaq', keterangan: '' },
+    ]);
 
-    const onPlus = () => {
-        // setCurr(curr + 1);
-        angka += 1;
-        const newItem = (
-            <div className="w-full max-w-xl">
-                <div className="border-2 w-full max-w-xl pl-2 mt-4 mb-2 mr-2">
-                    <div className="m-2 flex items-center">
-                        <label className="max-w-[200px] w-full">
-                            Kategory*
-                        </label>
-                        <select
-                            defaultValue={1}
-                            className="select w-full max-w-xs mr-2 border-2 border-gray-200"
-                        >
-                            <option value={1} disabled selected>
-                                infaq jumat
-                            </option>
-                            <option value={1}>01</option>
-                            <option value={1}>02</option>
-                            <option value={1}>03</option>
-                        </select>
-                    </div>
-                    <div className="m-2 flex items-center">
-                        <label className="max-w-[200px] w-full">
-                            Jumlah Pengeluaran*
-                        </label>
-                        <div className="form-control w-full max-w-xs">
-                            <label className="input-group w-full">
-                                <span>Rp</span>
-                                <input
-                                    type="number"
-                                    placeholder="enter the amount"
-                                    className="input w-full input-bordered"
-                                />
-                            </label>
-                        </div>
-                    </div>
-                    <div className="m-2 flex items-center">
-                        <label className="max-w-[200px] w-full">
-                            Keterangan*
-                        </label>
-                        <select
-                            defaultValue={1}
-                            className="select w-full max-w-xs mr-2 border-2 border-gray-200"
-                        >
-                            <option value={1} disabled selected>
-                                infaq jumat
-                            </option>
-                            <option value={1}>01</option>
-                            <option value={1}>02</option>
-                            <option value={1}>03</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        );
-        const newItems = [...items, newItem];
-        setItems(newItems);
+    const handleInputChange = (index, value) => {
+        console.log('input.value', inputs);
+        const updatedInputs = [...inputs];
+        updatedInputs[index].jumlah_pengeluaran = parseInt(value);
+        setInputs(updatedInputs);
+    };
+    const handleInputChange2 = (index, value) => {
+        console.log('input.value', inputs);
+        const updatedInputs = [...inputs];
+        updatedInputs[index].kategory = value;
+        setInputs(updatedInputs);
+    };
+    const handleInputChange3 = (index, value) => {
+        console.log('input.value', inputs);
+        const updatedInputs = [...inputs];
+        updatedInputs[index].keterangan = value;
+        setInputs(updatedInputs);
+    };
+
+    const handleAddInput = () => {
+        const newInput = {
+            id: inputs.length + 1,
+            jumlah_pengeluaran: 0,
+            kategory: 'infaq',
+
+            keterangan: '',
+        };
+        setInputs([...inputs, newInput]);
         scroll.scrollToBottom({ duration: 1000, smooth: true });
     };
+
+    const handleRemoveInput = (index) => {
+        const updatedInputs = [...inputs];
+        updatedInputs.splice(index, 1);
+        setInputs(updatedInputs);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const url = route('kas.storePengeluaran', {
+            kode_laporan: kodeLaporan,
+            items: inputs,
+        });
+        Inertia.post(url);
+        console.log(inputs);
+    };
+
     return (
         <div className="w-full">
-            <div className="sm:mx-10 bg-white">
+            <div className="sm:mx-10 bg-white mb-16">
                 <div className=" border-b-2 px-10 py-4 ">
                     <p>Tambah Pengeluaran</p>
                 </div>
-                <form className="p-2 px-8">
+                <form className="p-2 px-8" onSubmit={handleSubmit}>
                     <div className="m-2 flex items-center">
                         <label className="max-w-[200px] w-full">
                             Kode Pengeluaran
                         </label>
                         <input
                             type="text"
+                            value={kodeLaporan}
+                            disabled={true}
+                            // onChange={(e) => setKodeLaporan(e.target.value)}
                             placeholder="Type here"
                             className="input w-full max-w-xs bg-gray-300"
                         />
                     </div>
-
-                    <div className="m-2 flex items-center">
-                        <label className="max-w-[200px] w-full">
-                            Kode Pengeluaran
-                        </label>
-                        <div className="flex">
-                            {/* //! : tanggal */}
-                            <select
-                                defaultValue={1}
-                                className="select mr-2 border-2 border-gray-200"
-                            >
-                                <option value={1} disabled selected>
-                                    05
-                                </option>
-                                <option value={1}>01</option>
-                                <option value={1}>02</option>
-                                <option value={1}>03</option>
-                            </select>
-                            {/* //! : hari */}
-                            <select
-                                defaultValue={1}
-                                className="select mx-2 border-2 border-gray-200"
-                            >
-                                <option value={1} disabled selected>
-                                    05
-                                </option>
-                                <option value={1}>01</option>
-                                <option value={1}>02</option>
-                                <option value={1}>03</option>
-                            </select>
-                            {/* //! : tahun */}
-                            <select
-                                defaultValue={1}
-                                className="select mx-2 border-2 border-gray-200"
-                            >
-                                <option value={1} disabled selected>
-                                    2019
-                                </option>
-                                <option value={1}>2020</option>
-                                <option value={1}>2021</option>
-                                <option value={1}>2022</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    {/* //!:ITEM Pengeluaran */}
-                    <div className="flex items-end">
-                        <div className="border-2 pl-2 mt-4 mb-2 mr-2 w-full max-w-xl">
-                            <div className="m-2 flex items-center">
-                                <label className="max-w-[200px] w-full">
-                                    Kategory*
-                                </label>
-                                <select
-                                    defaultValue={1}
-                                    className="select w-full max-w-xs mr-2 border-2 border-gray-200"
-                                >
-                                    <option value={1} disabled selected>
-                                        infaq jumat
-                                    </option>
-                                    <option value={1}>01</option>
-                                    <option value={1}>02</option>
-                                    <option value={1}>03</option>
-                                </select>
-                            </div>
-                            <div className="m-2 flex items-center">
-                                <label className="max-w-[200px] w-full">
-                                    Jumlah Pengeluaran*
-                                </label>
-                                <div className="form-control w-full max-w-xs">
-                                    <label className="input-group w-full">
-                                        <span>Rp</span>
-                                        <input
-                                            type="number"
-                                            placeholder="enter the amount"
-                                            className="input w-full input-bordered"
-                                        />
+                    {inputs.map((input, index) => (
+                        <div
+                            key={input.id}
+                            className="w-full max-w-xl flex items-end"
+                        >
+                            <div className="border-2 w-full max-w-xl pl-2 mt-4 mb-2 mr-2">
+                                <div className="m-2 flex items-center">
+                                    <label className="max-w-[200px] w-full">
+                                        Kategory*
                                     </label>
+                                    <select
+                                        // value={input.kategory}
+                                        onChange={(event) =>
+                                            handleInputChange2(
+                                                index,
+                                                event.target.value
+                                            )
+                                        }
+                                        value={input.kategory}
+                                        className="select w-full max-w-xs mr-2 border-2 border-gray-200"
+                                    >
+                                        {/* <option value={"satu"} disabled selected>
+                                      infaq jumat
+                                  </option> */}
+                                        <option value={'infaq'}>infaq</option>
+                                        <option value={'shodaqah'}>
+                                            shodaqah
+                                        </option>
+                                        <option value={'zakat'}>zakat</option>
+                                        <option value={'lainya'}>lainya</option>
+                                    </select>
+                                </div>
+                                <div className="m-2 flex items-center">
+                                    <label className="max-w-[200px] w-full">
+                                        Jumlah Pengeluaran*
+                                    </label>
+                                    <div className="form-control w-full max-w-xs">
+                                        <label className="input-group w-full">
+                                            <span>Rp</span>
+                                            <input
+                                                value={input.jumlah_pengeluaran}
+                                                onChange={(event) =>
+                                                    handleInputChange(
+                                                        index,
+                                                        event.target.value
+                                                    )
+                                                }
+                                                type="number"
+                                                placeholder="enter the amount"
+                                                className="input w-full input-bordered"
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="m-2 flex ">
+                                    <label className="max-w-[200px] w-full">
+                                        Keterangan*
+                                    </label>
+                                    <textarea
+                                        value={inputs.keterangan}
+                                        onChange={(event) =>
+                                            handleInputChange3(
+                                                index,
+                                                event.target.value
+                                            )
+                                        }
+                                        className="textarea textarea-bordered"
+                                        placeholder="Bio"
+                                    ></textarea>
+                                    {/* <select
+                                        defaultValue={1}
+                                        className="select w-full max-w-xs mr-2 border-2 border-gray-200"
+                                    >
+                                        <option value={1} disabled selected>
+                                            infaq jumat
+                                        </option>
+                                        <option value={1}>01</option>
+                                        <option value={1}>02</option>
+                                        <option value={1}>03</option>
+                                    </select> */}
                                 </div>
                             </div>
-                            <div className="m-2 flex items-center">
-                                <label className="max-w-[200px] w-full">
-                                    Keterangan*
-                                </label>
-                                <select className="select w-full max-w-xs mr-2 border-2 border-gray-200">
-                                    <option disabled selected>
-                                        infaq jumat
-                                    </option>
-                                    <option>01</option>
-                                    <option>02</option>
-                                    <option>03</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div
-                            onClick={onPlus}
-                            className={
-                                items.length == 0
-                                    ? 'w-12 h-12 bg-blue-400 mb-2 text-center text-2xl font-bold text-white'
-                                    : 'hidden'
-                            }
-                        >
-                            +
-                        </div>
-                    </div>
 
-                    {items.map((item, index) => (
-                        <div key={index} id={index} className="flex items-end">
-                            {item}
-                            {index == items.length - 1 && (
+                            <button
+                                type="button"
+                                onClick={handleAddInput}
+                                className="btn btn-primary mb-2 mr-2"
+                            >
+                                +
+                            </button>
+                            {inputs.length > 1 && (
                                 <button
-                                    onClick={onPlus}
-                                    className="btn btn-primary mb-2"
+                                    type="button"
+                                    onClick={() => handleRemoveInput(index)}
+                                    className="btn btn-error mb-2"
                                 >
-                                    +
+                                    {' '}
+                                    -{' '}
                                 </button>
                             )}
                         </div>
+                        // <div key={input.id}>
+                        //     <input
+                        //         type="text"
+                        //         value={input.value}
+                        //         onChange={(event) =>
+                        //             handleInputChange(index, event.target.value)
+                        //         }
+                        //     />
+                        //     {index > 0 && (
+                        //         <button
+                        //             type="button"
+                        //             onClick={() => handleRemoveInput(index)}
+                        //         >
+                        //             Hapus
+                        //         </button>
+                        //     )}
+                        // </div>
                     ))}
-
+                    {/* <button type="button" onClick={handleAddInput}>
+                        Tambah Input
+                    </button> */}
                     <div className={`max-w-[200px] py-10`}>
                         <button className="btn btn-primary w-full">
                             Simpan
                         </button>
                     </div>
+                    {/* <button type="submit">Submit</button> */}
                 </form>
             </div>
         </div>
     );
 };
-
-// function Pengeluaran() {
-//   return (
-//     <Content>
-
-//         <div className='flex justify-center items-center h-screen'>
-//             Form Pengeluaran
-//         </div>
-//     </Content>
-//   )
-// }
-
-// export default Pengeluaran

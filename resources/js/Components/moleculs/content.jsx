@@ -5,10 +5,10 @@ import Sidebar from './Sidebar';
 
 function Content({ children }) {
     return (
-        <div className="flex justify-center">
-            <div className=" h-screen w-screen absolute left-[-1400px] flex items-end">
+        <div className="flex justify-center bg-blue-50">
+            {/* <div className=" h-screen w-screen absolute left-[-1400px] flex items-end">
                 <div className="bg-blue-200 h-20 w-full -end"></div>
-            </div>
+            </div> */}
 
             <Container>
                 <div className="flex">

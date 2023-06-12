@@ -3,6 +3,7 @@ import TextInput from '@/Components/TextInput';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import ChooseColor from '@/Components/atoms/ChooseColor';
 export default function Detail(props) {
     const [text, setText] = useState('');
     const [warna, setWarna] = useState('');
@@ -11,9 +12,12 @@ export default function Detail(props) {
         e.preventDefault();
         console.log('warna', warna);
         console.log('text', text);
-        const data = { text, warna };
+
+        const data = { warna, text };
+        console.log('data', data);
         // alert('kocak gaming')
-        const url = route('postingan.create', { text });
+
+        const url = route('postingan.store', { text, warna });
         Inertia.post(url);
         // console.log('text', text)
     };
@@ -51,23 +55,21 @@ export default function Detail(props) {
                                 Warna
                             </label>
                             <div className="max-w-xl flex w-full">
-                                <div
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'red'}
                                     onClick={() => setWarna('red')}
-                                    className={`${
-                                        warna === 'red'
-                                            ? 'border-4 border-black'
-                                            : ''
-                                    } bg-red-200 w-10 h-10 rounded-full`}
-                                ></div>
-                                <div
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'green'}
                                     onClick={() => setWarna('green')}
-                                    className={`${
-                                        warna === 'green'
-                                            ? 'border-4 border-black'
-                                            : ''
-                                    } bg-green-200 w-10 h-10 rounded-full`}
-                                ></div>
-                                {/* <TextInput className="" /> */}
+                                />
+                                <ChooseColor
+                                    warna={warna}
+                                    color={'blue'}
+                                    onClick={() => setWarna('blue')}
+                                />
                             </div>
                         </div>
                         <div className="  flex w-full  px-6 p-2 items-center">
@@ -98,3 +100,16 @@ export default function Detail(props) {
         </div>
     );
 }
+
+const ChooseWarna = ({ warna, color, onClick }) => {
+    return (
+        <div
+            style={{ backgroundColor: color }}
+            // onClick={() => setWarna('red')}
+            onClick={onClick}
+            className={`${
+                warna === color ? 'border-4 border-black' : ''
+            }  w-10 h-10 rounded-full`}
+        ></div>
+    );
+};

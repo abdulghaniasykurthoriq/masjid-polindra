@@ -1,32 +1,35 @@
 import { FaSearch } from 'react-icons/fa';
-import { BiLogOutCircle } from 'react-icons/bi';
+import { Inertia } from '@inertiajs/inertia';
 import Content from '@/Components/moleculs/content';
-import React from 'react';
-function LaporanKas() {
+import React, { useState } from 'react';
+import HeaderPage from '@/Components/moleculs/headerPage';
+// import useFormatDate from '../../helpers/useFormatDate';
+import useFormatDate from '../../../helpers/useFormatDate';
+import useFormatRupiah from '../../../helpers/useFormatRupiah';
+function LaporanKas(props) {
+    console.log('props', props);
+
+    const showDetail = () => {
+        return <div></div>;
+    };
+
     return (
         <Content>
             <div className=" min-h-screen ">
+                <HeaderPage title={'LAPORAN KEUANGAN'} />
+
                 <Header />
                 <div className="relative">
-                    <ListCard />
-                    <div
-                        className="
-          h-[50px] 
-          sm:h-[70px] 
-          md:h-[100px] 
-          lg:h-[70px] 
-          xl:h-[130px] 
-          border-b-2 mx-6 "
-                    >
-                        {/* //TODO: This is line */}{' '}
-                    </div>
-                    <div className="flex mx-16 my-4">
+                    {/* <ListCard /> */}
+
+                    <div className="flex mx-16 mb-4 ">
                         {/* start table  */}
-                        <div className="overflow-x-auto w-full ">
-                            <table className="table w-full">
+                        <div className="overflow-x-auto w-full">
+                            <table className="table w-full ">
                                 {/* head */}
                                 <thead>
                                     <tr>
+                                        <th>kode laporan</th>
                                         <th>Kategori</th>
                                         <th>Nominal</th>
                                         <th>Tanggal</th>
@@ -35,78 +38,112 @@ function LaporanKas() {
                                 </thead>
                                 <tbody>
                                     {/* row 1 */}
-                                    <tr>
-                                        <td>pemasukan </td>
-                                        <td>Rp. 1.900.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {/* row 2 */}
-                                    <tr className="hover">
-                                        <td>pemasukan</td>
-                                        <td>Rp. 1.000.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {/* row 3 */}
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>pengeluaran</td>
-                                        <td>Rp. 500.000</td>
-                                        <td>23,Agst, 2020</td>
-                                        <td>
-                                            <button className="btn btn-accent">
-                                                Show detail
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    {props.laporan_keuangan.length > 0 &&
+                                        props.laporan_keuangan.map(
+                                            (pemasukan, index) => {
+                                                return (
+                                                    <tr
+                                                        className="hover"
+                                                        key={index}
+                                                    >
+                                                        <td>
+                                                            {
+                                                                pemasukan.kode_laporan
+                                                            }{' '}
+                                                        </td>
+                                                        <td>
+                                                            {pemasukan.status}{' '}
+                                                        </td>
+                                                        <td>
+                                                            {useFormatRupiah(
+                                                                pemasukan.total
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {useFormatDate(
+                                                                pemasukan.created_at
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {/* Open the modal using ID.showModal() method */}
+                                                            <button
+                                                                className="btn"
+                                                                // onClick={() =>
+                                                                //     window.my_modal_5.showModal()
+                                                                // }
+                                                            >
+                                                                open modal
+                                                            </button>
+                                                            <dialog
+                                                                id="my_modal_5"
+                                                                className="modal modal-bottom sm:modal-middle"
+                                                            >
+                                                                <div
+                                                                    // method="dialog"
+                                                                    className="modal-box"
+                                                                >
+                                                                    <h3 className="font-bold text-lg">
+                                                                        Hello!
+                                                                    </h3>
+                                                                    <p className="py-4">
+                                                                        Press
+                                                                        ESC key
+                                                                        or click
+                                                                        the
+                                                                        button
+                                                                        below to
+                                                                        close
+                                                                    </p>
+                                                                    <div className="modal-action">
+                                                                        {/* if there is a button in form, it will close the modal */}
+                                                                        <button className="btn">
+                                                                            Close
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </dialog>
+                                                            {/* <button
+                                                                onClick={() =>
+                                                                    window.my_modal_5.showModal()
+                                                                }
+                                                                className="btn btn-accent"
+                                                            >
+                                                                Show detail
+                                                            </button>
+                                                            <dialog
+                                                                id="my_modal_5"
+                                                                className="modal modal-bottom sm:modal-middle"
+                                                            >
+                                                                <form
+                                                                    method="dialog"
+                                                                    className="modal-box"
+                                                                >
+                                                                    <h1 className="py-2 px-4 font-bold text-lg border-b">
+                                                                        PEMASUKAN
+                                                                        <br />
+                                                                        Rp.
+                                                                        1000.000
+                                                                    </h1>
+
+                                                                    <h2 className="py-2 px-4 text-md bg-base-200 rounded">
+                                                                        001-MSK
+                                                                    </h2>
+                                                                    <p className="py-2">
+                                                                        12/06/2023
+                                                                    </p>
+                                                                    <div className="modal-action">
+                                                           
+                                                                        <button className="btn">
+                                                                            Close
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </dialog> */}
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            }
+                                        )}
                                 </tbody>
                             </table>
                         </div>
@@ -125,26 +162,61 @@ function LaporanKas() {
 }
 
 const Header = () => {
+    const [kode, setKode] = useState('');
+    const goToCreatePemasukan = () => {
+        const url = route('kas.createPemasukan');
+        Inertia.get(url);
+    };
+    const goToCreatePengeluaran = () => {
+        const url = route('kas.createPengeluaran');
+        Inertia.get(url);
+    };
+    const submitFilter = (e) => {
+        e.preventDefault();
+        alert('wpi');
+        Inertia.get('/laporan-kas', { kode }, { preserveState: true });
+    };
     return (
-        <div className="w-full flex justify-between px-12 bg-blue-50 pt-12 pb-32 h-10 lg:h-56">
+        <div className="w-full flex justify-between px-12 pt-12 pb-6 ">
             {/* //todo: input search */}
-            <div className="form-control">
-                <label className="input-group">
-                    <span className="bg-white text-gray-300">
-                        <FaSearch />
-                    </span>
-                    <input
-                        type="text"
-                        placeholder="Search . . ."
-                        className="input"
-                    />
-                </label>
-            </div>
+            <form onSubmit={submitFilter}>
+                <div className="form-control">
+                    <label className="input-group">
+                        <span className="bg-white text-gray-300">
+                            <FaSearch />
+                        </span>
+                        <input
+                            type="text"
+                            value={kode}
+                            onChange={(e) => setKode(e.target.value)}
+                            placeholder="Search . . ."
+                            className="input"
+                        />
+                    </label>
+                </div>
+            </form>
 
             {/* //todo: logout  */}
-            <div className="hidden sm:flex items-center text-lg font-medium">
-                <p className="px-2">Logout</p>
-                <BiLogOutCircle />
+            <div>
+                <a href="laporan-kas/pemasukan">
+                    <button
+                        // onClick={() => goToCreatePemasukan()}
+                        className="btn btn-primary mx-2"
+                    >
+                        + Pemasukan
+                    </button>
+                </a>
+                <a href="laporan-kas/pengeluaran">
+                    <button
+                        // onClick={goToCreatePengeluaran}
+                        className="btn btn-secondary mx-2"
+                    >
+                        + Pengeluaran
+                    </button>
+                </a>
+
+                {/* <p className="px-2">Logout</p>
+                <BiLogOutCircle /> */}
             </div>
         </div>
     );

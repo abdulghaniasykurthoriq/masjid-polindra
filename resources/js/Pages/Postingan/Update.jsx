@@ -3,16 +3,23 @@ import TextInput from '@/Components/TextInput';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import ChooseColor from '@/Components/atoms/ChooseColor';
 export default function Detail(props) {
     const [text, setText] = useState('');
+    const [warna, setWarna] = useState('');
     useEffect(() => {
         console.log('props', props);
         setText(props.post.text);
+        setWarna(props.post.warna);
     }, []);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const url = route('postingan.update', { id: props.post.id, text });
+        const url = route('postingan.update', {
+            id: props.post.id,
+            text,
+            warna,
+        });
         Inertia.put(url);
     };
     return (
@@ -37,10 +44,18 @@ export default function Detail(props) {
                     <form onSubmit={(e) => onSubmit(e)} className="pl-8">
                         <div className="  flex w-full  px-6 p-2 items-center">
                             <label className="max-w-[200px] w-full">
-                                Expired
+                                Warna
                             </label>
-                            <div className="max-w-xl w-full">
-                                <TextInput className="" />
+                            <div className="max-w-xl w-full flex">
+                            <ChooseColor warna={warna} color={'red'} onClick={() => setWarna('red')}/>
+                            <ChooseColor warna={warna} color={'green'} onClick={() => setWarna('green')}/>
+                            <ChooseColor warna={warna} color={'blue'} onClick={() => setWarna('blue')}/>
+                                
+                                {/* <TextInput
+                                    className=""
+                                    value={warna}
+                                    onChange={(e) => setWarna(e.target.value)}
+                                /> */}
                             </div>
                         </div>
                         <div className="  flex w-full  px-6 p-2 items-center">

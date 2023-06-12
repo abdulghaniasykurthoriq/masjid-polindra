@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('pengeluaran', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('laporan_id');
             $table->string('kategory');
-            $table->string('jumlah_pemasukan');
-            $table->string('keterangan');
+            $table->integer('jumlah_pengeluaran');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
+
+            $table->foreign('laporan_id')->references('id')->on('laporan_keuangan');
         });
     }
 

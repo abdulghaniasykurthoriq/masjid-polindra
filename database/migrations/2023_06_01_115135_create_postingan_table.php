@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('postingan', function (Blueprint $table) {
             $table->id();
             $table->string('text');
-            $table->integer('user_id');
-            $table->integer('warna')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('warna')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

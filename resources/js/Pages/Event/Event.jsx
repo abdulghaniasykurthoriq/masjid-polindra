@@ -9,14 +9,11 @@ import { useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 
 export default function Event(props) {
-
-
     const goDetail = (id) => {
-        console.log('id', id)
+        console.log('id', id);
         const url = route('eventdetail', { id });
         Inertia.get(url);
-        
-    }
+    };
     console.log('props', props);
     return (
         <div className="flex">
@@ -81,78 +78,91 @@ export default function Event(props) {
                             </thead>
                             <tbody>
                                 {/* row 1 */}
-                                {props.event.map((event, i) => {
-                                    var inputDate = event.created_at;
 
-                                    var dt = new Date(inputDate);
-                                    return (
-                                        <tr key={i}>
-                                            <th>1</th>
-                                            <td>
-                                                <div className="flex w-full items-center">
-                                                    <img
-                                                        className="w-16"
-                                                        src={event.image == null ? Logo : '../images/1686139359.png'}
-                                                        alt="image"
-                                                    />
-                                                    <div className="px-2">
-                                                        <p>{event.nama}</p>
-                                                        <div className="flex">
-                                                            <p className="pr-20">
-                                                                {event.created_at}
-                                                            </p>
-                                                            <p className="pr-4">
-                                                                263
-                                                            </p>
-                                                            <p className="pr-4">
-                                                                1.1k
-                                                            </p>
-                                                            <p className="pr-4">
-                                                                100
-                                                            </p>
+                                {props.event &&
+                                    props.event.map((event, i) => {
+                                        var inputDate = event.created_at;
+
+                                        var dt = new Date(inputDate);
+                                        return (
+                                            <tr key={i}>
+                                                <th>1</th>
+                                                <td>
+                                                    <div className="flex w-full items-center">
+                                                        <img
+                                                            className="w-16"
+                                                            src={
+                                                                event.image ==
+                                                                null
+                                                                    ? Logo
+                                                                    : '../images/1686139359.png'
+                                                            }
+                                                            alt="image"
+                                                        />
+                                                        <div className="px-2">
+                                                            <p>{event.nama}</p>
+                                                            <div className="flex">
+                                                                <p className="pr-20">
+                                                                    {
+                                                                        event.created_at
+                                                                    }
+                                                                </p>
+                                                                <p className="pr-4">
+                                                                    263
+                                                                </p>
+                                                                <p className="pr-4">
+                                                                    1.1k
+                                                                </p>
+                                                                <p className="pr-4">
+                                                                    100
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p className="pr-8 flex items-center">
-                                                    {' '}
-                                                    <FaUser className="mr-2" />{' '}
-                                                    Agat Abdul
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <div className="flex">
-                                                    <p className="px-4 bg-blue-500 mx-4 self-center">
-                                                        Pengajian Umum
+                                                </td>
+                                                <td>
+                                                    <p className="pr-8 flex items-center">
+                                                        {' '}
+                                                        <FaUser className="mr-2" />{' '}
+                                                        Agat Abdul
                                                     </p>
-                                                    <button
-                                                        className="mx-2 bg-green-700 p-2 rounded-lg"
-                                                        type="btn"
-                                                        onClick={() =>goDetail(event.id)}
-                                                    >
-                                                        {' '}
-                                                        <FaRegSadTear />{' '}
-                                                    </button>
-                                                    <button
-                                                        className="mx-2 bg-blue-400 p-2 rounded-lg"
-                                                        type="btn"
-                                                    >
-                                                        {' '}
-                                                        <FaPencilAlt />{' '}
-                                                    </button>
-                                                    <button
-                                                        className="mx-2 bg-red-400 p-2 rounded-lg"
-                                                        type="btn"
-                                                    >
-                                                        {' '}
-                                                        <FaTrashAlt />{' '}
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
+                                                </td>
+                                                <td>
+                                                    <div className="flex">
+                                                        <p className="px-4 bg-blue-500 mx-4 self-center">
+                                                            Pengajian Umum
+                                                        </p>
+                                                        <button
+                                                            className="mx-2 bg-green-700 p-2 rounded-lg"
+                                                            type="btn"
+                                                            onClick={() =>
+                                                                goDetail(
+                                                                    event.id
+                                                                )
+                                                            }
+                                                        >
+                                                            {' '}
+                                                            <FaRegSadTear />{' '}
+                                                        </button>
+                                                        <button
+                                                            className="mx-2 bg-blue-400 p-2 rounded-lg"
+                                                            type="btn"
+                                                        >
+                                                            {' '}
+                                                            <FaPencilAlt />{' '}
+                                                        </button>
+                                                        <button
+                                                            className="mx-2 bg-red-400 p-2 rounded-lg"
+                                                            type="btn"
+                                                        >
+                                                            {' '}
+                                                            <FaTrashAlt />{' '}
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
                             </tbody>
                         </table>
                     </div>
