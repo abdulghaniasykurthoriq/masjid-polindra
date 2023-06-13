@@ -28,12 +28,32 @@ class PostinganController extends Controller
         //     $postingan->load('user');
         // }
 
-        $postingan = Postingan::all();
-        $postingan->load('user');
+        // $postingan = Postingan::all();
+        // $postingan->load('user');
+
+        $postingan = Postingan::query()->orderBy('created_at', 'desc');
+        $text = $request->input('text');
+        $postingan->with('user');
+        if ($text) {
+            $postingan->where('text', 'like', '%' . $text . '%');
+        }
+        $postingan = $postingan->get();
         return Inertia::render('Postingan/index', [
             'postingan' => $postingan,
             // 'event' => $event
         ]);
+    }
+    public function filter(Request $request)
+    {
+        // $laporanKeuangan = LaporanKeuangan::orderBy('created_at', 'desc')->limit(5)->get();
+        $laporan = Postingan::query()->orderBy('created_at', 'desc');
+        $text = $request->input('text');
+
+        if ($text) {
+            $laporan->where('text_laporan', 'like', '%' . $text . '%');
+        }
+
+        return Inertia::location(route('postingan.index', 'text=' . $text));
     }
 
     /**
@@ -60,7 +80,7 @@ class PostinganController extends Controller
         $postingan->user_id = Auth::user()->id;
         $postingan->save();
         return Inertia::location(route('postingan.index'));
-      //  return redirect()->route('postingan.index')->with('success', 'Data Berhasil Dibuat!');
+        //  return redirect()->route('postingan.index')->with('success', 'Data Berhasil Dibuat!');
     }
 
     /**

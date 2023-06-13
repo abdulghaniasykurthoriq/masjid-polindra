@@ -10,18 +10,25 @@ import { useState } from 'react';
 export default function Postingan(props) {
     const [kode, setKode] = useState('');
     console.log('props', props);
-    const onUpdate = (id) => {
-        const url = route('postingan.edit', { id });
-        Inertia.get(url);
-    };
+    // const onUpdate = (id) => {
+    //     const url = route('postingan.edit', { id });
+    //     Inertia.get(url);
+    // };
 
-    const submitFilter = () => {
-        alert('wpi');
+    const submitFilter = (e) => {
+        e.preventDefault()
+        // alert('wpi');
         // Inertia.get(
         //     '/laporan-kas',
         //     { kode},
         //     { preserveState: true }
         // );
+        const params = new URLSearchParams();
+        //alert(kode)
+        
+    params.append('text', kode);
+    //window.location.href(`/laporan-kas?${params.toString()}`)
+    Inertia.post(`/postingan?${params.toString()}`, { preserveState: true });
     };
 
     const onDeleted = (id) => {
@@ -54,6 +61,7 @@ export default function Postingan(props) {
                         className="flex items-center  w-full max-w-[600px] "
                     >
                         <div className="w-full">
+                            
                             <TextInput
                                 placeholder="search"
                                 value={kode}

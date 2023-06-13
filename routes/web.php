@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/laporan-kas', [LaporanKasController::class, 'index'])->name('kas.index');
+    Route::post('/laporan-kas', [LaporanKasController::class, 'filter'])->name('kas.filter');
     Route::get('/laporan-kas/pemasukan', [LaporanKasController::class, 'createPemasukan'])->name('kas.createPemasukan');
     Route::post('/laporan-kas/pemasukan', [LaporanKasController::class, 'storePemasukan'])->name('kas.storePemasukan');
 
@@ -67,6 +68,7 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/event', [EventController::class, 'update'])->name('event.update');
     // Route::delete('/event', [EventController::class, 'destroy'])->name('event.destroy');
     Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index');
+    Route::post('/postingan', [PostinganController::class, 'filter'])->name('postingan.filter');
     Route::get('/postingan/create', [PostinganController::class, 'create'])->name('postingan.create');
     Route::post('/postingan/create', [PostinganController::class, 'store'])->name('postingan.store');
     Route::get('/postingan/{id}/edit', [PostinganController::class, 'edit'])->name('postingan.edit');

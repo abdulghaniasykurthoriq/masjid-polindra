@@ -185,8 +185,12 @@ const Header = () => {
     };
     const submitFilter = (e) => {
         e.preventDefault();
-        alert('wpi');
-        Inertia.get('/laporan-kas', { kode }, { preserveState: true });
+        // alert('wpi');
+        // route('kas.filter', { kode });
+        const params = new URLSearchParams();
+    params.append('kode', kode);
+    //window.location.href(`/laporan-kas?${params.toString()}`)
+    Inertia.post(`/laporan-kas?${params.toString()}`, { preserveState: true });
     };
     return (
         <div className="w-full flex justify-between px-12 pt-12 pb-6 ">
@@ -201,7 +205,7 @@ const Header = () => {
                             type="text"
                             value={kode}
                             onChange={(e) => setKode(e.target.value)}
-                            placeholder="Search . . ."
+                            placeholder="Search kode laporan . . ."
                             className="input"
                         />
                     </label>

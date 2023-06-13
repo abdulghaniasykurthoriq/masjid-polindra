@@ -7,6 +7,7 @@ use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Inertia\Inertia;
 
 class LaporanKasController extends Controller
@@ -26,6 +27,18 @@ class LaporanKasController extends Controller
         return Inertia::render('LaporanKas/index', [
             'laporan_keuangan' => $laporanKeuangan
         ]);
+    }
+    public function filter(Request $request)
+    {
+        // $laporanKeuangan = LaporanKeuangan::orderBy('created_at', 'desc')->limit(5)->get();
+        $laporan = LaporanKeuangan::query()->orderBy('created_at', 'desc');
+        $kode = $request->input('kode');
+
+        if ($kode) {
+            $laporan->where('kode_laporan', 'like', '%' . $kode . '%');
+        }
+
+        return Inertia::location(route('kas.index', 'kode=' . $kode));
     }
 
     /**
@@ -108,7 +121,7 @@ class LaporanKasController extends Controller
             ]);
         }
         return Inertia::location(route('kas.index'));
-       // return redirect()->route('kas.index')->with('success', 'Data Berhasil Dibuat!');
+        // return redirect()->route('kas.index')->with('success', 'Data Berhasil Dibuat!');
     }
     public function store(Request $request)
     {
