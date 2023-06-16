@@ -7,7 +7,7 @@ import { Inertia } from '@inertiajs/inertia';
 function Pengeluaran(props) {
     // console.log('props', props)
     return (
-        <Content>
+        <Content props={props}>
             <div className="flex flex-col  min-h-screen bg-blue-50">
                 <HeaderPage title="Form Pengeluaran" />
 

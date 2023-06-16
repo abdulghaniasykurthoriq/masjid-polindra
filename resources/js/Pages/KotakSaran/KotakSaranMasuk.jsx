@@ -18,7 +18,7 @@ export default function KotakSaranMasuk(props) {
     return (
         <div className="flex">
             <Head title="Kotak Saran Masuk Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'Kotak Saran Masuk'} />
                 {/* Menu section */}

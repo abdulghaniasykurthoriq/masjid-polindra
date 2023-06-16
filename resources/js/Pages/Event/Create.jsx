@@ -5,41 +5,15 @@ import { useState } from 'react';
 import { FaArrowLeft, FaPlus } from 'react-icons/fa';
 import { Inertia } from '@inertiajs/inertia';
 export default function CreateEvent(props) {
-    const [totalMateri, setTotalMateri] = useState(1);
-    const [file, setFile] = useState(null);
-    // const handleTotalMateri = () => {
-    //     setTotalMateri(totalMateri + 1);
-    // };
-    // let listMateri = [];
-    // for (let index = 0; index < totalMateri; index++) {
-    //     listMateri.push(
-    //         <div className="flex w-full justify-between px-6 p-2 items-center">
-    //             <label>Thumbnail</label>
-    //             <div className="max-w-4xl float-start max-w-md w-full flex">
-    //                 <input
-    //                     onChange={(e) => setFile(e.target.files[0])}
-    //                     class=" max-w-sm file:bg-blue-500 file:text-white file:absolute file:-right-3 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 leading-[2.15] font-normal text-neutral-700  transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
-    //                     id="formFileLg"
-    //                     type="file"
-    //                 />
-    //                 {index == totalMateri - 1 && (
-    //                     <div
-    //                         onClick={handleTotalMateri}
-    //                         className=" bg-blue-500 p-3 mx-2 text-white "
-    //                     >
-    //                         <FaPlus />
-    //                     </div>
-    //                 )}
-    //             </div>
-    //         </div>
-    //     );
-    // }
+
+    const goBack = () => {
+        window.history.back();
+      };
 
     const [nama, setNama] = useState('');
     const [kategori, setKategori] = useState('');
     const [image, setImage] = useState(null);
-    // const [materi, setMateri] = useState(null);
-    let materi = [];
+
     const [error, setError] = useState(null);
 
     const handleFileChange = (event) => {
@@ -52,9 +26,8 @@ export default function CreateEvent(props) {
             nama,
             kategori,
             image,
-            items:inputs
-        }
-        
+            items: inputs,
+        };
 
         Inertia.post('/event', jsonData, {
             onError: (errors) => {
@@ -97,7 +70,7 @@ export default function CreateEvent(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 <div className="flex justify-between p-8">
@@ -108,7 +81,8 @@ export default function CreateEvent(props) {
                 <div className="mx-8 my-2 mb-8 bg-white mt-6 rounded-t-2xl">
                     <div>
                         <div className="p-4 flex items-center">
-                            <div className="bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
+                            
+                            <div onClick={goBack} className="cursor-pointer bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
                                 <FaArrowLeft className="mr-2" />
                                 <p>Back</p>
                             </div>
@@ -150,8 +124,10 @@ export default function CreateEvent(props) {
                                     class=" max-w-sm file:bg-blue-500 file:text-white file:absolute file:-right-3 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 leading-[2.15] font-normal text-neutral-700  transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
                                     id="formFileLg"
                                     type="file"
+                                    accept="image/*" 
                                     onChange={handleFileChange}
                                 />
+                                 {/* <input type="file" accept="image/*" onChange={handleImageUpload} /> */}
                             </div>
                         </div>
                         {/* {listMateri} */}
@@ -163,44 +139,44 @@ export default function CreateEvent(props) {
                                 >
                                     <label>Materi</label>
                                     <div className="float-start max-w-md w-full flex h-[48px]">
-                                        <div className='flex'>
-                                        <input
-                                        value={inputs.materi}
-                                        onChange={(event) =>
-                                            handleInputChange(
-                                                index,
-                                                event.target.files[0]
-                                            )
-                                        }
-                                            // onChange={(e) =>
-                                            //     setFile(e.target.files[0])
-                                            // }
-                                    class=" max-w-sm file:bg-blue-500 file:text-white file:absolute file:-right-3 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 leading-[2.15] font-normal text-neutral-700  transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
-                                            
-                                            id="formFileLg"
-                                            type="file"
-                                        />
-                                        <button
-                                        type="button"
-                                        onClick={handleAddInput}
-                                        className="btn btn-primary mb-2 mx-2"
-                                    >
-                                        +
-                                    </button>
-                                    {inputs.length > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={() => handleRemoveInput(index)}
-                                    className="btn btn-error mb-2"
-                                >
-                                    {' '}
-                                    -{' '}
-                                </button>
-                            )}
-
+                                        <div className="flex">
+                                            <input
+                                                value={inputs.materi}
+                                                accept=".pdf" 
+                                                onChange={(event) =>
+                                                    handleInputChange(
+                                                        index,
+                                                        event.target.files[0]
+                                                    )
+                                                }
+                                                // onChange={(e) =>
+                                                //     setFile(e.target.files[0])
+                                                // }
+                                                class=" max-w-sm file:bg-blue-500 file:text-white file:absolute file:-right-3 relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 dark:border-neutral-600 bg-clip-padding py-[0.32rem] px-3 leading-[2.15] font-normal text-neutral-700  transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit dark:file:bg-neutral-700 file:px-3 file:py-[0.32rem] file:text-neutral-700 dark:file:text-neutral-100 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none"
+                                                id="formFileLg"
+                                                type="file"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={handleAddInput}
+                                                className="btn btn-primary mb-2 mx-2"
+                                            >
+                                                +
+                                            </button>
+                                            {inputs.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        handleRemoveInput(index)
+                                                    }
+                                                    className="btn btn-error mb-2"
+                                                >
+                                                    {' '}
+                                                    -{' '}
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
-                                    
                                 </div>
                             );
                         })}

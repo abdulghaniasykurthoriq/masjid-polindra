@@ -96,7 +96,7 @@ export default function Akun(props) {
     return (
         <div className="flex">
             <Head title="Management Postingan Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'MANAGEMENT ACCOUNT'} />
                 {/* Menu section */}

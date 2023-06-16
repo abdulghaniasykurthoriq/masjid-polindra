@@ -1,22 +1,26 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
-import TextInput from '@/Components/TextInput';
 import { Head, Link } from '@inertiajs/react';
-import { FaPencilAlt, FaRegSadTear, FaSearch, FaTrashAlt, FaUser } from 'react-icons/fa';
+import {
+    FaPencilAlt,
+    FaRegSadTear,
+    FaSearch,
+    FaTrashAlt,
+    FaUser,
+} from 'react-icons/fa';
 import Logo from '../../../assets/logo.png';
 import HeaderPage from '@/Components/moleculs/headerPage';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
+import useFormatDate from '../../../helpers/useFormatDate';
 
 export default function Event(props) {
-    const goDetail = (id) => {
-        console.log('id', id);
-        const url = route('eventdetail', { id });
-        Inertia.get(url);
-    };
+    // const goDetail = (id) => {
+    //     console.log('id', id);
+    //     const url = route('eventdetail', { id });
+    //     Inertia.get(url);
+    // };
 
-    
     const onDeleted = (id) => {
-        
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -37,7 +41,7 @@ export default function Event(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 {/* <div className='flex justify-between p-8'>
@@ -49,23 +53,22 @@ export default function Event(props) {
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">
-                    <form >
-                <div className="form-control">
-                    <label className="input-group">
-                        <span className="bg-white text-gray-300">
-                            <FaSearch />
-                            
-                        </span>
-                        <input
-                            type="text"
-                            // value={kode}
-                            // onChange={(e) => setKode(e.target.value)}
-                            placeholder="Search . . ."
-                            className="input"
-                        />
-                    </label>
-                </div>
-            </form>
+                        <form>
+                            <div className="form-control">
+                                <label className="input-group">
+                                    <span className="bg-white text-gray-300">
+                                        <FaSearch />
+                                    </span>
+                                    <input
+                                        type="text"
+                                        // value={kode}
+                                        // onChange={(e) => setKode(e.target.value)}
+                                        placeholder="Search . . ."
+                                        className="input"
+                                    />
+                                </label>
+                            </div>
+                        </form>
                         {/* <div className="flex items-center ml-4 max-w-2xl w-full">
                             <span>Kategory : </span>
                             <div className="px-4 mx-2 bg-gray-200 py-2 rounded-lg ">
@@ -137,7 +140,7 @@ export default function Event(props) {
                                                             <div className="flex">
                                                                 <p className="pr-20">
                                                                     {
-                                                                        event.created_at
+                                                                        useFormatDate(event.created_at)
                                                                     }
                                                                 </p>
                                                                 <p className="pr-4">
@@ -165,34 +168,40 @@ export default function Event(props) {
                                                         <p className="px-4 bg-blue-500 mx-4 self-center">
                                                             Pengajian Umum
                                                         </p>
-                                                        <a href={`/event/${event.id}`}>
-                                                        <button
-                                                            className="mx-2 bg-green-700 p-2 rounded-lg"
-                                                            type="btn"
-                                                            // onClick={() =>
-                                                            //     goDetail(
-                                                            //         event.id
-                                                            //     )
-                                                            // }
+                                                        <a
+                                                            href={`/event/${event.id}`}
                                                         >
-                                                            {' '}
-                                                            <FaRegSadTear />{' '}
-                                                        </button>
-
+                                                            <button
+                                                                className="mx-2 bg-green-700 p-2 rounded-lg"
+                                                                type="btn"
+                                                                // onClick={() =>
+                                                                //     goDetail(
+                                                                //         event.id
+                                                                //     )
+                                                                // }
+                                                            >
+                                                                {' '}
+                                                                <FaRegSadTear />{' '}
+                                                            </button>
                                                         </a>
-                                                        <a href={`event/${event.id}`}>
-
-                                                        <button
-                                                            className="mx-2 bg-blue-400 p-2 rounded-lg"
-                                                            type="btn"
+                                                        <a
+                                                            href={`event/${event.id}`}
                                                         >
-                                                            {' '}
-                                                            <FaPencilAlt />{' '}
-                                                        </button>
+                                                            <button
+                                                                className="mx-2 bg-blue-400 p-2 rounded-lg"
+                                                                type="btn"
+                                                            >
+                                                                {' '}
+                                                                <FaPencilAlt />{' '}
+                                                            </button>
                                                         </a>
 
                                                         <button
-                                                        onClick={() => onDeleted(event.id)}
+                                                            onClick={() =>
+                                                                onDeleted(
+                                                                    event.id
+                                                                )
+                                                            }
                                                             className="mx-2 bg-red-400 p-2 rounded-lg"
                                                             type="btn"
                                                         >

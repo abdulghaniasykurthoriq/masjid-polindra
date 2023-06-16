@@ -33,7 +33,7 @@ export default function Detail(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 <div className="flex justify-between p-8">

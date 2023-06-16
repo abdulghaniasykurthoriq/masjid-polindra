@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pemasukan', function (Blueprint $table) {
+        Schema::create('keuangan_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('laporan_id');
             $table->string('kategory');
-            $table->integer('jumlah_pemasukan');
-            $table->string('keterangan')->nullable();
+            $table->integer('jumlah');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
 
             $table->foreign('laporan_id')->references('id')->on('laporan_keuangan');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemasukan');
+        Schema::dropIfExists('keuangan_details');
     }
 };

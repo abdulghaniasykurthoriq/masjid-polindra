@@ -16,7 +16,7 @@ export default function Postingan(props) {
     // };
 
     const submitFilter = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         // alert('wpi');
         // Inertia.get(
         //     '/laporan-kas',
@@ -25,10 +25,12 @@ export default function Postingan(props) {
         // );
         const params = new URLSearchParams();
         //alert(kode)
-        
-    params.append('text', kode);
-    //window.location.href(`/laporan-kas?${params.toString()}`)
-    Inertia.post(`/postingan?${params.toString()}`, { preserveState: true });
+
+        params.append('text', kode);
+        //window.location.href(`/laporan-kas?${params.toString()}`)
+        Inertia.post(`/postingan?${params.toString()}`, {
+            preserveState: true,
+        });
     };
 
     const onDeleted = (id) => {
@@ -51,7 +53,7 @@ export default function Postingan(props) {
     return (
         <div className="flex">
             <Head title="Management Postingan Masjid" />
-            <Sidebar />
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'FORM POSTINGAN'} />
                 {/* Menu section */}
@@ -61,7 +63,6 @@ export default function Postingan(props) {
                         className="flex items-center  w-full max-w-[600px] "
                     >
                         <div className="w-full">
-                            
                             <TextInput
                                 placeholder="search"
                                 value={kode}
@@ -106,7 +107,7 @@ export default function Postingan(props) {
                                     {props.postingan.map((item, i) => {
                                         return (
                                             <tr key={i}>
-                                                <th>{i+1}</th>
+                                                <th>{i + 1}</th>
                                                 <td>
                                                     <div
                                                         style={{
@@ -133,7 +134,7 @@ export default function Postingan(props) {
                                                             Update
                                                         </button>
                                                     </a>
-                                                    
+
                                                     <button className="btn btn-success mx-1">
                                                         Show detail
                                                     </button>

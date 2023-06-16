@@ -9,12 +9,81 @@ import useFormatRupiah from '../../../helpers/useFormatRupiah';
 function LaporanKas(props) {
     console.log('props', props);
 
-    const showDetail = () => {
-        return <div></div>;
+    
+
+    const [display, setDisplay] = useState(false)
+    const [judul, setJudul] = useState('')
+    const [item, setItem] = useState('')
+    const [itemCreatedAt, setItemCreatedAt] = useState('')
+    const [itemStatus, setItemStatus] = useState('')
+    const [itemKode, setItemKode] = useState('')
+    const [itemData, setItemData] = useState([])
+    const showDetail = (pemasukanStatus,kodeItem, pemasukan,detail) => {
+        setDisplay(true)
+        setJudul('agat');
+        setItemCreatedAt(pemasukan)
+        setItemStatus(pemasukanStatus)
+        setItemKode(kodeItem)
+        console.log('pp', detail)
+        setItemData(detail)
     };
+    const setShow = () => {
+        setDisplay(false)
+        setJudul('');
+        setItemCreatedAt('')
+        setItemStatus('')
+        setItemKode('')
+        setItemData([])
+        
+    }
+
+    const Dialog = () => {
+        console.log('niko new', itemData)
+            return (
+                <div  className={ `${display ? 'flex' : 'hidden'} absolute w-screen h-screen flex justify-center items-center`}>
+                <div onClick={setShow} style={{zIndex:99}} className={ `bg-gray-400 w-screen h-screen absolute opacity-50 items-center justify-center`}>
+                    
+                </div>
+                <div style={{zIndex:100, opacity:1}} className='bg-white w-full max-w-xl h-[400px] rounded-xl shadow-2xl overflow-y-auto'>
+                        <div className='p-8'>
+                        <h3 className="font-bold text-lg">{itemStatus}
+                        <button className="btn btn-xs btn-outline btn-secondary mx-2">{itemKode}</button>
+                        </h3>
+                        <p>{useFormatDate(itemCreatedAt)}</p>
+                        <div className='pt-2 mt-2 w-full'>
+                            {itemData.map((item,index) => {
+                                return (
+<div key={index} className='border-t-2 pt-2 mt-2'>
+                                <h3>{item.kategory}</h3>
+                                <h2>{useFormatRupiah(item.jumlah)}</h2>
+                                <div>
+                                <p>{item.keterangan}</p>
+                                </div>
+                                
+                            </div>
+                                )
+                            })}
+                            
+ 
+
+                        </div>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
+        )
+    }
+
+
 
     return (
-        <Content>
+        <>
+        
+        {display && <Dialog/> }
+        
+        <Content props={props}>
+            
             <div className=" min-h-screen ">
                 <HeaderPage title={'LAPORAN KEUANGAN'} />
 
@@ -30,7 +99,7 @@ function LaporanKas(props) {
                                 <thead>
                                     <tr>
                                         <th>kode laporan</th>
-                                        <th>Kategori</th>
+                                        <th>Status</th>
                                         <th>Nominal</th>
                                         <th>Tanggal</th>
                                         <th></th>
@@ -65,92 +134,21 @@ function LaporanKas(props) {
                                                             )}
                                                         </td>
                                                         <td>
-                                                            {/* Open the modal using ID.showModal() method */}
-                                                            {/* <button
+                                                            <button
                                                                 className="btn"
-                                                 
-                                                            >
-                                                                open modal
-                                                            </button>
-                                                            <form
-                                                                method="dialog"
-                                                                id="my_modal_5"
-                                                                className="modal modal-bottom sm:modal-middle"
-                                                            >
-                                                                <div
-                                                                    
-                                                                    className="modal-box"
-                                                                >
-                                                                    <h3 className="font-bold text-lg">
-                                                                        Hello!
-                                                                    </h3>
-                                                                    <p className="py-4">
-                                                                        Press
-                                                                        ESC key
-                                                                        or click
-                                                                        the
-                                                                        button
-                                                                        below to
-                                                                        close
-                                                                    </p>
-                                                                    <div className="modal-action">
-                                                                        <button className="btn">
-                                                                            Close
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </form> */}
-                                                            {/* Open the modal using ID.showModal() method */}
-{/* You can open the modal using ID.showModal() method */}
-{/* You can open the modal using ID.showModal() method */}
-<button className="btn" onClick={()=>window.my_modal_4.showModal()}>open modal</button>
-<dialog id="my_modal_4" className="modal">
-  <form method="dialog" className="modal-box w-11/12 max-w-5xl">
-    <h3 className="font-bold text-lg">Hello!</h3>
-    <p className="py-4">Click the button below to close</p>
-    <div className="modal-action">
-      {/* if there is a button, it will close the modal */}
-      <button className="btn">Close</button>
-    </div>
-  </form>
-</dialog>
-                                                            {/* <button
                                                                 onClick={() =>
-                                                                    window.my_modal_5.showModal()
+                                                                    showDetail(
+                                                                        pemasukan.status,
+                                                                        pemasukan.kode_laporan,
+                                                                        pemasukan.created_at,
+                                                                        pemasukan.detail
+                                                                        
+                                                                        )
                                                                 }
-                                                                className="btn btn-accent"
                                                             >
                                                                 Show detail
                                                             </button>
-                                                            <dialog
-                                                                id="my_modal_5"
-                                                                className="modal modal-bottom sm:modal-middle"
-                                                            >
-                                                                <form
-                                                                    method="dialog"
-                                                                    className="modal-box"
-                                                                >
-                                                                    <h1 className="py-2 px-4 font-bold text-lg border-b">
-                                                                        PEMASUKAN
-                                                                        <br />
-                                                                        Rp.
-                                                                        1000.000
-                                                                    </h1>
-
-                                                                    <h2 className="py-2 px-4 text-md bg-base-200 rounded">
-                                                                        001-MSK
-                                                                    </h2>
-                                                                    <p className="py-2">
-                                                                        12/06/2023
-                                                                    </p>
-                                                                    <div className="modal-action">
-                                                           
-                                                                        <button className="btn">
-                                                                            Close
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </dialog> */}
+                                                         
                                                         </td>
                                                     </tr>
                                                 );
@@ -170,6 +168,8 @@ function LaporanKas(props) {
                 </div>
             </div>
         </Content>
+        </>
+        
     );
 }
 
@@ -188,9 +188,11 @@ const Header = () => {
         // alert('wpi');
         // route('kas.filter', { kode });
         const params = new URLSearchParams();
-    params.append('kode', kode);
-    //window.location.href(`/laporan-kas?${params.toString()}`)
-    Inertia.post(`/laporan-kas?${params.toString()}`, { preserveState: true });
+        params.append('kode', kode);
+        //window.location.href(`/laporan-kas?${params.toString()}`)
+        Inertia.post(`/laporan-kas?${params.toString()}`, {
+            preserveState: true,
+        });
     };
     return (
         <div className="w-full flex justify-between px-12 pt-12 pb-6 ">

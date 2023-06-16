@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Logo from '../../../assets/logo.png';
 // import {MdSpaceDashboard,MdMessage} from 'react-icons/md'
 // import {FaWallet,FaCalendarDay, FaUserFriends,FaUsersCog,FaUserCircle, FaArrowDown} from 'react-icons/fa'
-import { MdSpaceDashboard, MdMessage } from 'react-icons/md';
+import { MdSpaceDashboard, MdMessage, MdMonitor } from 'react-icons/md';
 import {
     FaWallet,
     FaCalendarDay,
@@ -17,7 +17,8 @@ import { Link } from '@inertiajs/react';
 import useMediaQuery from '../../../../resources/helpers/useMediaQuery';
 // import useMediaQuery from 'resources/helpers/mediaQuery';
 
-export default function Sidebar() {
+export default function Sidebar({props}) {
+  
     const [isShow, setIsShow] = useState(false);
     const [isKeuangan, setIsKeuangan] = useState(false);
     const isDesktop = useMediaQuery('(min-width:1024px)');
@@ -291,6 +292,27 @@ export default function Sidebar() {
                                                 </p>
                                             </li>
                                         </Link>
+                                        <a href='monitor' target='_blank'>
+                                            <li
+                                                style={
+                                                    currentPage ===
+                                                    '/monitor'
+                                                        ? {
+                                                              backgroundColor:
+                                                                  '#d9ddfc',
+                                                          }
+                                                        : {}
+                                                }
+                                                className="pl-10 flex items-center py-2"
+                                            >
+                                                {' '}
+                                                <MdMonitor />{' '}
+                                                <p className="pl-4">
+                                                    Go to Monitor{' '}
+                                                </p>
+                                            </li>
+                                        </a>
+                                        
                                         {/* <Link to="/event">
                         <li
                           style={currentPage === "/event" ? { backgroundColor: "#d9ddfc" } : {}}
@@ -331,7 +353,7 @@ export default function Sidebar() {
                             <div className="content-end absolute bottom-0 w-full h-20 bg-blue-200 flex">
                                 <div className="pl-8 flex items-center font-semibold text-gray-700">
                                     <FaUserCircle />{' '}
-                                    <p className="pl-4 pr-2">Abdul Ghani</p>
+                                    <p className="pl-4 pr-2">{props.auth.user.name}</p>
                                     <FaArrowDown />
                                 </div>
                             </div>

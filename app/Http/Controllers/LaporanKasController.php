@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KeuanganDetail;
 use App\Models\LaporanKeuangan;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
+use App\Models\Saldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -15,15 +17,36 @@ class LaporanKasController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request)
+    // {
+    //     // $laporan = LaporanKeuangan::query()->with(['detail' => function ($query) {
+    //     //     $query->orderBy('created_at', 'desc');
+    //     // }])
+    //     //     ->whereHas('detail') // Filter hanya ketika ada relasi "detail"
+    //     //     ->orderBy('created_at', 'desc')->get();
+    //     $laporan = LaporanKeuangan::query()->orderBy('created_at', 'desc');
+    //     $kode = $request->input('kode');
+    //     if ($kode) {
+    //         $laporan->where('kode_laporan', 'like', '%' . $kode . '%');
+    //     }
+    //     $laporanKeuangan = $laporan->get();
+    //     return Inertia::render('LaporanKas/index', [
+    //         'laporan_keuangan' => $laporanKeuangan
+    //     ]);
+    // }
     public function index(Request $request)
     {
-        // $laporanKeuangan = LaporanKeuangan::orderBy('created_at', 'desc')->limit(5)->get();
-        $laporan = LaporanKeuangan::query()->orderBy('created_at', 'desc');
+        $laporan = LaporanKeuangan::with(['detail'])
+            ->whereHas('detail') // Filter hanya ketika ada relasi "detail"
+            ->orderBy('created_at', 'desc');
+
         $kode = $request->input('kode');
         if ($kode) {
             $laporan->where('kode_laporan', 'like', '%' . $kode . '%');
         }
+
         $laporanKeuangan = $laporan->get();
+
         return Inertia::render('LaporanKas/index', [
             'laporan_keuangan' => $laporanKeuangan
         ]);
@@ -88,14 +111,18 @@ class LaporanKasController extends Controller
         $laporanKas->save();
         // dd($request->items);
         foreach ($request->items as $pemasukan) {
-            Pemasukan::create([
+            KeuanganDetail::create([
                 'users_id' => Auth::user()->id,
                 'kategory' => $pemasukan['kategory'],
                 'laporan_id' => $laporanKas->id,
-                'jumlah_pemasukan' => $pemasukan['jumlah_pemasukan'],
+                'jumlah' => $pemasukan['jumlah_pemasukan'],
                 'keterangan' => $pemasukan['keterangan']
             ]);
         }
+        $saldo = Saldo::find(1);
+        $saldoSekarang = $saldo->saldo;
+        $saldo->saldo = $saldoSekarang + $laporanKas->total;
+        $saldo->save();
         return Inertia::location(route('kas.index'));
         //return redirect()->route('kas.index')->with('success', 'Data Berhasil Dibuat!');
     }
@@ -103,7 +130,7 @@ class LaporanKasController extends Controller
     {
         $laporanKas = new LaporanKeuangan();
         $laporanKas->kode_laporan = $request->kode_laporan;
-        $laporanKas->user_id = 1;
+        $laporanKas->user_id = Auth()->user()->id;
         $laporanKas->status = "pengeluaran";
 
         foreach ($request->items as $pengeluaran) {
@@ -112,14 +139,18 @@ class LaporanKasController extends Controller
         $laporanKas->save();
         // dd($request->items);
         foreach ($request->items as $pengeluaran) {
-            Pengeluaran::create([
+            KeuanganDetail::create([
                 'users_id' => Auth::user()->id,
                 'kategory' => $pengeluaran['kategory'],
                 'laporan_id' => $laporanKas->id,
-                'jumlah_pengeluaran' => $pengeluaran['jumlah_pengeluaran'],
+                'jumlah' => $pengeluaran['jumlah_pengeluaran'],
                 'keterangan' => $pengeluaran['keterangan']
             ]);
         }
+        $saldo = Saldo::find(1);
+        $saldoSekarang = $saldo->saldo;
+        $saldo->saldo = $saldoSekarang - $laporanKas->total;
+        $saldo->save();
         return Inertia::location(route('kas.index'));
         // return redirect()->route('kas.index')->with('success', 'Data Berhasil Dibuat!');
     }

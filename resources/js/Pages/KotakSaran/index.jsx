@@ -40,7 +40,7 @@ export default function KotakSaran(props) {
     return (
         <div className="flex">
             <Head title="Kotak Saran Jamaah Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'Kotak Saran'} />
                 {/* Menu section */}

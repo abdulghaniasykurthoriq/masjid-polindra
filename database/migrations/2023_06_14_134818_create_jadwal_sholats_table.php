@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengeluaran', function (Blueprint $table) {
+        Schema::create('jadwal_sholat', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('laporan_id');
-            $table->string('kategory');
-            $table->integer('jumlah_pengeluaran');
-            $table->string('keterangan')->nullable();
+            $table->string('subuh');
+            $table->string('duhur');
+            $table->string('ashar');
+            $table->string('maghrib');
+            $table->string('isya');
             $table->timestamps();
-
-            $table->foreign('laporan_id')->references('id')->on('laporan_keuangan');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengeluaran');
+        Schema::dropIfExists('jadwal_sholats');
     }
 };

@@ -19,7 +19,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $event = Event::all();
+        $event = Event::query()->orderBy('created_at', 'desc')->get();
         return Inertia::render(
             'Event/Event',
             [
@@ -37,7 +37,7 @@ class EventController extends Controller
     }
     public function detail(String $id)
     {
-        $event = Event::with('materi')->where('id', $id)->first();
+        $event = Event::query()->orderBy('created_at', 'desc')->with('materi')->where('id', $id)->first();
         return Inertia::render('Event/Detail', [
             'event' => $event
         ]);
@@ -93,7 +93,11 @@ class EventController extends Controller
                     }
                 }
             }
-            return response()->json(['berhasil' => 'berhasil menambah event dengan image']);
+            //return Inertia::location(route('event.index'))->with('message', 'Berhasil dibuat');
+            // return Inertia::render('event.index')->with('message', 'Berhasil dibuat');
+
+            return Inertia::location(route('event.index'));
+            //return response()->json(['berhasil' => 'berhasil menambah event dengan image']);
             // return response()->json(['success' => 'Image uploaded successfully.']);
         } else {
             $event = new Event();
@@ -121,11 +125,12 @@ class EventController extends Controller
                     }
                 }
             }
-            return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
+            return Inertia::location(route('event.index'));
+            // return response()->json(['berhasil' => 'berhasil menambah event tanpa image']);
         }
 
-
-        return response()->json(['gagal' => 'something went wrong']);
+        return Inertia::location(route('event.index'));
+        //return response()->json(['gagal' => 'something went wrong']);
         // return response()->json(['error' => 'Error upload event.']);
     }
 

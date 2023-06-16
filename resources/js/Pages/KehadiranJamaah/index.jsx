@@ -16,7 +16,7 @@ export default function KehadiranJamaah(props) {
     return (
         <div className="flex">
             <Head title="Management Kehadiran Jamaah Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'Kehadiran Jamaah'} />
                 {/* Menu section */}

@@ -7,7 +7,7 @@ import { Inertia } from '@inertiajs/inertia';
 function Pemasukan(props) {
     // console.log('props', props)
     return (
-        <Content>
+        <Content props={props}>
             <div className="flex flex-col  min-h-screen bg-blue-50">
                 <HeaderPage title="Form Pemasukan" />
 
@@ -165,7 +165,6 @@ const FormPemasukan = (props) => {
                                         className="textarea textarea-bordered"
                                         placeholder="Bio"
                                     ></textarea>
-                                
                                 </div>
                             </div>
 
@@ -187,7 +186,6 @@ const FormPemasukan = (props) => {
                                 </button>
                             )}
                         </div>
-
                     ))}
 
                     <div className={`max-w-[200px] py-10`}>

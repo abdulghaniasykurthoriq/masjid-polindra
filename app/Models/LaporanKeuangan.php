@@ -9,4 +9,9 @@ class LaporanKeuangan extends Model
 {
     use HasFactory;
     protected $table = 'laporan_keuangan';
+
+    public function detail()
+    {
+        return $this->hasMany(KeuanganDetail::class, 'laporan_id');
+    }
 }

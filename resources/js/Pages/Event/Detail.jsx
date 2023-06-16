@@ -16,8 +16,8 @@ export default function Detail(props) {
     const downloadPdf = (name) => {
         const url = route('materi.downloadPDF', { name });
         Inertia.get(url);
-    }
-    
+    };
+
     const onDeleted = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -38,7 +38,7 @@ export default function Detail(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar />
+            <Sidebar props={props}/>
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 <div className="flex justify-between p-8">
@@ -62,7 +62,9 @@ export default function Detail(props) {
                                 </div>
                                 <div className="flex flex-col pl-2">
                                     <b>{props.event.nama}</b>
-                                    <small>{useFormatDate(props.event.created_at)}</small>
+                                    <small>
+                                        {useFormatDate(props.event.created_at)}
+                                    </small>
                                 </div>
                             </div>
                         </>
@@ -79,23 +81,30 @@ export default function Detail(props) {
                                     className="flex items-center justify-between py-4 px-8 border-b-2"
                                 >
                                     <div className="flex items-center pl-8">
-                                        <a href={`materi/${materi.file_materi}`} download={true}>
-                                        </a>
-                                        <div onClick={() => downloadPdf(materi.file_materi)} className="bg-gray-300 w-max p-1 rounded-md">
+                                        <a
+                                            href={`materi/${materi.file_materi}`}
+                                            download={true}
+                                        ></a>
+                                        <div
+                                            onClick={() =>
+                                                downloadPdf(materi.file_materi)
+                                            }
+                                            className="bg-gray-300 w-max p-1 rounded-md"
+                                        >
                                             <img src={LogoFile} alt="file" />
                                         </div>
-                                        
+
                                         <b className="pl-3">{materi.name}</b>
                                     </div>
 
                                     <div className="">
-                                        
                                         {/* <button className="btn btn-sm btn-secondary">
                                             <FaPencilAlt />
                                         </button> */}
-                                        <button onClick={() =>
-                                                            onDeleted(materi.id)
-                                                        } className="btn btn-sm  btn-accent">
+                                        <button
+                                            onClick={() => onDeleted(materi.id)}
+                                            className="btn btn-sm  btn-accent"
+                                        >
                                             <FaTrash />
                                         </button>
                                     </div>

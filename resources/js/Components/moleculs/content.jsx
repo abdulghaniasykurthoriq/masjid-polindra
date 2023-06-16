@@ -3,7 +3,7 @@ import Container from './container';
 // import Navside from './navside'
 import Sidebar from './Sidebar';
 
-function Content({ children }) {
+function Content({ children,props }) {
     return (
         <div className="flex justify-center bg-blue-50">
             {/* <div className=" h-screen w-screen absolute left-[-1400px] flex items-end">
@@ -12,7 +12,7 @@ function Content({ children }) {
 
             <Container>
                 <div className="flex">
-                    <Sidebar />
+                    <Sidebar props={props} />
                     <div className="w-full">{children}</div>
                 </div>
             </Container>
