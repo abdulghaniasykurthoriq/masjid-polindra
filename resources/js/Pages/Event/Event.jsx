@@ -41,7 +41,7 @@ export default function Event(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 {/* <div className='flex justify-between p-8'>
@@ -87,10 +87,7 @@ export default function Event(props) {
                             </button>
                         </Link> */}
                         <Link href={route('event.create')}>
-                            <button
-                                className="bg-blue-400 px-4 rounded-lg text-white"
-                                type="btn"
-                            >
+                            <button className="btn btn-primary" type="btn">
                                 + Event
                             </button>
                         </Link>
@@ -107,9 +104,9 @@ export default function Event(props) {
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Judul</th>
+                                    <th>Dibuat Oleh</th>
+                                    <th>Kategori</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -137,11 +134,11 @@ export default function Event(props) {
                                                         />
                                                         <div className="px-2">
                                                             <p>{event.nama}</p>
-                                                            <div className="flex">
+                                                            {/* <div className="flex">
                                                                 <p className="pr-20">
-                                                                    {
-                                                                        useFormatDate(event.created_at)
-                                                                    }
+                                                                    {useFormatDate(
+                                                                        event.created_at
+                                                                    )}
                                                                 </p>
                                                                 <p className="pr-4">
                                                                     263
@@ -152,7 +149,7 @@ export default function Event(props) {
                                                                 <p className="pr-4">
                                                                     100
                                                                 </p>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </div>
                                                 </td>
@@ -160,15 +157,18 @@ export default function Event(props) {
                                                     <p className="pr-8 flex items-center">
                                                         {' '}
                                                         <FaUser className="mr-2" />{' '}
-                                                        Agat Abdul
+                                                        {event.user.name}
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <div className="flex">
-                                                        <p className="px-4 bg-blue-500 mx-4 self-center">
-                                                            Pengajian Umum
-                                                        </p>
-                                                        <a
+                                                    <div className="flex items-center">
+                                                        <button className="btn  btn-sm mr-8">
+                                                            {event.kategori}
+                                                        </button>
+                                                        {/* <p className="px-4 bg-blue-500 mx-4 self-center">
+
+                                                        </p> */}
+                                                        {/* <a
                                                             href={`/event/${event.id}`}
                                                         >
                                                             <button
@@ -183,16 +183,15 @@ export default function Event(props) {
                                                                 {' '}
                                                                 <FaRegSadTear />{' '}
                                                             </button>
-                                                        </a>
+                                                        </a> */}
                                                         <a
                                                             href={`event/${event.id}`}
                                                         >
                                                             <button
-                                                                className="mx-2 bg-blue-400 p-2 rounded-lg"
+                                                                className="mx-2 btn btn-info"
                                                                 type="btn"
                                                             >
-                                                                {' '}
-                                                                <FaPencilAlt />{' '}
+                                                                update
                                                             </button>
                                                         </a>
 
@@ -202,11 +201,10 @@ export default function Event(props) {
                                                                     event.id
                                                                 )
                                                             }
-                                                            className="mx-2 bg-red-400 p-2 rounded-lg"
+                                                            className="mx-2 btn btn-error"
                                                             type="btn"
                                                         >
-                                                            {' '}
-                                                            <FaTrashAlt />{' '}
+                                                            DELETE
                                                         </button>
                                                     </div>
                                                 </td>

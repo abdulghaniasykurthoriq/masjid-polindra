@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { Inertia } from '@inertiajs/inertia';
 import useFormatDate from '../../../helpers/useFormatDate';
 import Swal from 'sweetalert2';
+import HeaderPage from '@/Components/moleculs/headerPage';
 export default function Detail(props) {
     useEffect(() => {
         console.log('props', props);
@@ -38,13 +39,14 @@ export default function Detail(props) {
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
-                <div className="flex justify-between p-8">
+                {/* <div className="flex justify-between p-8">
                     <p className="text-3xl font-bold">MANAGEMENT EVENT</p>
                     <p>logout</p>
-                </div>
+                </div> */}
+                <HeaderPage title={'MANAGEMENT EVENT'} />
 
                 <div className="mx-8 my-2 mb-8 min-h-[400px] bg-white mt-6 rounded-t-2xl">
                     {props.event != null ? (
@@ -55,7 +57,7 @@ export default function Detail(props) {
                                         src={
                                             props.event.image == null
                                                 ? LogoGallery
-                                                : '../images/1686139359.png'
+                                                : `../images/${props.event.image}`
                                         }
                                         alt="gallery"
                                     />
@@ -81,10 +83,12 @@ export default function Detail(props) {
                                     className="flex items-center justify-between py-4 px-8 border-b-2"
                                 >
                                     <div className="flex items-center pl-8">
-                                        <a
+                                        {/* <a
                                             href={`materi/${materi.file_materi}`}
                                             download={true}
-                                        ></a>
+                                        >
+
+                                        </a> */}
                                         <div
                                             onClick={() =>
                                                 downloadPdf(materi.file_materi)
@@ -103,9 +107,10 @@ export default function Detail(props) {
                                         </button> */}
                                         <button
                                             onClick={() => onDeleted(materi.id)}
-                                            className="btn btn-sm  btn-accent"
+                                            className="btn btn-sm  btn-error"
                                         >
-                                            <FaTrash />
+                                            delete
+                                            {/* <FaTrash /> */}
                                         </button>
                                     </div>
                                 </div>

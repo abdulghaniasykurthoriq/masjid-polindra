@@ -6,6 +6,9 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import EMasjid from '../../../assets/emasjid.svg';
+import GambarMasjid from '../../../assets/logo-masjid.svg';
+import Hamdalah from '../../../assets/hamdalah.svg';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,77 +39,116 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <GuestLayout>
+        <div>
             <Head title="Log in" />
-
-            {status && (
-                <div className="mb-4 font-medium text-sm text-green-600">
-                    {status}
-                </div>
-            )}
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="username" value="username" />
-
-                    <TextInput
-                        id="username"
-                        type="text"
-                        name="username"
-                        value={data.username}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={handleOnChange}
-                    />
-
-                    <InputError message={errors.username} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={handleOnChange}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            value={data.remember}
-                            onChange={handleOnChange}
-                        />
-                        <span className="ml-2 text-sm text-gray-600">
-                            Remember me
-                        </span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <div className="flex w-full">
+                <section className="lg:w-1/2 flex justify-center relative">
+                    <div>
+                        <div className="flex justify-center">
+                            <img
+                                className="w-[200px] mt-[100px]"
+                                src={EMasjid}
+                                alt="ini logo masjid"
+                            />
+                        </div>
+                        <div className="mt-[100px] text-center">
+                            <p className="font-medium text-[30px]">
+                                WELCOME TO MASJID BAITUL MUSTAQIN
+                            </p>
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="mt-[50px] text-center max-w-sm w-full">
+                                <div className="py-[10px]">
+                                    <p className="font-medium text-[20px]">
+                                        Login
+                                    </p>
+                                </div>
+                                <form
+                                    className="flex flex-col"
+                                    onSubmit={submit}
+                                >
+                                    <div className="pt-[10px]">
+                                        <input
+                                            type="text"
+                                            placeholder="Username"
+                                            id="username"
+                                            name="username"
+                                            value={data.username}
+                                            autoComplete="username"
+                                            isFocused={true}
+                                            onChange={handleOnChange}
+                                            className="input input-bordered w-full max-w-xs border border-200 py-[10px]"
+                                        />
+                                    </div>
+                                    <div className="pt-[20px]">
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            placeholder="Password"
+                                            name="password"
+                                            value={data.password}
+                                            autoComplete="current-password"
+                                            onChange={handleOnChange}
+                                            className="input input-bordered w-full max-w-xs border border-200 py-[10px]"
+                                        />
+                                    </div>
+                                    <div className="pt-[20px]">
+                                        <button
+                                            style={{
+                                                backgroundColor: '#96a2ff',
+                                                border: 'none',
+                                                color: 'white',
+                                            }}
+                                            className="btn btn-neutral btn-sm"
+                                        >
+                                            Login
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    style={{ backgroundColor: '#96a2ff' }}
+                    className="hidden w-1/2 h-screen lg:flex justify-center items-center"
+                >
+                    <div>
+                        <div>
+                            <img
+                                className="w-[400px]"
+                                src={GambarMasjid}
+                                alt=""
+                            />
+                        </div>
+                        <div
+                            style={{ backgroundColor: '#adb5fa' }}
+                            className="flex flex-col justify-center items-center bg-gray-200 rounded-[10px] h-[200px]"
                         >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+                            <div>
+                                <img
+                                    className="mb-[20px] w-[200px]"
+                                    src={Hamdalah}
+                                    alt=""
+                                />
+                            </div>
+                            <div className="flex justify-center items-center">
+                                <div className="max-w-[350px] flex flex-col justify-center items-center">
+                                    <p className="text-sm">
+                                        “...Ingatlah, hanya dengan mengingat
+                                    </p>
+                                    <p className="text-sm">
+                                        Allah hati menjadi tentram"
+                                    </p>
+                                    <p className="text-sm mt-[20px]">
+                                        (Ar-Ra’d : 28)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
     );
 }

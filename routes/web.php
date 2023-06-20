@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan-kas/pengeluaran', [LaporanKasController::class, 'createPengeluaran'])->name('kas.createPengeluaran');
     Route::post('/laporan-kas/pengeluaran', [LaporanKasController::class, 'storePengeluaran'])->name('kas.storePengeluaran');
     Route::get('/laporan-kas/detail', [LaporanKasController::class, 'detail'])->name('kas.detail');
+    Route::delete('/laporan-kas/{id}/delete', [LaporanKasController::class, 'destroy'])->name('kas.destroy');
 
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
     Route::post('/event', [EventController::class, 'store'])->name('event.store');

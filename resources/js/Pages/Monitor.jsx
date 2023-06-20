@@ -5,13 +5,13 @@ import useFormatDate from '../../helpers/useFormatDate';
 import useFormatRupiah from '../../helpers/useFormatRupiah';
 
 function Monitor(props) {
-    console.log('props', props)
+    console.log('props', props);
     const [time, setTime] = useState(new Date());
 
     const tick = () => {
         setTime(new Date());
     };
-    
+
     useEffect(() => {
         const timerID = setInterval(tick, 1000);
         return () => {
@@ -20,7 +20,7 @@ function Monitor(props) {
     }, []);
 
     // Format waktu dalam HH:MM:SS
-    const formattedTime = time.toLocaleTimeString([], {hour12:false});
+    const formattedTime = time.toLocaleTimeString([], { hour12: false });
 
     useEffect(() => {
         let index = 0;
@@ -61,31 +61,38 @@ function Monitor(props) {
                         >
                             <div>{item.status}</div>
                             <div>
-                                <p>{/* Format Rupiah */} {useFormatRupiah(item.total)}</p>
-                                <p>{/* Format Tanggal */} {useFormatDate(item.created_at)} </p>
+                                <p>
+                                    {/* Format Rupiah */}{' '}
+                                    {useFormatRupiah(item.total)}
+                                </p>
+                                <p>
+                                    {/* Format Tanggal */}{' '}
+                                    {useFormatDate(item.created_at)}{' '}
+                                </p>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 <div className="card w-full bg-base-100 shadow-xl absolute bottom-0">
-            <figure><img src={BSI} alt="ATM" /></figure>
-            <div className="card-body">
-                <h2 className="card-title">
-                Shoes!
-                <div className="badge badge-secondary">NEW</div>
-                </h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                <div className="badge badge-outline">Fashion</div> 
-                <div className="badge badge-outline">Products</div>
+                    <figure>
+                        <img src={BSI} alt="ATM" />
+                    </figure>
+                    <div className="card-body">
+                        <h2 className="card-title">
+                            Shoes!
+                            <div className="badge badge-secondary">NEW</div>
+                        </h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div className="card-actions justify-end">
+                            <div className="badge badge-outline">Fashion</div>
+                            <div className="badge badge-outline">Products</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
             </aside>
 
-            <div className="w-full h-screen  flex flex-col items-center relative">
-
+            <div className="w-full h-screen  flex flex-col items-center justify-center relative">
                 <div className="carousel   h-2/3 w-2/3 rounded-3xl">
                     {props.postingan.map((postingan, index) => (
                         <div
@@ -126,34 +133,49 @@ function Monitor(props) {
                     <div className="absolute bottom-0 flex justify-center">
                         <div className=" bg-red-200 px-10 py-5">
                             <p>Shubuh</p>
-                            <p className="text-2xl font-extrabold">{props.subuh}</p>
+                            <p className="text-2xl py-2 font-extrabold">
+                                {props.subuh}
+                            </p>
                         </div>
                         <div className=" bg-blue-200 px-10 py-5">
                             <p>Duhur</p>
-                            <p className="text-2xl font-extrabold">{props.duhur}</p>
+                            <p className="text-2xl py-2 font-extrabold">
+                                {props.duhur}
+                            </p>
                         </div>
                         <div className=" bg-green-200 px-10 py-5">
                             <p>Ashar</p>
-                            <p className="text-2xl font-extrabold">{props.ashar}</p>
+                            <p className="text-2xl py-2 font-extrabold">
+                                {props.ashar}
+                            </p>
                         </div>
                         <div className=" bg-accent px-10 py-5">
                             <p>Maghrib</p>
-                            <p className="text-2xl font-extrabold">{props.maghrib}</p>
+                            <p className="text-2xl py-2 font-extrabold">
+                                {props.maghrib}
+                            </p>
                         </div>
                         <div className=" bg-red-200 px-10 py-5">
                             <p>Isya</p>
-                            <p className="text-2xl font-extrabold">{props.isya}</p>
+                            <p className="text-2xl py-2 font-extrabold">
+                                {props.isya}
+                            </p>
+                        </div>
+                        <div className="drop-shadow-md  px-10 py-5  bg-gray-400 w-full">
+                            <p className="text-xl text-white">INDRAMAYU</p>
+                            <p className="text-2xl py-2">{formattedTime}</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
-                <div
-                    // style={{ backgroundColor: '#21D998' }}
+                {/* <div
+
                     className="drop-shadow-md  px-10 py-5 rounded-2xl bg-gray-400 mt-4"
                 >
                     <p className="text-xl text-white">INDRAMAYU</p>
                     <p className="text-6xl py-2">{formattedTime}</p>
-                    <p>{/* Tampilkan tanggal */}</p>
-                </div>
+                    <p></p>
+                </div> */}
             </div>
         </div>
     );

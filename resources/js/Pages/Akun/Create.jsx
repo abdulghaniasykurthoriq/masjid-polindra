@@ -52,6 +52,11 @@ export default function CreateAccount(props) {
         <div className="flex">
             <Head title="Management Event Masjid" />
             <Sidebar props={props} />
+            {/* <<<<<<< HEAD
+            <Sidebar props={props} />
+=======
+            <Sidebar props={props}/>
+>>>>>>> fffd8c5794302ddd48dc0ebda6571d77be863f32 */}
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 <div className="flex justify-between p-8">

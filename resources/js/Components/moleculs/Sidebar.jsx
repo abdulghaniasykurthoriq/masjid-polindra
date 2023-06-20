@@ -247,7 +247,7 @@ export default function Sidebar({ props }) {
                                                 </p>
                                             </li>
                                         </Link>
-                                        <Link
+                                        {/* <Link
                                             href={route(
                                                 'kehadiran-jamaah.index'
                                             )}
@@ -270,8 +270,8 @@ export default function Sidebar({ props }) {
                                                     Kehadiran Jamaah{' '}
                                                 </p>
                                             </li>
-                                        </Link>
-                                        <Link href={route('kotak-saran.index')}>
+                                        </Link> */}
+                                        {/* <Link href={route('kotak-saran.index')}>
                                             <li
                                                 style={
                                                     currentPage ===
@@ -290,7 +290,7 @@ export default function Sidebar({ props }) {
                                                     Kotak Saran{' '}
                                                 </p>
                                             </li>
-                                        </Link>
+                                        </Link> */}
                                         <a href="monitor" target="_blank">
                                             <li
                                                 style={

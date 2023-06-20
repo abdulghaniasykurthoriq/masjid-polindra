@@ -96,7 +96,7 @@ export default function Akun(props) {
     return (
         <div className="flex">
             <Head title="Management Postingan Masjid" />
-            <Sidebar props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'MANAGEMENT ACCOUNT'} />
                 {/* Menu section */}
@@ -219,9 +219,9 @@ export default function Akun(props) {
                                                                     data.id
                                                                 )
                                                             }
-                                                            className="btn btn-secondary mx-1"
+                                                            className="btn btn-error mx-1"
                                                         >
-                                                            Hapus
+                                                            DELETE
                                                         </button>
                                                     </td>
                                                 </tr>

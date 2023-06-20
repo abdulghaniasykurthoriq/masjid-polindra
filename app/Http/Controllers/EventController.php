@@ -19,11 +19,12 @@ class EventController extends Controller
      */
     public function index()
     {
-        $event = Event::query()->orderBy('created_at', 'desc')->get();
+       // $event = Event::with(['user'])->query()->orderBy('created_at', 'desc')->get();
+        $events = Event::with('user')->orderBy('created_at', 'desc')->get();
         return Inertia::render(
             'Event/Event',
             [
-                'event' => $event
+                'event' => $events
             ]
         );
     }
@@ -71,7 +72,7 @@ class EventController extends Controller
             $event->nama = $request->nama;
             $event->kategori = $request->kategori;
             $event->image = $imageName;
-            $event->user_id = 1;
+            $event->user_id = auth()->user()->id;
             $event->save();
             if ($request->has('items')) {
                 $counter = 0;

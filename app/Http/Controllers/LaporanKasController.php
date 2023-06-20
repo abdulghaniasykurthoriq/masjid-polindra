@@ -187,6 +187,21 @@ class LaporanKasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $laporanKas = LaporanKeuangan::find($id);
+        $tempMoney = $laporanKas->total;
+
+        $saldo = Saldo::find(1);
+        $saldoSekarang = $saldo->saldo;
+       // dd($laporanKas->status);
+        if($laporanKas->status === "pemasukan"){
+          //  dd('pemasukan laper');
+            $saldo->saldo = $saldoSekarang - $tempMoney;
+        }else{
+            $saldo->saldo = $saldoSekarang + $tempMoney;
+        }
+        $laporanKas->detail()->delete();
+        $laporanKas->delete();
+        $saldo->save();
+        return Inertia::location(route('kas.index'));
     }
 }

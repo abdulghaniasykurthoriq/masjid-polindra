@@ -18,7 +18,7 @@ export default function KotakSaranMasuk(props) {
     return (
         <div className="flex">
             <Head title="Kotak Saran Masuk Masjid" />
-            <Sidebar props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 <HeaderPage title={'Kotak Saran Masuk'} />
                 {/* Menu section */}
@@ -33,7 +33,7 @@ export default function KotakSaranMasuk(props) {
                     </div>
 
                     <div className="flex">
-                        <Link href={route('postingan.create')}>
+                        <Link href={route('kotak-saran.index')}>
                             <button
                                 className="bg-blue-400 px-4 rounded-lg text-white"
                                 type="btn"

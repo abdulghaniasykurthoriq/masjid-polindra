@@ -76,10 +76,7 @@ export default function Postingan(props) {
 
                     <div className="flex">
                         <Link href={route('postingan.create')}>
-                            <button
-                                className="bg-blue-400 px-4 rounded-lg text-white"
-                                type="btn"
-                            >
+                            <button className="btn btn-primary" type="btn">
                                 + New Post
                             </button>
                         </Link>
@@ -129,7 +126,7 @@ export default function Postingan(props) {
                                                             // onClick={() =>
                                                             //     onUpdate(item.id)
                                                             // }
-                                                            className="btn btn-primary mx-1"
+                                                            className="btn btn-info mx-1"
                                                         >
                                                             Update
                                                         </button>
@@ -144,7 +141,7 @@ export default function Postingan(props) {
                                                         }
                                                         className="btn btn-error mx-1"
                                                     >
-                                                        hapus
+                                                        delete
                                                     </button>
                                                 </td>
                                             </tr>
