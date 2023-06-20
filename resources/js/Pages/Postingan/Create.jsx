@@ -30,14 +30,18 @@ export default function Detail(props) {
         console.log('warna', warna);
     };
 
+    const handleCancel = () => {
+        window.history.back();
+    };
+
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
-            <Sidebar props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
                 {/* Header section */}
                 <div className="flex justify-between p-8">
-                    <p className="text-3xl font-bold">MANAGEMENT EVENT</p>
+                    <p className="text-3xl font-bold">MANAGEMENT POSTINGAN</p>
                     <p>logout</p>
                 </div>
 
@@ -94,7 +98,10 @@ export default function Detail(props) {
                             <button className="btn btn-primary mx-1">
                                 submit
                             </button>
-                            <button className="btn btn-error mx-1">
+                            <button
+                                onClick={handleCancel}
+                                className="btn btn-error mx-1"
+                            >
                                 cancel
                             </button>
                         </div>

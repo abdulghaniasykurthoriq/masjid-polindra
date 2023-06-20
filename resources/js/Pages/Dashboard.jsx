@@ -11,45 +11,51 @@ import useFormatDate from '../../helpers/useFormatDate';
 import getMonthString from '../../helpers/getMonthYearString';
 
 export default function Dashboarad(props) {
-    console.log('saldo', props)
+    console.log('saldo', props);
     return (
         <div className="flex">
             <Head title="Management Dashboarad Masjid" />
-            <Sidebar  props={props}/>
+            <Sidebar props={props} />
             <div className="bg-blue-50 w-full">
-                <HeaderPage title={' Dashboarad'} />
+                <HeaderPage title={' Dashboard'} />
                 {/* Menu section */}
 
                 {/* Content section */}
                 <div className="mx-8 my-2 mt-6">
                     {/* card content section */}
-                    <ListCard  props={props}/>
+                    <ListCard props={props} />
                 </div>
             </div>
         </div>
     );
 }
-const ListCard = ({props}) => {
-    console.log('saldowe', props)
+const ListCard = ({ props }) => {
+    console.log('saldowe', props);
     return (
         <div className="w-full flex flex-wrap items-center justify-center ">
             {/* <div class="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  h-40 w-40"></div>
              */}
-             {props.saldo.map((item,index) => {
-            return(
-                <div
-            key={index}
-                className="
+            {props.saldo.map((item, index) => {
+                return (
+                    <div
+                        key={index}
+                        className="
             bg-gradient-to-r  from-[#FEECD2] to-100% to-[#D0D5FC]
             md:w-60 md:h-32 
             lg:w-[200px] 
             xl:w-72 xl:h-40 m-2 px-4 lg:px-8 py-2 lg:py-4 flex flex-col justify-between"
-            >
-                <p className=" z-10 text-[9px] sm:text-lg">Total Saldo</p>
-                <p className="z-10 text-center xl:text-3xl">{useFormatRupiah(item.saldo)}</p>
-                <p className="z-10 text-xs text-right">{useFormatDate(item.updated_at)}</p>
-            </div>
-            )
+                    >
+                        <p className=" z-10 text-[9px] sm:text-lg">
+                            Total Saldo
+                        </p>
+                        <p className="z-10 text-center xl:text-3xl">
+                            {useFormatRupiah(item.saldo)}
+                        </p>
+                        <p className="z-10 text-xs text-right">
+                            {useFormatDate(item.updated_at)}
+                        </p>
+                    </div>
+                );
             })}
             <div
                 className="
@@ -59,8 +65,12 @@ const ListCard = ({props}) => {
              xl:w-72 xl:h-40 m-2 px-4 lg:px-8 py-2 lg:py-4 flex flex-col justify-between"
             >
                 <p className=" z-10 text-[9px] sm:text-lg">Pemasukan</p>
-                <p className="z-10 text-center xl:text-3xl">{useFormatRupiah(props.pemasukan)}</p>
-                <p className="z-10 text-xs text-right">periode {getMonthString(props.periode_pemasukan)}</p>
+                <p className="z-10 text-center xl:text-3xl">
+                    {useFormatRupiah(props.pemasukan)}
+                </p>
+                <p className="z-10 text-xs text-right">
+                    periode {getMonthString(props.periode_pemasukan)}
+                </p>
             </div>
             <div
                 className="
@@ -79,8 +89,12 @@ const ListCard = ({props}) => {
                     </div>
                 </div>
                 <p className="z-10 text-[9px]  sm:text-lg">Pengeluaran</p>
-                <p className="z-10 text-center xl:text-3xl">{useFormatRupiah(props.pengeluaran)}</p>
-                <p className="z-10 text-xs text-right">periode {getMonthString(props.periode_pengeluaran)}</p>
+                <p className="z-10 text-center xl:text-3xl">
+                    {useFormatRupiah(props.pengeluaran)}
+                </p>
+                <p className="z-10 text-xs text-right">
+                    periode {getMonthString(props.periode_pengeluaran)}
+                </p>
             </div>
         </div>
     );
