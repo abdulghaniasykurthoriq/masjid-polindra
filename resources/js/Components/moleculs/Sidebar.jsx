@@ -17,8 +17,7 @@ import { Link } from '@inertiajs/react';
 import useMediaQuery from '../../../../resources/helpers/useMediaQuery';
 // import useMediaQuery from 'resources/helpers/mediaQuery';
 
-export default function Sidebar({props}) {
-  
+export default function Sidebar({ props }) {
     const [isShow, setIsShow] = useState(false);
     const [isKeuangan, setIsKeuangan] = useState(false);
     const isDesktop = useMediaQuery('(min-width:1024px)');
@@ -292,11 +291,10 @@ export default function Sidebar({props}) {
                                                 </p>
                                             </li>
                                         </Link>
-                                        <a href='monitor' target='_blank'>
+                                        <a href="monitor" target="_blank">
                                             <li
                                                 style={
-                                                    currentPage ===
-                                                    '/monitor'
+                                                    currentPage === '/monitor'
                                                         ? {
                                                               backgroundColor:
                                                                   '#d9ddfc',
@@ -312,7 +310,7 @@ export default function Sidebar({props}) {
                                                 </p>
                                             </li>
                                         </a>
-                                        
+
                                         {/* <Link to="/event">
                         <li
                           style={currentPage === "/event" ? { backgroundColor: "#d9ddfc" } : {}}
@@ -353,7 +351,9 @@ export default function Sidebar({props}) {
                             <div className="content-end absolute bottom-0 w-full h-20 bg-blue-200 flex">
                                 <div className="pl-8 flex items-center font-semibold text-gray-700">
                                     <FaUserCircle />{' '}
-                                    <p className="pl-4 pr-2">{props.auth.user.name}</p>
+                                    <p className="pl-4 pr-2">
+                                        {props.auth.user.name}
+                                    </p>
                                     <FaArrowDown />
                                 </div>
                             </div>
