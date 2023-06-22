@@ -22,7 +22,7 @@ export default function Sidebar({ props }) {
     const [isKeuangan, setIsKeuangan] = useState(false);
     const isDesktop = useMediaQuery('(min-width:1024px)');
     const isMobile = useMediaQuery('(min-width:200px)');
-
+    console.log('propssssssssssssss', props)
     let angka = 29;
     const handleShow = () => {
         setIsShow(!isShow);
@@ -320,7 +320,11 @@ export default function Sidebar({ props }) {
                           <MdMessage /> <p className="pl-4">Event </p>
                         </li>
                       </Link> */}
+
+                                    
                                     </ul>
+                                    {props.auth.user.level != 'mahasiswa' && 
+                                    <>
                                     <p className="pl-10 pt-4">Administrator</p>
                                     <ul>
                                         <Link href={route('akun.index')}>
@@ -343,6 +347,9 @@ export default function Sidebar({ props }) {
                                             </li>
                                         </Link>
                                     </ul>
+                                    </>
+                                    }
+                                    
                                 </div>
                             </div>
                             <div className="h-20 bg-red">

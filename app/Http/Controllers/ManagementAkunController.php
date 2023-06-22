@@ -15,22 +15,27 @@ class ManagementAkunController extends Controller
     {
         $query = User::query();
 
-        $searchTerm = $request->input('name');
-        // if ($request->has('name')) {
-        //     $query->where('name', 'like', '%' . $searchTerm . '%')
-        //         ->orWhere('level', 'like', '%' . $searchTerm . '%');
-        // }
-        $query->where(function ($query) use ($searchTerm) {
-            $query->where('username', 'like', '%' . $searchTerm . '%')
-                ->orWhere('name', 'like', '%' . $searchTerm . '%')
-                ->orWhere(function ($query) use ($searchTerm) {
-                    $query->where('level', 'like', '%' . $searchTerm . '%')
-                        ->orWhere('status', 'like', '%' . $searchTerm . '%');
-                });
-        });
-        $filterParam = $request->input('level');
-        if ($filterParam) {
-            $query->where('level', $filterParam);
+        $nama = $request->input('nama');
+        $level = $request->input('level');
+        $status = $request->input('status');
+
+        if ($nama) {
+            $query->where(function ($subQuery) use ($nama) {
+                $subQuery->where('name', 'like', '%' . $nama . '%')
+                    ->orWhere('username', 'like', '%' . $nama . '%');
+            });
+        }
+
+        if ($level !== null) {
+            $query->where('level', 'like', '%' . $level . '%');
+        }
+
+        if ($status !== null) {
+            if ($status == 'active') {
+                $query->where('status', 'active');
+            } elseif ($status == 'non-active') {
+                $query->where('status', 'non-active');
+            }
         }
 
         $user = $query->get();
@@ -38,6 +43,76 @@ class ManagementAkunController extends Controller
             'user' => $user
         ]);
     }
+
+    public function filter(Request $request)
+    {
+        $nama = $request->input('nama');
+        $level = $request->input('level');
+        $status = $request->input('status');
+
+        if ($level) {
+            if ($status) {
+                return Inertia::location(route('akun.index', ['nama' => $nama, 'level' => $level, 'status' => $status]));
+            }
+            return Inertia::location(route('akun.index', ['nama' => $nama, 'level' => $level]));
+        }
+
+        if ($status) {
+            return Inertia::location(route('akun.index', ['nama' => $nama, 'status' => $status]));
+        }
+
+        return Inertia::location(route('akun.index', 'nama=' . $nama));
+    }
+
+    // public function index(Request $request)
+    // {
+    //     $query = User::query();
+
+    //     $nama = $request->input('nama');
+    //     $level = $request->input('level');
+    //     $status = $request->input('status');
+
+    //     if ($nama) {
+    //         $query->where(function ($subQuery) use ($nama) {
+    //             $subQuery->where('name', 'like', '%' . $nama . '%')
+    //                 ->orWhere('username', 'like', '%' . $nama . '%');
+    //         });
+    //     }
+
+    //     // if ($level) {
+    //     //     $query->where('level', 'like', '%' . $level . '%');
+    //     // }
+
+    //     if ($status !== null) {
+    //         $query->where('status', 'like', '%' . $status . '%');
+    //     }
+
+    //     $user = $query->get();
+    //     return Inertia::render('Akun/index', [
+    //         'user' => $user
+    //     ]);
+    // }
+
+    // public function filter(Request $request)
+    // {
+    //     $nama = $request->input('nama');
+    //     $level = $request->input('level');
+    //     $status = $request->input('status');
+
+    //     if ($level) {
+    //         if ($status) {
+    //             return Inertia::location(route('akun.index', ['nama' => $nama, 'level' => $level, 'status' => 'active']));
+    //         }
+    //         return Inertia::location(route('akun.index', ['nama' => $nama, 'level' => $level]));
+    //     }
+
+    //     if ($status) {
+    //         // dd('status');
+    //         return Inertia::location(route('akun.index', ['nama' => $nama, 'status' => 'active']));
+    //     }
+
+    //     return Inertia::location(route('akun.index', 'nama=' . $nama));
+    // }
 
     /**
      * Show the form for creating a new resource.

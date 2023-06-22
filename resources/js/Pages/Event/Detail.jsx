@@ -15,8 +15,17 @@ export default function Detail(props) {
         console.log('props', props);
     });
     const downloadPdf = (name) => {
-        const url = route('materi.downloadPDF', { name });
-        Inertia.get(url);
+      // alert(name)
+       const url = window.route('materi.downloadPDF', { name });
+       Inertia.get(url);
+    //     const fileUrl = 'http://localhost:8000/materi/1687440729.pdf';
+    // const fileName = 'example.pdf';
+
+    // // Buat tautan unduhan secara dinamis
+    // const downloadLink = document.createElement('a');
+    // downloadLink.href = fileUrl;
+    // downloadLink.download = fileName;
+    // downloadLink.click();
     };
 
     const onDeleted = (id) => {
@@ -89,14 +98,16 @@ export default function Detail(props) {
                                         >
 
                                         </a> */}
+                                        <a href={`/materi/${materi.file_materi.replace('event/', '')}`} download={true}  >
                                         <div
-                                            onClick={() =>
-                                                downloadPdf(materi.file_materi)
-                                            }
+                                            // onClick={() =>
+                                            //     downloadPdf(materi.file_materi)
+                                            // }
                                             className="bg-gray-300 w-max p-1 rounded-md"
                                         >
                                             <img src={LogoFile} alt="file" />
                                         </div>
+                                        </a>
 
                                         <b className="pl-3">{materi.name}</b>
                                     </div>

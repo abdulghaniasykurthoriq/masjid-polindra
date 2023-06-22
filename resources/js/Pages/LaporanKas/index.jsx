@@ -35,7 +35,7 @@ function LaporanKas(props) {
     };
 
     const Dialog = () => {
-        console.log('niko new', itemData);
+        
         return (
             <div
                 className={`${
@@ -148,6 +148,13 @@ function LaporanKas(props) {
                                                                 )}
                                                             </td>
                                                             <td>
+                                                                <a href={`/laporan-kas/${pemasukan.id}/downloadpdf`} download={true}>
+                                                                <button
+                                                                    className="btn btn-outline btn-secondary mx-2">
+                                                                        export pdf
+                                                                    </button>
+                                                                </a>
+                                                            
                                                                 <button
                                                                     className="btn btn-success mx-2"
                                                                     onClick={() =>

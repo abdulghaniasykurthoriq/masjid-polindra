@@ -11,7 +11,7 @@ export default function CreateEvent(props) {
     };
 
     const [nama, setNama] = useState('');
-    const [kategori, setKategori] = useState('jumatan');
+    const [kategori, setKategori] = useState('kajian umum');
     const [image, setImage] = useState(null);
 
     const [error, setError] = useState(null);
@@ -127,8 +127,9 @@ export default function CreateEvent(props) {
                                     {/* <option value={1} disabled selected>
                                     infaq jumat
                                 </option> */}
-                                    <option value={'jumatan'}>jumatan</option>
-                                    <option value={'sabtuan'}>sabtuan</option>
+                                    <option value={'kajian umum'}>kajian umum</option>
+                                    <option value={'keputrian'}>keputrian</option>
+                                    <option value={'hari besar islam'}>hari besar islam</option>
                                 </select>
                             </div>
                         </div>

@@ -16,21 +16,6 @@ class PostinganController extends Controller
      */
     public function index(Request $request)
     {
-
-        // $event = Event::with(['materi']);
-        // $kode = $request->input('kode');
-
-        // $postingan = Postingan::with('users')->where('id', $id)->first();
-        // if ($kode) {
-        //     $postingan = Postingan::query();
-        // } else {
-        //     $postingan = Postingan::all();
-        //     $postingan->load('user');
-        // }
-
-        // $postingan = Postingan::all();
-        // $postingan->load('user');
-
         $postingan = Postingan::query()->orderBy('created_at', 'desc');
         $text = $request->input('text');
         $postingan->with('user');

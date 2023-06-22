@@ -25,7 +25,7 @@ export default function Update(props) {
     const sendUpdate = (e) => {
         e.preventDefault();
         const data = { id, name, username, level, status, password };
-        console.log('data', data);
+        // console.log('data', data);
         Inertia.post(`/akun/update/{$id}`, data);
     };
 
@@ -44,14 +44,14 @@ export default function Update(props) {
                 <div className="mx-8 my-2 mb-8 bg-white mt-6 rounded-t-2xl">
                     <div>
                         <div className="p-4 flex items-center">
-                            <div className="bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
+                            <div onClick={() => window.history.back()} className="cursor-pointer bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
                                 <FaArrowLeft className="mr-2" />
                                 <p>Back</p>
                             </div>
                             <p className="px-6 text-2xl font-bold">Buat Akun</p>
                         </div>
                     </div>
-                    <form className="">
+                    <form onSubmit={sendUpdate} className="">
                         <div className="  flex w-full justify-between px-6 p-2 items-center">
                             <label>username</label>
                             <div className="max-w-4xl w-full">
@@ -131,7 +131,8 @@ export default function Update(props) {
                             >
                                 Simpan
                             </button>
-                            <button className="btn btn-error mx-2">
+        
+                            <button onClick={() => window.history.back() } className="btn btn-error mx-2">
                                 cancel
                             </button>
                         </div>

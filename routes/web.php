@@ -10,6 +10,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MonitorController;
 use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\ProfileController;
+use App\Models\LaporanKeuangan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,12 +28,13 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     // return 'hello world';
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
+    return Inertia::location(route('dashboard'));
 });
 
 // Route::get('/dashboard', function () {
@@ -40,6 +42,17 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/monitor', [MonitorController::class, 'index'])->name('monitor.index');
+// Route::get('/testPdf', function () {
+//     $laporan = LaporanKeuangan::with('detail')
+//         ->whereHas('detail') // Filter hanya ketika ada relasi "detail"
+//         ->orderBy('created_at', 'desc')
+//         ->find(1);
+
+
+//     return view('pdf.template', compact('laporan'));
+// });
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -56,11 +69,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/laporan-kas/pemasukan', [LaporanKasController::class, 'storePemasukan'])->name('kas.storePemasukan');
 
     Route::get('/laporan-kas/pengeluaran', [LaporanKasController::class, 'createPengeluaran'])->name('kas.createPengeluaran');
+    Route::get('/laporan-kas/{id}/downloadpdf', [LaporanKasController::class, 'generatePDF'])->name('kas.generatePDF');
     Route::post('/laporan-kas/pengeluaran', [LaporanKasController::class, 'storePengeluaran'])->name('kas.storePengeluaran');
     Route::get('/laporan-kas/detail', [LaporanKasController::class, 'detail'])->name('kas.detail');
     Route::delete('/laporan-kas/{id}/delete', [LaporanKasController::class, 'destroy'])->name('kas.destroy');
 
     Route::get('/event', [EventController::class, 'index'])->name('event.index');
+    Route::post('/event/filter', [EventController::class, 'filter'])->name('event.filter');
+
     Route::post('/event', [EventController::class, 'store'])->name('event.store');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
     Route::get('/event/{id}', [EventController::class, 'detail'])->name('eventdetail');
@@ -90,7 +106,8 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
 
-    Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index');
+    Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index')->middleware('checkRole:dosen,admin');
+    Route::post('/akun', [ManagementAkunController::class, 'filter'])->name('akun.index');
     Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create');
     Route::post('/akuncreate', [ManagementAkunController::class, 'store']);
     Route::get('/akun/update/{id}', [ManagementAkunController::class, 'update'])->name('akun.update');

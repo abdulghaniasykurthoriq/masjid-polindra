@@ -132,9 +132,9 @@ export default function Postingan(props) {
                                                         </button>
                                                     </a>
 
-                                                    <button className="btn btn-success mx-1">
+                                                    {/* <button className="btn btn-success mx-1">
                                                         Show detail
-                                                    </button>
+                                                    </button> */}
                                                     <button
                                                         onClick={() =>
                                                             onDeleted(item.id)

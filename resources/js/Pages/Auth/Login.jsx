@@ -42,8 +42,8 @@ export default function Login({ status, canResetPassword }) {
         <div>
             <Head title="Log in" />
             <div className="flex w-full">
-                <section className="lg:w-1/2 flex justify-center relative">
-                    <div>
+                <section className="w-full lg:w-1/2 flex justify-center relative">
+                    <div className=''>
                         <div className="flex justify-center">
                             <img
                                 className="w-[200px] mt-[100px]"

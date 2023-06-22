@@ -1,25 +1,27 @@
 import Sidebar from '@/Components/moleculs/Sidebar';
 import { Head, Link } from '@inertiajs/react';
 import {
-    FaPencilAlt,
-    FaRegSadTear,
     FaSearch,
-    FaTrashAlt,
     FaUser,
 } from 'react-icons/fa';
 import Logo from '../../../assets/logo.png';
 import HeaderPage from '@/Components/moleculs/headerPage';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
-import useFormatDate from '../../../helpers/useFormatDate';
+import { useState } from 'react';
 
 export default function Event(props) {
-    // const goDetail = (id) => {
-    //     console.log('id', id);
-    //     const url = route('eventdetail', { id });
-    //     Inertia.get(url);
-    // };
 
+    const [nama, setNama] = useState("");
+    const filter = (e) => {
+        e.preventDefault();
+
+        const params = new URLSearchParams();
+        params.append('nama', nama);
+        Inertia.post(`/event/filter?${params.toString()}`, {
+            preserveState: true,
+        });
+    }
     const onDeleted = (id) => {
         Swal.fire({
             title: 'Are you sure?',
@@ -53,7 +55,7 @@ export default function Event(props) {
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
                     <div className="flex items-center  w-full max-w-[600px] ">
-                        <form>
+                        <form onSubmit={filter}>
                             <div className="form-control">
                                 <label className="input-group">
                                     <span className="bg-white text-gray-300">
@@ -61,9 +63,9 @@ export default function Event(props) {
                                     </span>
                                     <input
                                         type="text"
-                                        // value={kode}
-                                        // onChange={(e) => setKode(e.target.value)}
-                                        placeholder="Search . . ."
+                                        value={nama}
+                                        onChange={(e) => setNama(e.target.value)}
+                                        placeholder="judul atau penulis . . .  "
                                         className="input"
                                     />
                                 </label>

@@ -93,7 +93,7 @@ function Monitor(props) {
             </aside>
 
             <div className="w-full h-screen  flex flex-col items-center justify-center relative">
-                <div className="carousel   h-2/3 w-2/3 rounded-3xl">
+                <div className="carousel   h-1/2 w-2/3 rounded-3xl">
                     {props.postingan.map((postingan, index) => (
                         <div
                             style={{ backgroundColor: postingan.warna }}
@@ -131,7 +131,8 @@ function Monitor(props) {
                         </div>
                     ))}
                     <div className="absolute bottom-0 flex justify-center">
-                        <div className=" bg-red-200 px-10 py-5">
+                        <div className='flex'>
+                        <div className="w-full bg-red-200 px-10 py-5">
                             <p>Shubuh</p>
                             <p className="text-2xl py-2 font-extrabold">
                                 {props.subuh}
@@ -165,6 +166,7 @@ function Monitor(props) {
                             <p className="text-xl text-white">INDRAMAYU</p>
                             <p className="text-2xl py-2">{formattedTime}</p>
                             <p></p>
+                        </div>
                         </div>
                     </div>
                 </div>

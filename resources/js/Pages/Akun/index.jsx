@@ -12,48 +12,38 @@ export default function Akun(props) {
     const [isDosen, setIsDosen] = useState(false);
     const [isMahasiswa, setIsMahasiswa] = useState(false);
     const [isActive, setIsActive] = useState(false);
-    const [isLevel, setIsLevel] = useState('');
-    useEffect(() => {
-        console.log('woi ini property lahh', props);
-    }, []);
-    console.log('isDosen', isDosen);
-    const handleDosenFilter = () => {
-        setIsDosen(!isDosen);
-        console.log('isDosen', isDosen);
-        if (isDosen === true) {
-            setIsLevel('dosen');
-        }
-
-        console.log('isDosen', isDosen);
-    };
-    const handleMahasiswaFilter = () => {
-        setIsMahasiswa(!isMahasiswa);
-    };
+    
     const handleActiveFilter = () => {
         setIsActive(!isActive);
     };
 
-    const onFilterLevel = () => {};
-    const onFilter = () => {
-        if (isDosen === true && isMahasiswa === true) {
-            setIsLevel('');
-        } else if (isDosen === true) {
-            setIsLevel('dosen');
-        } else if (isMahasiswa === true) {
-            setIsLevel('mahasiswa');
+    const onFilter = (e) => {
+        e.preventDefault();
+        const params = new URLSearchParams();
+
+        if(isMahasiswa && isDosen){
+            params.append('level', '');
+        }else if(isMahasiswa){
+            params.append('level', 'mahasiswa');
+        }else if(isDosen){
+            params.append('level', 'dosen');
         }
-        Inertia.get(
-            '/akun',
-            { name: filter, level: isLevel },
-            { preserveState: true }
-        );
+        
+        if(isActive){
+            params.append('status', 'active');
+        }
+        params.append('nama', filter);
+        Inertia.post(`/akun?${params.toString()}`, {
+            preserveState: true,
+        });
     };
+
 
     function onReset(id) {
         console.log('id', id);
         Swal.fire({
             title: 'Are you sure to reset password?',
-            text: "You won't be able to revert this!",
+            text: "Password akan menjadi 12345678",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -72,10 +62,7 @@ export default function Akun(props) {
         });
     }
 
-    function onUpdate(id) {
-        const url = route('akun.update', { id: id });
-        Inertia.get(url);
-    }
+ 
     function onDelete(id) {
         Swal.fire({
             title: 'Are you sure?',
@@ -101,10 +88,11 @@ export default function Akun(props) {
                 <HeaderPage title={'MANAGEMENT ACCOUNT'} />
                 {/* Menu section */}
                 <div className="flex justify-between px-8 pt-8">
+                    <form onSubmit={onFilter}>
                     <div className="flex items-center  w-full max-w-[600px] ">
                         <div className="w-full">
                             <TextInput
-                                placeholder="search"
+                                placeholder="username or full name . . ."
                                 value={filter}
                                 onChange={(e) => setFilter(e.target.value)}
                             />
@@ -114,7 +102,7 @@ export default function Akun(props) {
                                 <FaFilter onClick={onFilter} />
                             </div>
                             <div
-                                onClick={handleDosenFilter}
+                                onClick={() => setIsDosen(!isDosen)}
                                 className={
                                     isDosen
                                         ? 'bg-white border border-blue-800 px-4 py-2 rounded-xl mx-2'
@@ -124,7 +112,7 @@ export default function Akun(props) {
                                 Dosen
                             </div>
                             <div
-                                onClick={handleMahasiswaFilter}
+                                onClick={() => setIsMahasiswa(!isMahasiswa)}
                                 className={
                                     isMahasiswa
                                         ? 'bg-white border border-blue-800 px-4 py-2 rounded-xl mx-2'
@@ -134,7 +122,7 @@ export default function Akun(props) {
                                 Mahasiswa
                             </div>
                             <div
-                                onClick={handleActiveFilter}
+                                onClick={() => setIsActive(!isActive)}
                                 className={
                                     isActive
                                         ? 'bg-white border border-blue-800 px-4 py-2 rounded-xl mx-2'
@@ -145,6 +133,7 @@ export default function Akun(props) {
                             </div>
                         </div>
                     </div>
+                    </form>
 
                     <div className="flex">
                         <Link href={route('akun.create')}>
@@ -181,7 +170,7 @@ export default function Akun(props) {
                                         props.user.map((data, i) => {
                                             return (
                                                 <tr key={i}>
-                                                    <th>1</th>
+                                                    <th>{i+1}</th>
                                                     <td>{data.username}</td>
                                                     <td>{data.name}</td>
                                                     <td>{data.level}</td>

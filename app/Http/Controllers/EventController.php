@@ -3,30 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Materi;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Termwind\Components\Dd;
 
 class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       // $event = Event::with(['user'])->query()->orderBy('created_at', 'desc')->get();
-        $events = Event::with('user')->orderBy('created_at', 'desc')->get();
+        $events = Event::with('user')->orderBy('created_at', 'desc');
+        $nama = $request->input('nama');
+        $events->where('nama', 'like', '%' . $nama . '%')
+            ->orWhereHas('user', function ($query) use ($nama) {
+                $query->where('name', 'like', '%' . $nama . '%');
+            });
+
+        $event = $events->get();
         return Inertia::render(
             'Event/Event',
             [
-                'event' => $events
+                'event' => $event
             ]
         );
+    }
+
+    public function filter(Request $request)
+    {
+        $nama = $request->input('nama');
+
+
+
+        return Inertia::location(route('event.index', 'nama=' . $nama));
     }
 
     /**

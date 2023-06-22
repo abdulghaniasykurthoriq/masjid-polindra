@@ -12,9 +12,15 @@ class MateriController extends Controller
 {
     public function downloadPDF(String $name)
     {
-        // // $file = public_path('materi/' . $name);
+        // $materi = Materi::query()->where('file_materi', $name)->first();
+
+        // if ($materi) {
+        //     $file = public_path('materi/' . $name);
+        //     return response()->download($file, $materi->name);
+        // }
         $file = public_path('materi/' . $name);
         return response()->download($file, 'fileName.pdf');
+        // return response()->download($file, $materi->name . '.pdf');
     }
     /**
      * Display a listing of the resource.

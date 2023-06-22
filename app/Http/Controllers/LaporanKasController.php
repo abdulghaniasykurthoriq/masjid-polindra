@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\KeuanganDetail;
 use App\Models\LaporanKeuangan;
-use App\Models\Pemasukan;
-use App\Models\Pengeluaran;
 use App\Models\Saldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\PDF;
 
 class LaporanKasController extends Controller
 {
@@ -192,16 +191,35 @@ class LaporanKasController extends Controller
 
         $saldo = Saldo::find(1);
         $saldoSekarang = $saldo->saldo;
-       // dd($laporanKas->status);
-        if($laporanKas->status === "pemasukan"){
-          //  dd('pemasukan laper');
+        // dd($laporanKas->status);
+        if ($laporanKas->status === "pemasukan") {
+            //  dd('pemasukan laper');
             $saldo->saldo = $saldoSekarang - $tempMoney;
-        }else{
+        } else {
             $saldo->saldo = $saldoSekarang + $tempMoney;
         }
         $laporanKas->detail()->delete();
         $laporanKas->delete();
         $saldo->save();
         return Inertia::location(route('kas.index'));
+    }
+
+
+    public function generatePdf(string $id)
+    {
+        $laporan = LaporanKeuangan::with('detail')
+            ->whereHas('detail') // Filter hanya ketika ada relasi "detail"
+            ->orderBy('created_at', 'desc')
+            ->find($id);
+
+
+        $pdf = app(PDF::class); // Membuat instansi objek PDF
+        // $data = 'hello';
+        $view = View::make('pdf.template', ['laporan' => $laporan]);
+        $html = $view->render();
+
+        $pdf->loadHTML($html);
+
+        return $pdf->stream('document.pdf');
     }
 }

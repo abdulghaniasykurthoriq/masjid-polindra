@@ -48,6 +48,12 @@ export default function CreateAccount(props) {
         );
     }
 
+    const onCancel = (e) => {
+        e.preventDefault()
+      //  alert('ss')
+        window.history.back()
+    }
+
     return (
         <div className="flex">
             <Head title="Management Event Masjid" />
@@ -67,7 +73,7 @@ export default function CreateAccount(props) {
                 <div className="mx-8 my-2 mb-8 bg-white mt-6 rounded-t-2xl">
                     <div>
                         <div className="p-4 flex items-center">
-                            <div className="bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
+                            <div onClick={() => window.history.back()} className="cursor-pointer bg-red-600 p-2 w-max flex items-center text-white rounded-lg">
                                 <FaArrowLeft className="mr-2" />
                                 <p>Back</p>
                             </div>
@@ -152,7 +158,7 @@ export default function CreateAccount(props) {
                             >
                                 Simpan
                             </button>
-                            <button className="btn btn-error mx-2">
+                            <button  onClick={onCancel} className="btn btn-error mx-2">
                                 cancel
                             </button>
                         </div>

@@ -6,7 +6,7 @@ import { Inertia } from '@inertiajs/inertia';
 import ChooseColor from '@/Components/atoms/ChooseColor';
 export default function Detail(props) {
     const [text, setText] = useState('');
-    const [warna, setWarna] = useState('');
+    const [warna, setWarna] = useState('#6e56ce');
     useEffect(() => {}, [warna]);
     const onSubmit = (e) => {
         e.preventDefault();
