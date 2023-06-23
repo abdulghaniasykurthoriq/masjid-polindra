@@ -107,13 +107,13 @@ Route::middleware('auth')->group(function () {
     // Route::get('/dashboard', [PostinganController::class, 'index'])->name('postingan.index');
 
     Route::get('/akun', [ManagementAkunController::class, 'index'])->name('akun.index')->middleware('checkRole:dosen,admin');
-    Route::post('/akun', [ManagementAkunController::class, 'filter'])->name('akun.index');
-    Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create');
-    Route::post('/akuncreate', [ManagementAkunController::class, 'store']);
-    Route::get('/akun/update/{id}', [ManagementAkunController::class, 'update'])->name('akun.update');
-    Route::post('/akun/update/{id}', [ManagementAkunController::class, 'updateStore'])->name('akun.updateStore');
-    Route::put('/akun/{id}/resetpassword', [ManagementAkunController::class, 'resetPassword'])->name('akun.resetPassword');
-    Route::delete('/akun/{id}/delete', [ManagementAkunController::class, 'destroy'])->name('akun.destroy');
+    Route::post('/akun', [ManagementAkunController::class, 'filter'])->name('akun.index')->middleware('checkRole:dosen,admin');
+    Route::get('/akun/create', [ManagementAkunController::class, 'create'])->name('akun.create')->middleware('checkRole:dosen,admin');
+    Route::post('/akuncreate', [ManagementAkunController::class, 'store'])->middleware('checkRole:dosen,admin');
+    Route::get('/akun/update/{id}', [ManagementAkunController::class, 'update'])->name('akun.update')->middleware('checkRole:dosen,admin');
+    Route::post('/akun/update/{id}', [ManagementAkunController::class, 'updateStore'])->name('akun.updateStore')->middleware('checkRole:dosen,admin');
+    Route::put('/akun/{id}/resetpassword', [ManagementAkunController::class, 'resetPassword'])->name('akun.resetPassword')->middleware('checkRole:dosen,admin');
+    Route::delete('/akun/{id}/delete', [ManagementAkunController::class, 'destroy'])->name('akun.destroy')->middleware('checkRole:dosen,admin');
 });
 
 
