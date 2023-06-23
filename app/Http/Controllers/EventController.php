@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 
 class EventController extends Controller
@@ -120,7 +121,7 @@ class EventController extends Controller
             if ($request->has('items')) {
                 $counter = 0;
                 foreach ($request->items as $item) {
-
+                
                     if (isset($item['materi']) && is_a($item['materi'], 'Illuminate\Http\UploadedFile')) {
                         $counter++;
                         $materi = $item['materi'];
@@ -180,8 +181,15 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
 
-        $event->materi()->delete();
 
+        foreach ($event->materi as $item) {
+            $filePath = public_path('materi/' . $item->file_materi);
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+            //   dd($item);
+        }
+        $event->materi()->delete();
         $event->delete();
         return Inertia::location(route('event.index'));
     }

@@ -121,7 +121,7 @@ export default function Event(props) {
                                         var dt = new Date(inputDate);
                                         return (
                                             <tr key={i}>
-                                                <th>1</th>
+                                                <th>{i+1}</th>
                                                 <td>
                                                     <div className="flex w-full items-center">
                                                         <img

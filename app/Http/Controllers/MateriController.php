@@ -76,7 +76,10 @@ class MateriController extends Controller
     public function destroy(string $id)
     {
         $materi = Materi::find($id);
-
+        $filePath = public_path('materi/' . $materi->file_materi);
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+        }
 
         //delete post
         $materi->delete();
